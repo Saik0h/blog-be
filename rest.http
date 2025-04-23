@@ -1,0 +1,31 @@
+### Create a new resource
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+     
+    "author": 2
+}
+
+### Read all resources
+GET http://localhost:3000/post
+
+### Read a single resource by ID
+GET http://localhost:3000/post/3
+
+### Update a resource by ID
+PATCH http://localhost:3000/user/3
+Content-Type: application/json
+
+{
+    "posts":{ 
+        "create": {
+        "title": "Curriculum Vitae",
+    "text": "Sou muitobom programando",
+    "image": "Mais uma imagem"
+        }
+     }
+}
+
+### Delete a resource by ID
+DELETE http://localhost:3000/user/4
