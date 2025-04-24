@@ -122,7 +122,8 @@ exports.Prisma.UserScalarFieldEnum = {
   firstname: 'firstname',
   lastname: 'lastname',
   username: 'username',
-  role: 'role'
+  role: 'role',
+  password: 'password'
 };
 
 exports.Prisma.PostScalarFieldEnum = {
@@ -131,6 +132,7 @@ exports.Prisma.PostScalarFieldEnum = {
   title: 'title',
   text: 'text',
   image: 'image',
+  references: 'references',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

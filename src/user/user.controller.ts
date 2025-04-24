@@ -10,7 +10,7 @@ import {
 import { UserService } from './user.service';
 import { Prisma } from 'generated/prisma';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
