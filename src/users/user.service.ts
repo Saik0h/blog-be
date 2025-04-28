@@ -1,14 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from 'generated/prisma';
 import { DatabaseService } from 'src/database/database.service';
+import { encodePassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(private readonly server: DatabaseService) {}
-
-  async create(createUserDto: Prisma.UserCreateInput) {
-    return this.server.user.create({ data: createUserDto });
-  }
 
   async findAll() {
     return this.server.user.findMany({});
@@ -19,7 +16,13 @@ export class UserService {
   }
 
   async update(id: number, updateUserDto: Prisma.UserUpdateInput) {
-    return this.server.user.update({ where: { id }, data: updateUserDto });
+    if (!updateUserDto.password) {
+      return this.server.user.update({ where: { id }, data: updateUserDto });
+    } else {
+      const newPassword = encodePassword(updateUserDto.password.toString());
+      const data = { ...updateUserDto, password: newPassword };
+      return this.server.user.update({ where: { id }, data });
+    }
   }
 
   async remove(id: number) {

@@ -1,31 +1,50 @@
 ### Create a new resource
-POST http://localhost:3000/user
+POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-     
-    "author": 2
+"username": "laisdonida",
+"password": "novasenha123"
 }
+### Register new user
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+"firstname": "Jhin",
+"lastname": "khoda",
+"username": "quatro",
+"password": "quatroquatro"
+}
+
 
 ### Read all resources
 GET http://localhost:3000/post
 
 ### Read a single resource by ID
-GET http://localhost:3000/post/3
+GET http://localhost:3000/posts
 
 ### Update a resource by ID
-PATCH http://localhost:3000/user/3
+PATCH http://localhost:3000/users/6
 Content-Type: application/json
 
 {
     "posts":{ 
         "create": {
-        "title": "Curriculum Vitae",
-    "text": "Sou muitobom programando",
-    "image": "Mais uma imagem"
+        "title": "Olá mundo",
+    "text": "Me chamo Lais Donida",
+    "image": "imagem"
         }
      }
 }
 
+### Update a User by ID
+PATCH http://localhost:3001/users/6
+Content-Type: application/json
+
+{
+    "password":"novasenha123"
+}
+
 ### Delete a resource by ID
-DELETE http://localhost:3000/user/4
+DELETE http://localhost:3001/users/6
