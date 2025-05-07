@@ -17,10 +17,6 @@ export class PostService {
     return this.server.post.findUnique({ where: { id } });
   }
 
-  async findAllByAuthor(authorId : number) {
-    return this.server.post.findMany({ where: { authorId } });
-  }
-
   async update(id: number, updatePostDto: Prisma.PostUpdateInput) {
     return this.server.post.update({ where: { id }, data: updatePostDto });
   }

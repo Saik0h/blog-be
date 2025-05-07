@@ -10,7 +10,7 @@ import {
 import { UserService } from './user.service';
 import { Prisma } from 'generated/prisma';
 
-@Controller('users')
+@Controller('api/users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -22,6 +22,11 @@ export class UserController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
+  }
+
+  @Get('/:id/posts')
+  findByAuthor(@Param('id') id: string) {
+    return this.userService.findAllByAuthor(+id);
   }
 
   @Patch(':id')

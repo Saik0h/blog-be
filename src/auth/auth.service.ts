@@ -24,7 +24,7 @@ export class AuthService {
     const userfound = await this.server.user.findUnique({
       where: { username },
     });
-    if (!userfound) throw new NotFoundException();
+    if (!userfound) throw new error('user doesnt exist'); 
     if (comparePassword(pass, userfound.password)) {
       const { password, ...user } = userfound;
       return this.jwtService.sign(user);

@@ -8,11 +8,26 @@ export class UserService {
   constructor(private readonly server: DatabaseService) {}
 
   async findAll() {
-    return this.server.user.findMany({});
+    const users = await this.server.user.findMany({});
+    const usersWOPassword = users.map((user) => {
+      const { password, ...userWOP } = user;
+      return userWOP;
+    });
+    return usersWOPassword;
   }
 
   async findOne(id: number) {
-    return this.server.user.findUnique({ where: { id } });
+    const user = await this.server.user.findUnique({ where: { id } });
+    if (!user) {
+      console.error('user not found');
+    } else {
+      const { password, ...userWOP } = user;
+      return userWOP;
+    }
+  }
+
+  async findAllByAuthor(id: number) {
+    return this.server.post.findMany({ where: { authorId: id } });
   }
 
   async update(id: number, updateUserDto: Prisma.UserUpdateInput) {

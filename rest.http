@@ -18,33 +18,33 @@ Content-Type: application/json
 }
 
 
-### Read all resources
-GET http://localhost:3000/post
-
-### Read a single resource by ID
-GET http://localhost:3000/posts
-
-### Update a resource by ID
-PATCH http://localhost:3000/users/6
+### Read all users
+GET http://localhost:3000/api/users/6/posts
 Content-Type: application/json
 
-{
-    "posts":{ 
-        "create": {
-        "title": "Olá mundo",
-    "text": "Me chamo Lais Donida",
-    "image": "imagem"
-        }
-     }
-}
 
-### Update a User by ID
-PATCH http://localhost:3001/users/6
+### Read all posts
+GET http://localhost:3000/api/posts
+
+### Update a user by ID
+PATCH http://localhost:3000/users/6
 Content-Type: application/json
 
 {
     "password":"novasenha123"
 }
+    
 
-### Delete a resource by ID
-DELETE http://localhost:3001/users/6
+### Update a post by ID
+PATCH http://localhost:3000/posts/6
+Content-Type: application/json
+
+{
+"text":"Hi"
+}
+
+### Delete a user by ID
+DELETE http://localhost:3000/users/6
+
+### Delete a post by ID
+DELETE http://localhost:3000/posts/6
