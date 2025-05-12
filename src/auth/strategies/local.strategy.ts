@@ -1,7 +1,11 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { AuthService } from '../auth.service';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -9,9 +13,12 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     super();
   }
 
-  validate(username: string, password: string ) {
+  validate(username?: string, password?: string) {
+    if (!username || username === '')
+      throw new BadRequestException('Username cannot be blank');
+    if (!password || password === '')
+      throw new BadRequestException('Password cannot be blank');
     const user = this.authService.validateUser(username, password);
-    if (!user) throw new UnauthorizedException();
     return user;
   }
 }

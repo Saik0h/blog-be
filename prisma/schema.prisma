@@ -7,7 +7,6 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
-
 }
 
 datasource db {
@@ -17,25 +16,26 @@ datasource db {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  firstname String
-  lastname  String
-  username  String @unique
-  role      Role   @default(REGULAR)
-  posts     Post[]
-  password String
+  id           Int     @id @default(autoincrement())
+  firstname    String
+  lastname     String
+  username     String  @unique
+  role         Role    @default(REGULAR)
+  posts        Post[]
+  password     String
+  refreshToken String?
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-  title     String
-  text      String
-  image     String
+  id         Int      @id @default(autoincrement())
+  author     User     @relation(fields: [authorId], references: [id])
+  authorId   Int
+  title      String
+  text       String
+  image      String
   references String[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 enum Role {

@@ -1,37 +1,50 @@
-### Create a new resource
-POST http://localhost:3000/auth/login
+### LogsIn
+POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
 "username": "laisdonida",
 "password": "novasenha123"
 }
-### Register new user
-POST http://localhost:3000/auth/register
+
+###
+GET http://localhost:3000/api/auth/status
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsInVzZXJuYW1lIjoibGFpc2RvbmlkYSIsImlhdCI6MTc0NzAyNDIyMiwiZXhwIjoxNzQ3MDI0MjgyfQ.HZo-EPbBvwenrdYxoUozRgdY_-ImmQwevGU9fZAs-Po
+
+###
+POST http://localhost:3000/api/auth/refresh-token
 Content-Type: application/json
 
 {
-"firstname": "Jhin",
-"lastname": "khoda",
-"username": "quatro",
-"password": "quatroquatro"
+"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsInVzZXJuYW1lIjoibGFpc2RvbmlkYSIsImlhdCI6MTc0NzAyNDIwOSwiZXhwIjoxNzQ3NjI5MDA5fQ.Hl7juKxGd0eTftchAsd5_8rteJpaGMc9k1umyFLdj60"
+}
+### Register new user
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+"firstname": "oscarl",
+"lastname": "alho",
+"username": "oscar",
+"password": "senha123"
 }
 
 
 ### Read all users
-GET http://localhost:3000/api/users/6/posts
+GET http://localhost:3000/api/users
 Content-Type: application/json
 
 
 ### Read all posts
-GET http://localhost:3000/api/posts
+GET http://localhost:3000/api/posts/search?q=a
+
 
 ### Update a user by ID
-PATCH http://localhost:3000/users/6
+PATCH http://localhost:3000/api/users/10
 Content-Type: application/json
 
 {
-    "password":"novasenha123"
+    "password":"senha123"
 }
     
 

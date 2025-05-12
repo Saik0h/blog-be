@@ -16,13 +16,14 @@ datasource db {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  firstname String
-  lastname  String
-  username  String @unique
-  role      Role   @default(REGULAR)
-  posts     Post[]
-  password  String
+  id           Int     @id @default(autoincrement())
+  firstname    String
+  lastname     String
+  username     String  @unique
+  role         Role    @default(REGULAR)
+  posts        Post[]
+  password     String
+  refreshToken String?
 }
 
 model Post {
