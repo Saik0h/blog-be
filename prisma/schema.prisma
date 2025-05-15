@@ -20,7 +20,7 @@ model User {
   firstname    String
   lastname     String
   username     String  @unique
-  role         Role    @default(REGULAR)
+  role         Role    @default(MEMBRO)
   posts        Post[]
   password     String
   refreshToken String?
@@ -38,8 +38,18 @@ model Post {
   updatedAt  DateTime @updatedAt
 }
 
+model news {
+  id        Int      @id @default(autoincrement())
+  title     String
+  text      String
+  images    String[]
+  source    String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum Role {
-  REGULAR
-  MODERATOR
-  ADMIN
+  MEMBRO
+  EDITOR
+  CHEFE
 }

@@ -1,5 +1,5 @@
 import { Controller, Post, Body, UseGuards, Req, Get } from '@nestjs/common';
-import { Prisma } from 'generated/prisma';
+import { Prisma, User } from 'generated/prisma';
 import { AuthService } from './auth.service';
 import { LocalGuard } from './guards/local.guard';
 import { Request } from 'express';
@@ -39,7 +39,7 @@ export class AuthController {
   @Post('logout')
   @UseGuards(JwtAuthGuard)
   logout(@Req() req: Request) {
-    const user = req.user as any;
+    const user = req.user as User;
     return this.authService.logoutUser(user.id);
   }
 }

@@ -138,6 +138,16 @@ exports.Prisma.PostScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.NewsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  text: 'text',
+  images: 'images',
+  source: 'source',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -153,14 +163,15 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 exports.Role = exports.$Enums.Role = {
-  REGULAR: 'REGULAR',
-  MODERATOR: 'MODERATOR',
-  ADMIN: 'ADMIN'
+  MEMBRO: 'MEMBRO',
+  EDITOR: 'EDITOR',
+  CHEFE: 'CHEFE'
 };
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Post: 'Post'
+  Post: 'Post',
+  news: 'news'
 };
 
 /**

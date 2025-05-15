@@ -9,23 +9,23 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/auth/status
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsInVzZXJuYW1lIjoibGFpc2RvbmlkYSIsImlhdCI6MTc0NzAyNDIyMiwiZXhwIjoxNzQ3MDI0MjgyfQ.HZo-EPbBvwenrdYxoUozRgdY_-ImmQwevGU9fZAs-Po
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE3LCJ1c2VybmFtZSI6InN1YW1hZSIsImlhdCI6MTc0NzI3NTI5NywiZXhwIjoxNzQ3Mjc1NDc3fQ.zr53MuVoT69wqq4994-iQZM9l0mqpXncZzmVg1tjQ0M 
 
 ###
 POST http://localhost:3000/api/auth/refresh-token
 Content-Type: application/json
 
 {
-"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsInVzZXJuYW1lIjoibGFpc2RvbmlkYSIsImlhdCI6MTc0NzAyNDIwOSwiZXhwIjoxNzQ3NjI5MDA5fQ.Hl7juKxGd0eTftchAsd5_8rteJpaGMc9k1umyFLdj60"
+"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE3LCJ1c2VybmFtZSI6InN1YW1hZSIsImlhdCI6MTc0NzI3NTAwOCwiZXhwIjoxNzQ3ODc5ODA4fQ.pUjsi7KYM2JRkV2_lDwuXPYwJiZvCrIjCS_yiusjIO0"
 }
 ### Register new user
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-"firstname": "oscarl",
-"lastname": "alho",
-"username": "oscar",
+"firstname": "sua",
+"lastname": "mãe",
+"username": "suamae",
 "password": "senha123"
 }
 
@@ -57,7 +57,7 @@ Content-Type: application/json
 }
 
 ### Delete a user by ID
-DELETE http://localhost:3000/users/6
+DELETE http://localhost:3000/users/17
 
 ### Delete a post by ID
 DELETE http://localhost:3000/posts/6

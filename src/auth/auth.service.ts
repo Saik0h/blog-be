@@ -35,10 +35,14 @@ export class AuthService {
     const data = { ...registerPayload, password: pass };
     // Cria o usuário
     const user = await this.prisma.user.create({ data });
-    // cria o token
-    const token = this.jwtService.sign(user);
-    // retorna o token
-    return token;
+
+    // gera os tokens
+    const tokens = await this.generateTokens(user.id, user.username);
+    // envia o refreshtoken ao banco de dados
+    this.updateRefreshToken(user.id, tokens.refreshToken);
+
+    // retorna os tokens
+    return tokens;
   }
   // -------------------------------------------------- //
 
