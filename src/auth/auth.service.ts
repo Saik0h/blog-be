@@ -89,7 +89,7 @@ export class AuthService {
   // -------------------------------------------------- //
 
   // -------------------------------------------------- //
-  // ------- Atualiza o Refresh token do usuário ------ //
+  // ------- Atualiza o Access token do usuário ------ //
   // -------------------------------------------------- //
   async refreshAccessToken(refreshToken: string) {
     try {
@@ -103,7 +103,11 @@ export class AuthService {
       });
 
       // Verifica se o usuário existe e se o refresh token corresponde ao armazenado no banco
-      if (!user || user.refreshToken !== refreshToken) {
+      if (!user) {
+        throw new NotFoundException('Usuário não encontrado');
+      }
+      // Verifica se o refresh token armazenado no banco de dados corresponde ao refresh token passado na requisição
+      if (user.refreshToken !== refreshToken) {
         throw new ForbiddenException('Token inválido ou expirado');
       }
 
@@ -125,10 +129,10 @@ export class AuthService {
   // -------------------------------------------------- //
   // ---- Gera novos tokens (access/refresh token) ---- //
   // -------------------------------------------------- //
-  private async generateTokens(userId: number, username: string) {
-    const payload: { sub: number; username: string } = {
+  public async generateTokens(userId: number, role: string) {
+    const payload: { sub: number; role: string } = {
       sub: userId,
-      username,
+      role,
     };
 
     // Gera  o access token (expira em 3 minutos)

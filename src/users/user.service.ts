@@ -49,21 +49,18 @@ export class UserService {
     }
   }
 
-  // Atualiza o usuário, codificando a senha se fornecida
+  // Atualiza o usuário
   async update(id: number, updateUserDto: UpdateUserDto) {
-    if (!updateUserDto.password) {
+    if (updateUserDto.password) {
+      const hashedPassword = encodePassword(updateUserDto.password.toString());
+      updateUserDto.password = hashedPassword;
       return this.prisma.user.update({ where: { id }, data: updateUserDto });
     }
-
-    const newPassword = encodePassword(updateUserDto.password.toString());
-    return this.prisma.user.update({
-      where: { id },
-      data: { ...updateUserDto, password: newPassword },
-    });
+    return this.prisma.user.update({ where: { id }, data: updateUserDto });
   }
 
   // Remove um usuário
- async remove(id: number) {
+  async remove(id: number) {
     try {
       const user = await this.prisma.user.findUnique({ where: { id } });
       if (!user) {

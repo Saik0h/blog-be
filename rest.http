@@ -23,9 +23,9 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-"firstname": "sua",
-"lastname": "mãe",
-"username": "suamae",
+"firstname": "Cristhyan",
+"lastname": "Magarão",
+"username": "ocmagarao",
 "password": "senha123"
 }
 
@@ -36,15 +36,15 @@ Content-Type: application/json
 
 
 ### Read all posts
-GET http://localhost:3000/api/posts/search?q=a
+GET http://localhost:3000/api/users/1
 
 
 ### Update a user by ID
-PATCH http://localhost:3000/api/users/10
+PATCH http://localhost:3000/api/users/5
 Content-Type: application/json
 
 {
-    "password":"senha123"
+    "username":"zezinho"
 }
     
 
@@ -57,7 +57,7 @@ Content-Type: application/json
 }
 
 ### Delete a user by ID
-DELETE http://localhost:3000/users/17
+DELETE http://localhost:3000/api/users/6
 
 ### Delete a post by ID
 DELETE http://localhost:3000/posts/6
