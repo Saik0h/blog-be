@@ -7,10 +7,14 @@ import {
   Param,
   Delete,
   Query,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { Request } from 'express';
+import { JwtAuthGuard } from 'src/common/guards/auth.guard';
 
 @Controller('api/posts')
 export class PostController {
@@ -24,8 +28,9 @@ export class PostController {
 
   // ➕ Criar novo post
   @Post()
-  create(@Body() createPostDto: CreatePostDto) {
-    return this.postService.create(createPostDto);
+  @UseGuards(JwtAuthGuard)
+  create(@Body() createPostDto: CreatePostDto, @Req() req: Request) {
+    return this.postService.create(createPostDto, req);
   }
 
   // 📃 Listar todos os posts
@@ -42,10 +47,7 @@ export class PostController {
 
   // ✏️ Atualizar post por ID
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updatePostDto: UpdatePostDto,
-  ) {
+  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
     return this.postService.update(+id, updatePostDto);
   }
 

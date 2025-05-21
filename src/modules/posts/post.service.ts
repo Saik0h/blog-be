@@ -1,12 +1,14 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { Post } from 'generated/prisma';
+import { Post, Prisma, User } from 'generated/prisma';
 import { DatabaseService } from 'src/database/database.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { Request } from 'express';
 
 @Injectable()
 export class PostService {
@@ -25,11 +27,18 @@ export class PostService {
   }
 
   // ➕ Cria novo post
-  async create(data: CreatePostDto): Promise<Post> {
+  async create(data: CreatePostDto, req: Request): Promise<Post> {
+    const user = req.user as User;
+    console.log(user)
     try {
-      return await this.prisma.post.create({ data });
+      if (!data) throw new BadRequestException('No input provided');
+      const updatedData: CreatePostDto = {
+        ...data,
+        author: { connect: { id: user.id } },
+      };
+      return await this.prisma.post.create({ data: updatedData });
     } catch (error) {
-      throw new InternalServerErrorException('Deu n man, tenta denovo');
+      throw new InternalServerErrorException('Error creating post');
     }
   }
 

@@ -1,10 +1,21 @@
 ### LogsIn
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+"firstname":"Jumento",
+    "lastname":"da Silva",
+"username": "jumentow",
+"password": "novasenha123"
+}
+
+###
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-"username": "laisdonida",
-"password": "novasenha123"
+    "username":"ocmagarao",
+    "password":"senha123"
 }
 
 ###
@@ -31,12 +42,12 @@ Content-Type: application/json
 
 
 ### Read all users
-GET http://localhost:3000/api/users
+GET http://localhost:3000/api/posts
 Content-Type: application/json
 
 
 ### Read all posts
-GET http://localhost:3000/api/users/1
+GET http://localhost:3000/api/users
 
 
 ### Update a user by ID
@@ -49,15 +60,33 @@ Content-Type: application/json
     
 
 ### Update a post by ID
-PATCH http://localhost:3000/posts/6
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsInJvbGUiOiJvY21hZ2FyYW8iLCJpYXQiOjE3NDc3OTg4NTEsImV4cCI6MTc0Nzc5OTAzMX0.WVLG1ZdX1sgjVRt9pFSTxyZ-DQaF3v7aEqS_j1ND7oM; Max-Age=180; Path=/; Expires=Wed, 21 May 2025 03:43:52 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsInJvbGUiOiJvY21hZ2FyYW8iLCJpYXQiOjE3NDc3OTg4NTEsImV4cCI6MTc0ODQwMzY1MX0.nrbmGHop5jyyhMV7we37prUG4BY-Q2a0ONc9xu0dkRk; Max-Age=604800; Path=/; Expires=Wed, 28 May 2025 03:40:52 GMT; HttpOnly; SameSite=Lax
+
+{
+    "title":"Hello world",
+"text":"Hi",
+"image":"adssdasdasd"
+}
+###
+PATCH http://localhost:3000/api/users/8
+Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsInJvbGUiOiJvY21hZ2FyYW8iLCJpYXQiOjE3NDc3OTg4NTEsImV4cCI6MTc0Nzc5OTAzMX0.WVLG1ZdX1sgjVRt9pFSTxyZ-DQaF3v7aEqS_j1ND7oM; Max-Age=180; Path=/; Expires=Wed, 21 May 2025 03:43:52 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsInJvbGUiOiJvY21hZ2FyYW8iLCJpYXQiOjE3NDc3OTg4NTEsImV4cCI6MTc0ODQwMzY1MX0.nrbmGHop5jyyhMV7we37prUG4BY-Q2a0ONc9xu0dkRk; Max-Age=604800; Path=/; Expires=Wed, 28 May 2025 03:40:52 GMT; HttpOnly; SameSite=Lax
 Content-Type: application/json
 
 {
-"text":"Hi"
+    "posts":{
+        "create":{
+            "title": "Hello World",
+            "text":"Gay asf",
+            "image":"ssssssh"
+        }
+    }
 }
-
 ### Delete a user by ID
-DELETE http://localhost:3000/api/users/6
+DELETE http://localhost:3000/api/users/7
+Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInJvbGUiOiJqdW1lbnRvdyIsImlhdCI6MTc0Nzc5NzIwMywiZXhwIjoxNzQ3Nzk3MzgzfQ.y9j_wAUvs9cdHHqi95PD8ciNAahgZPxXZ1-urwnENVg
+
 
 ### Delete a post by ID
 DELETE http://localhost:3000/posts/6
