@@ -1,92 +1,98 @@
-### LogsIn
+# Auth Endpoints
+### Register
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-"firstname":"Jumento",
-    "lastname":"da Silva",
-"username": "jumentow",
-"password": "novasenha123"
+    "firstname":"",
+    "lastname":"",
+    "username": "",
+    "password": ""
 }
 
-###
+### Login
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "username":"ocmagarao",
-    "password":"senha123"
+    "username": "",
+    "password": ""
 }
 
-###
+### Refresh Tokens
+POST http://localhost:3000/api/auth/refresh
+Cookie: 
+
+### Get user from token
 GET http://localhost:3000/api/auth/status
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE3LCJ1c2VybmFtZSI6InN1YW1hZSIsImlhdCI6MTc0NzI3NTI5NywiZXhwIjoxNzQ3Mjc1NDc3fQ.zr53MuVoT69wqq4994-iQZM9l0mqpXncZzmVg1tjQ0M 
+Cookie: 
 
-###
-POST http://localhost:3000/api/auth/refresh-token
+### Logout
+POST http://localhost:3000/api/auth/logout
+Cookie: 
+
+#Users Endpoints
+### Get All Users
+GET http://localhost:3000/api/users/
+
+### Get a single user
+GET http://localhost:3000/api/users/2
+
+### Patches User
+PATCH http://localhost:3000/api/users/2
 Content-Type: application/json
 
 {
-"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE3LCJ1c2VybmFtZSI6InN1YW1hZSIsImlhdCI6MTc0NzI3NTAwOCwiZXhwIjoxNzQ3ODc5ODA4fQ.pUjsi7KYM2JRkV2_lDwuXPYwJiZvCrIjCS_yiusjIO0"
+    "username": ""
 }
-### Register new user
-POST http://localhost:3000/api/auth/register
+### Get all posts from a user
+GET http://localhost:3000/api/users/2/posts
+
+### Deletes User
+DELETE  http://localhost:3000/api/users/1
+
+
+### Changes user password
+PATCH  http://localhost:3000/api/users/2/change-password
+Content-Type: application/json
+Cookie: 
+
+{
+    "newPassword":"",
+    "newPasswordConfirmation":"",
+    "currentPassword":""
+
+}
+
+#Posts Endpoints
+### Creates a post
+POST  http://localhost:3000/api/posts
+Cookie: 
 Content-Type: application/json
 
 {
-"firstname": "Cristhyan",
-"lastname": "Magarão",
-"username": "ocmagarao",
-"password": "senha123"
+    "title":"",
+    "text":"",
+    "image":""
 }
-
-
-### Read all users
+### Get All Posts
 GET http://localhost:3000/api/posts
+
+### Query posts
+GET http://localhost:3000/api/posts/search?q=gay
+
+### Creates A Post
+PATCH http://localhost:3000/api/posts/1
 Content-Type: application/json
-
-
-### Read all posts
-GET http://localhost:3000/api/users
-
-
-### Update a user by ID
-PATCH http://localhost:3000/api/users/5
-Content-Type: application/json
+Cookie: 
 
 {
-    "username":"zezinho"
+    "title" : "",
+    "text" : ""
 }
-    
 
-### Update a post by ID
-POST http://localhost:3000/api/posts
+### Deletes a post
+DELETE http://localhost:3000/api/posts/author/9
+Cookie: 
+
 Content-Type: application/json
-Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsInJvbGUiOiJvY21hZ2FyYW8iLCJpYXQiOjE3NDc3OTg4NTEsImV4cCI6MTc0Nzc5OTAzMX0.WVLG1ZdX1sgjVRt9pFSTxyZ-DQaF3v7aEqS_j1ND7oM; Max-Age=180; Path=/; Expires=Wed, 21 May 2025 03:43:52 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsInJvbGUiOiJvY21hZ2FyYW8iLCJpYXQiOjE3NDc3OTg4NTEsImV4cCI6MTc0ODQwMzY1MX0.nrbmGHop5jyyhMV7we37prUG4BY-Q2a0ONc9xu0dkRk; Max-Age=604800; Path=/; Expires=Wed, 28 May 2025 03:40:52 GMT; HttpOnly; SameSite=Lax
-
-{
-    "title":"Hello world",
-"text":"Hi",
-"image":"adssdasdasd"
-}
-###
-PATCH http://localhost:3000/api/users/8
-Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsInJvbGUiOiJvY21hZ2FyYW8iLCJpYXQiOjE3NDc3OTg4NTEsImV4cCI6MTc0Nzc5OTAzMX0.WVLG1ZdX1sgjVRt9pFSTxyZ-DQaF3v7aEqS_j1ND7oM; Max-Age=180; Path=/; Expires=Wed, 21 May 2025 03:43:52 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsInJvbGUiOiJvY21hZ2FyYW8iLCJpYXQiOjE3NDc3OTg4NTEsImV4cCI6MTc0ODQwMzY1MX0.nrbmGHop5jyyhMV7we37prUG4BY-Q2a0ONc9xu0dkRk; Max-Age=604800; Path=/; Expires=Wed, 28 May 2025 03:40:52 GMT; HttpOnly; SameSite=Lax
-Content-Type: application/json
-
-{
-    "posts":{
-        "create":{
-            "title": "Hello World",
-            "text":"Gay asf",
-            "image":"ssssssh"
-        }
-    }
-}
-### Delete a user by ID
-DELETE http://localhost:3000/api/users/7
-Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsInJvbGUiOiJqdW1lbnRvdyIsImlhdCI6MTc0Nzc5NzIwMywiZXhwIjoxNzQ3Nzk3MzgzfQ.y9j_wAUvs9cdHHqi95PD8ciNAahgZPxXZ1-urwnENVg
-
-
-### Delete a post by ID
-DELETE http://localhost:3000/posts/6

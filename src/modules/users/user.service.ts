@@ -1,18 +1,23 @@
 import {
   BadRequestException,
+  ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
-import { encodePassword } from 'src/common/utils/bcrypt';
+import { comparePassword, encodePassword } from 'src/common/utils/bcrypt';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from 'generated/prisma';
+import { ChangePasswordDto } from './dto/change-password.dto';
+import { IDecodedJWT } from 'src/common/utils/decoded';
+import { Request } from 'express';
 
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: DatabaseService) {}
 
-  // Retorna todos os usuários sem a senha
+  // Retorna todos os usuários
   async findAll() {
     try {
       const users = await this.prisma.user.findMany({});
@@ -23,7 +28,7 @@ export class UserService {
     }
   }
 
-  // Retorna um único usuário sem a senha
+  // Retorna um único usuário
   async findOne(id: number) {
     try {
       const user = await this.prisma.user.findUnique({ where: { id } });
@@ -32,7 +37,7 @@ export class UserService {
       }
       return this.removeSensitiveDataFromUser(user);
     } catch (err) {
-      throw new BadRequestException('Cannot find user');
+      throw new NotFoundException('Cannot find user');
     }
   }
 
@@ -59,15 +64,12 @@ export class UserService {
       if (!id) throw new BadRequestException('User must be provided');
       if (!updateUserDto) throw new BadRequestException('Changes must be made');
       if (updateUserDto.password) {
-        const hashedPassword = encodePassword(
-          updateUserDto.password.toString(),
-        );
-        updateUserDto.password = hashedPassword;
-        return this.prisma.user.update({ where: { id }, data: updateUserDto });
+        throw new BadRequestException('Password changes must not be made here');
       }
-      return this.prisma.user.update({ where: { id }, data: updateUserDto });
+      await this.prisma.user.update({ where: { id }, data: updateUserDto });
+      return { message: 'Updated Succesfuly!' };
     } catch (err) {
-      throw new BadRequestException("Error updating user data")
+      throw err;
     }
   }
 
@@ -84,14 +86,44 @@ export class UserService {
     }
   }
 
-  // Função para remover dados sensíveis de um único usuário
+  async changePassword(req: Request, payload: ChangePasswordDto) {
+    try {
+      const u = req.user! as IDecodedJWT;
+      const id = u.sub;
+      console.log(id);
+      const user = await this.prisma.user.findUnique({ where: { id } });
+      const currentPassword = user!.password;
+      if (payload.newPassword !== payload.newPasswordConfirmation)
+        throw new BadRequestException('Passwords dont match');
+      if (!comparePassword(payload.currentPassword, currentPassword))
+        throw new ForbiddenException('Incorrect Password');
+      if (payload.newPassword === currentPassword)
+        throw new ConflictException('Password cannot be the same as before');
+
+      const encodedPassword = encodePassword(payload.newPassword);
+      await this.prisma.user.update({
+        where: { id: id },
+        data: { password: encodedPassword },
+      });
+
+      return { message: 'Password Updated Succsessfully' };
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  }
+
+  // Método para remover dados sensíveis de um único usuário
   private removeSensitiveDataFromUser(user: User) {
     const { password, refreshToken, profileImage, username, ...userWOP } = user;
     return userWOP;
   }
 
-  // Função para remover dados sensíveis de vários usuários
+  // Método para remover dados sensíveis de vários usuários
   private removeSensitiveDataFromUsers(users: User[]) {
-    return users.map(({ password, refreshToken, profileImage, username, ...usersWOP }) => usersWOP);
+    return users.map(
+      ({ password, refreshToken, profileImage, username, ...usersWOP }) =>
+        usersWOP,
+    );
   }
 }

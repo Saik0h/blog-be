@@ -6,18 +6,19 @@ import {
   Req,
   Get,
   Res,
+  Patch,
 } from '@nestjs/common';
 import { Prisma, User } from 'generated/prisma';
 import { AuthService } from './auth.service';
-import { LocalGuard } from '../../common/guards/local.guard';
 import { Request, Response } from 'express';
 import { JwtAuthGuard } from '../../common/guards/jwt.guard';
+import { IDecodedJWT } from 'src/common/utils/decoded';
 
 @Controller('api/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  // Endpoint responsável por registrar um usuário. Retorna um Access e Refresh Token.
+  // -------------------> Rota de Registro de usuário
   @Post('register')
   register(
     @Body() registerPayload: Prisma.UserCreateInput,
@@ -26,9 +27,9 @@ export class AuthController {
     return this.authService.register(registerPayload, res);
   }
 
-  // Endpoint responsável pelo login de um usuário. Retorna um Access e Refresh Token.
+  // -------------------> Rota de login
+
   @Post('login')
-  @UseGuards(LocalGuard)
   async login(
     @Body() loginDto: { username: string; password: string },
     @Res({ passthrough: true }) res: Response,
@@ -36,14 +37,16 @@ export class AuthController {
     return this.authService.login(loginDto, res);
   }
 
-  // Endpoint responsável por autenticar um access token. precisa de um access token como parâmetro e Retorna um usuário.
+  // -------------------> Rota responsável por buscar usuário
+
   @Get('status')
   @UseGuards(JwtAuthGuard)
   async status(@Req() req: Request) {
     return this.authService.getUser(req);
   }
 
-  // Endpoint responsável por autenticar um refreshtoken. Retorna um Access e Refresh Token.
+  // -------------------> Rota para verificar e e atualizar jwtToken
+
   @Post('refresh')
   async refresh(
     @Req() req: Request,
@@ -52,11 +55,14 @@ export class AuthController {
     return await this.authService.refreshTokens(req, res);
   }
 
-  // Endpoint opcional para logout, invalida o refresh token no banco.
+  // -------------------> Rota de logout
+
   @Post('logout')
   @UseGuards(JwtAuthGuard)
-  logout(@Req() req: Request, res: Response) {
-    const user = req.user as User;
+  logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    const user = req.user as IDecodedJWT;
     return this.authService.logoutUser(user, res);
   }
+
+  // -------------------------------------------------------->
 }

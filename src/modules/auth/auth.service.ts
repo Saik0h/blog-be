@@ -1,8 +1,10 @@
 import {
+  BadRequestException,
   ConflictException,
   ForbiddenException,
   HttpException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -13,10 +15,13 @@ import { comparePassword, encodePassword } from 'src/common/utils/bcrypt';
 import { Request, Response } from 'express';
 import { ITokens } from 'src/common/utils/tokens';
 import { IDecodedJWT } from 'src/common/utils/decoded';
-import { use } from 'passport';
+import {
+  clearTokensFromCookies,
+  getTokensFromCookies,
+  setTokensInCookies,
+} from './utils/cookie-service';
 // IMPORTS ACIMA-----------------------^
 
-// Service responsável pelas operações de autenticação(registro e login com token)
 @Injectable()
 export class AuthService {
   constructor(
@@ -24,18 +29,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  private getTokensFromCookies(req: Request): {
-    accessToken: string | null;
-    refreshToken: string | null;
-  } {
-    const refreshToken: string = req.cookies['refreshToken'];
-    const accessToken: string = req.cookies['accessToken'];
-    return {
-      accessToken,
-      refreshToken,
-    };
-  }
-
+  // -------------------------------------------------------- //
+  
   private isTokenExpired(decoded: IDecodedJWT): boolean {
     if (!decoded.exp) return true;
 
@@ -49,110 +44,83 @@ export class AuthService {
     return this.jwtService.verify(token) as IDecodedJWT;
   }
 
-  private setTokensInCookies(res: Response, tokens: ITokens) {
-    res.cookie('accessToken', tokens.accessToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
-      maxAge: 60000 * 3, // 3 minutos
-    });
-    res.cookie('refreshToken', tokens.refreshToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
-      maxAge: 60000 * 60 * 24 * 7, // 7 dias
-    });
-  }
+  // -------------------------------------------------------- //
 
-  private clearTokensFromCookies(res: Response) {
-    res.clearCookie('accessToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict',
-    });
-
-    res.clearCookie('refreshToken', {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'strict',
-    });
-  }
-
-  // -------------------------------------------------- //
-  // ----- Registra um usuário e retorna os tokens ---- //
-  // -------------------------------------------------- //
   async register(registerPayload: Prisma.UserCreateInput, res: Response) {
-    // Verifica se o nome de usuário já está sendo utilizado
-    const isUsernameTaken = await this.prisma.user.findUnique({
-      where: { username: registerPayload.username },
-    });
-    // se sim, lança um erro de conflito
-    if (isUsernameTaken) throw new ConflictException('Username taken');
-    // codifica senha
-    const pass = encodePassword(registerPayload.password);
-    // troca a senha enviada pelo input pela senha codificada
-    const data = { ...registerPayload, password: pass };
-    // Cria o usuário
-    const user = await this.prisma.user.create({ data });
+    try {
+      const isUsernameTaken = await this.prisma.user.findUnique({
+        where: { username: registerPayload.username },
+      });
+      if (isUsernameTaken) throw new ConflictException('Username taken');
+      if (!registerPayload.firstname)
+        throw new BadRequestException('First Name must be provided');
+      if (!registerPayload.lastname)
+        throw new BadRequestException('Last Name must be provided');
+      if (!registerPayload.username)
+        throw new BadRequestException('Username must be provided');
+      if (!registerPayload.password)
+        throw new BadRequestException('Password must be provided');
 
-    // gera os tokens
-    const tokens = await this.generateTokens(user.id, user.username);
+      const pass = encodePassword(registerPayload.password);
+      const data = { ...registerPayload, password: pass };
+      const user = await this.prisma.user.create({ data });
+      const tokens = await this.generateTokens(user.id, user.username);
 
-    this.setTokensInCookies(res, tokens);
+      setTokensInCookies(res, tokens);
 
-    // retorna os tokens
-    return { message: 'User registered successfully' };
+      return { message: 'User registered successfully' };
+    } catch (err) {
+      throw err;
+    }
   }
-  // -------------------------------------------------- //
 
   // -------------------------------------------------- //
-  // ---------- Gera os tokens ao fazer login --------- //
-  // -------------------------------------------------- //
-  async login(user: {username: string, password: string}, res: Response) {
-    // Busca usuário pelo nome de usuário]
-    const findUser = await this.prisma.user.findUnique({
-      where: { username:user.username },
-    });
-    const pass = user.password;
-console.log(pass)
-    // se não encontra usuário, lança exceção "Usuário não existe"
-    if (!findUser) throw new NotFoundException("User doesn't exist");
 
-    // Confere se a senha é uma senha válida
-    const isPasswordValid = comparePassword(pass, findUser.password);
-    // se a senha não é válida, lança uma exceção "Senha incorreta"
-    if (!isPasswordValid) throw new ForbiddenException('Incorrect Password');
+  async login(user: { username: string; password: string }, res: Response) {
+    try {
+      const findUser = await this.prisma.user.findUnique({
+        where: { username: user.username },
+      });
+      if (!findUser) throw new NotFoundException("User doesn't exist");
 
-    // gera os tokens
-    const tokens: ITokens = await this.generateTokens(
-      findUser.id,
-      findUser.username,
-    );
-    // envia os tokens via cookies
-    this.setTokensInCookies(res, tokens);
+      const pass = user.password;
+      const isPasswordValid = comparePassword(pass, findUser.password);
+      if (!isPasswordValid) throw new ForbiddenException('Incorrect Password');
 
-    // retorna mensagem de sucesso
-    return { message: 'Successfully logged in' };
+      const tokens: ITokens = await this.generateTokens(
+        findUser.id,
+        findUser.username,
+      );
+      setTokensInCookies(res, tokens);
+
+      return { message: 'Successfully logged in' };
+    } catch (err) {
+      throw err;
+    }
   }
-  // -------------------------------------------------- //
 
   // -------------------------------------------------- //
-  // ---- Limpa o Refresh token do usuário(Logout) ---- //
-  // -------------------------------------------------- //
-  async logoutUser(user: User, res: Response) {
-    const id = user.id;
-    this.clearTokensFromCookies(res);
-    await this.prisma.user.update({
-      where: { id },
-      data: { refreshToken: null },
-    });
 
-    return { message: 'Successfully logged out' };
+  async logoutUser(user: IDecodedJWT, res: Response) {
+    try {
+      if (!user) throw new NotFoundException('User is not logged in');
+      const id = user.sub;
+      clearTokensFromCookies(res);
+      await this.prisma.user.update({
+        where: { id },
+        data: { refreshToken: null },
+      });
+      return { message: 'Successfully logged out' };
+    } catch (err) {
+      console.error(err);
+      throw new InternalServerErrorException('Something went wrong');
+    }
   }
+
   // -------------------------------------------------- //
 
   private async verifyAccessToken(req: Request, res: Response) {
-    const accessToken = this.getTokensFromCookies(req).accessToken;
+    const accessToken = getTokensFromCookies(req).accessToken;
 
     if (!accessToken) {
       throw new ForbiddenException('Access token not found');
@@ -163,49 +131,43 @@ console.log(pass)
     try {
       decoded = this.extractPayload(accessToken) as IDecodedJWT;
     } catch (err) {
+      console.log(err);
       throw new ForbiddenException('Invalid access token');
     }
 
     if (this.isTokenExpired(decoded)) {
       throw new ForbiddenException('Access token expired');
     }
-    return { message: 'Token refreshed succesfully' };
+    return { message: 'Token is valid' };
   }
 
-  // -------------------------------------------------- //
-  // ------- Atualiza o Access token do usuário ------ //
   // -------------------------------------------------- //
 
   private async refreshExpiredAccessToken(req: Request, res: Response) {
     try {
-      const refreshToken = this.getTokensFromCookies(req).refreshToken;
+      const refreshToken = getTokensFromCookies(req).refreshToken;
       if (refreshToken === null)
         throw new ForbiddenException('User must be logged in');
-      // Verifica e decodifica o refresh token
       const decoded: IDecodedJWT = this.extractPayload(refreshToken);
 
       if (this.isTokenExpired(decoded))
         throw new ForbiddenException('Token Expired');
 
-      // Busca o usuário no banco de dados com base no id encontrado no refresh token passado na requisição
       const user = await this.prisma.user.findUnique({
         where: { id: decoded.sub },
       });
 
-      // Verifica se o usuário existe e se o refresh token corresponde ao armazenado no banco
       if (!user) {
         throw new NotFoundException('User not found');
       }
 
-      // Verifica se o refresh token armazenado no banco de dados corresponde ao refresh token passado na requisição
       if (user.refreshToken !== refreshToken) {
         throw new ForbiddenException('Invalid token');
       }
 
-      // Gera novos tokens (access e refresh token)
       const tokens: ITokens = await this.generateTokens(user.id, user.username);
 
-      this.setTokensInCookies(res, tokens);
+      setTokensInCookies(res, tokens);
 
       return { message: 'Access token refreshed successfully' };
     } catch (err) {
@@ -230,11 +192,12 @@ console.log(pass)
   }
 
   async getUser(req: Request) {
-    const user = req.user as User;
+    const user = req.user as IDecodedJWT;
     try {
       if (!user) throw new UnauthorizedException('User not found');
+      console.log(user);
       const u = await this.prisma.user.findUnique({
-        where: { id: user.id },
+        where: { id: user.sub },
       });
       const { refreshToken, password, ...userLoggedIn } = u!;
 
@@ -243,33 +206,27 @@ console.log(pass)
       throw err;
     }
   }
+
   // -------------------------------------------------- //
-  // ---- Gera novos tokens (access/refresh token) ---- //
-  // -------------------------------------------------- //
+
   private async generateTokens(userId: number, role: string): Promise<ITokens> {
     const payload: { sub: number; role: string } = {
       sub: userId,
       role,
     };
 
-    // Gera  o access token (expira em 3 minutos)
     const accessToken = this.jwtService.sign(payload, {
       expiresIn: '3m',
     });
 
-    // Gera o refresh token (expira em 7 dias)
     const refreshToken = this.jwtService.sign(payload, {
-      expiresIn: '7d', // Tempo de expiração: 7 dias
+      expiresIn: '7d',
     });
     await this.updateRefreshTokenInDb(userId, refreshToken);
-    // retorna ambos os tokens
     return { accessToken, refreshToken };
   }
   // -------------------------------------------------- //
 
-  // -------------------------------------------------- //
-  // -- Atualiza o refresh token armazenado no banco -- //
-  // -------------------------------------------------- //
   private async updateRefreshTokenInDb(userId: number, refreshToken: string) {
     await this.prisma.user.update({
       where: { id: userId },
