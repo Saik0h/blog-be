@@ -52,7 +52,7 @@ export class AuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    return await this.authService.refreshTokens(req, res);
+    return this.authService.refreshTokens(req, res);
   }
 
   // -------------------> Rota de logout

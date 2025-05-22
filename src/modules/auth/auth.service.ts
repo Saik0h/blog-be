@@ -64,7 +64,7 @@ export class AuthService {
       const pass = encodePassword(registerPayload.password);
       const data = { ...registerPayload, password: pass };
       const user = await this.prisma.user.create({ data });
-      const tokens = await this.generateTokens(user.id, user.username);
+      const tokens = await this.generateTokens(user.id, user.role);
 
       setTokensInCookies(res, tokens);
 
@@ -89,7 +89,7 @@ export class AuthService {
 
       const tokens: ITokens = await this.generateTokens(
         findUser.id,
-        findUser.username,
+        findUser.role,
       );
       setTokensInCookies(res, tokens);
 
@@ -112,8 +112,7 @@ export class AuthService {
       });
       return { message: 'Successfully logged out' };
     } catch (err) {
-      console.error(err);
-      throw new InternalServerErrorException('Something went wrong');
+      throw err;
     }
   }
 
