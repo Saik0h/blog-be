@@ -15,8 +15,8 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "",
-    "password": ""
+    "username": "zezinho",
+    "password": "senha123"
 }
 
 ### Refresh Tokens
@@ -71,12 +71,19 @@ Cookie:
 Content-Type: application/json
 
 {
+    "category": "ARTIGO",
     "title":"",
     "text":"",
     "image":""
 }
 ### Get All Posts
 GET http://localhost:3000/api/posts
+
+### Get All Posts from the blog category
+GET http://localhost:3000/api/posts/blogs
+
+### Get All Posts from the article category
+GET http://localhost:3000/api/posts/artigos
 
 ### Query posts
 GET http://localhost:3000/api/posts/search?q=gay

@@ -133,21 +133,12 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
+  category: 'category',
   authorId: 'authorId',
   title: 'title',
   text: 'text',
   image: 'image',
   references: 'references',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.NewsScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  text: 'text',
-  images: 'images',
-  source: 'source',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -172,10 +163,14 @@ exports.Role = exports.$Enums.Role = {
   CHEFE: 'CHEFE'
 };
 
+exports.PostCategory = exports.$Enums.PostCategory = {
+  BLOG: 'BLOG',
+  ARTIGO: 'ARTIGO'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
-  Post: 'Post',
-  news: 'news'
+  Post: 'Post'
 };
 
 /**

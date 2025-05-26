@@ -10,6 +10,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Request } from 'express';
 import { IDecodedJWT } from 'src/common/utils/decoded';
+import { last } from 'rxjs';
 
 @Injectable()
 export class PostService {
@@ -45,13 +46,24 @@ export class PostService {
   }
 
   // -------------------------------------------------------------------- //
-  async findAll(): Promise<Post[]> {
-    return this.prisma.post.findMany();
+ 
+
+  async findAll() {
+    return await this.prisma.post.findMany({include:  {author: {select: {firstname: true, lastname: true, profileImage: true}}}});
   }
 
   // -------------------------------------------------------------------- //
+  async findAllBlogs() {
+    return this.prisma.post.findMany({ where: { category: 'BLOG' }, include:  {author: {select: {firstname: true, lastname: true, profileImage: true}}}});
+  }
+
+  // -------------------------------------------------------------------- //
+  async findAllArtigos() {
+    return this.prisma.post.findMany({ where: { category: 'ARTIGO' }, include:  {author: {select: {firstname: true, lastname: true, profileImage: true}}}});
+  }
+  // -------------------------------------------------------------------- //
   async findOne(id: number): Promise<Post> {
-    const post = await this.prisma.post.findUnique({ where: { id } });
+    const post = await this.prisma.post.findUnique({ where: { id }, include: {author: {select:{firstname: true, lastname: true, profileImage: true }}} });
 
     if (!post) {
       throw new NotFoundException(`Post com ID ${id} não encontrado.`);
@@ -111,6 +123,6 @@ export class PostService {
       throw err;
     }
   }
-  
+
   // -------------------------------------------------------------------- //
 }

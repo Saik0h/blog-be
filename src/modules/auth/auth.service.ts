@@ -130,7 +130,6 @@ export class AuthService {
     try {
       decoded = this.extractPayload(accessToken) as IDecodedJWT;
     } catch (err) {
-      console.log(err);
       throw new ForbiddenException('Invalid access token');
     }
 
@@ -164,13 +163,12 @@ export class AuthService {
         throw new ForbiddenException('Invalid token');
       }
 
-      const tokens: ITokens = await this.generateTokens(user.id, user.username);
+      const tokens: ITokens = await this.generateTokens(user.id, user.role);
 
       setTokensInCookies(res, tokens);
 
       return { message: 'Access token refreshed successfully' };
     } catch (err) {
-      console.error('Refresh token error:', err);
       throw err instanceof HttpException
         ? err
         : new ForbiddenException('Unable to refresh token');
@@ -194,7 +192,6 @@ export class AuthService {
     const user = req.user as IDecodedJWT;
     try {
       if (!user) throw new UnauthorizedException('User not found');
-      console.log(user);
       const u = await this.prisma.user.findUnique({
         where: { id: user.sub },
       });

@@ -34,6 +34,20 @@ export class PostController {
     return this.postService.findAll();
   }
 
+  // -------------------> Retorna todos os posts
+
+  @Get('blogs')
+  findAllBlogs() {
+    return this.postService.findAllBlogs();
+  }
+
+  // -------------------> Retorna todos os posts
+
+  @Get('artigos')
+  findAllArtigos() {
+    return this.postService.findAllArtigos();
+  }
+
   // -------------------> Retorna um post específico
 
   @Get(':id')
@@ -70,7 +84,7 @@ export class PostController {
   }
 
   // -------------------> Apaga todos os posts de um autor específico
- 
+
   @Delete('author/:authorId')
   @UseGuards(JwtAuthGuard)
   removeAll(@Param('authorId') id: string) {
