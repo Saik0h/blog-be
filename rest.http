@@ -2,6 +2,7 @@
 ### Register
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
+Cookie: 
 
 {
     "firstname":"",
@@ -15,8 +16,8 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "zezinho",
-    "password": "senha123"
+    "username": "",
+    "password": ""
 }
 
 ### Refresh Tokens
@@ -34,23 +35,27 @@ Cookie:
 #Users Endpoints
 ### Get All Users
 GET http://localhost:3000/api/users/
+Cookie: 
 
 ### Get a single user
-GET http://localhost:3000/api/users/2
+GET http://localhost:3000/api/users/12
+Cookie: 
 
 ### Patches User
-PATCH http://localhost:3000/api/users/2
+PATCH http://localhost:3000/api/users/11
+Cookie: 
 Content-Type: application/json
 
 {
-    "username": ""
+    "role": ""
 }
+
 ### Get all posts from a user
 GET http://localhost:3000/api/users/2/posts
 
 ### Deletes User
 DELETE  http://localhost:3000/api/users/1
-
+Cookie: 
 
 ### Changes user password
 PATCH  http://localhost:3000/api/users/2/change-password
@@ -61,7 +66,6 @@ Cookie:
     "newPassword":"",
     "newPasswordConfirmation":"",
     "currentPassword":""
-
 }
 
 #Posts Endpoints
@@ -71,7 +75,7 @@ Cookie:
 Content-Type: application/json
 
 {
-    "category": "ARTIGO",
+    "category": "",
     "title":"",
     "text":"",
     "image":""
@@ -102,4 +106,20 @@ Cookie:
 DELETE http://localhost:3000/api/posts/author/9
 Cookie: 
 
+### Gets Inboxes
+GET http://localhost:3000/api/inbox
+Cookie: 
+
+### Delete Inboxes
+DELETE http://localhost:3000/api/inbox/1
+Cookie: 
+
+### Post Inboxes
+POST http://localhost:3000/api/inbox
 Content-Type: application/json
+
+{
+    "name": "",
+    "email": "",
+    "message": ""
+}

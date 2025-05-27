@@ -6,13 +6,13 @@ import {
   Req,
   Get,
   Res,
-  Patch,
 } from '@nestjs/common';
 import { Prisma, User } from 'generated/prisma';
 import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
 import { JwtAuthGuard } from '../../common/guards/jwt.guard';
 import { IDecodedJWT } from 'src/common/utils/decoded';
+import { Access } from 'src/common/decorators/access-level-decorator';
 
 @Controller('api/auth')
 export class AuthController {
@@ -20,6 +20,7 @@ export class AuthController {
 
   // -------------------> Rota de Registro de usuário
   @Post('register')
+  @Access('restrict')
   register(
     @Body() registerPayload: Prisma.UserCreateInput,
     @Res({ passthrough: true }) res: Response,
@@ -30,6 +31,7 @@ export class AuthController {
   // -------------------> Rota de login
 
   @Post('login')
+  @Access('public')
   async login(
     @Body() loginDto: { username: string; password: string },
     @Res({ passthrough: true }) res: Response,
@@ -40,6 +42,7 @@ export class AuthController {
   // -------------------> Rota responsável por buscar usuário
 
   @Get('status')
+  @Access('authorizedOnly')
   @UseGuards(JwtAuthGuard)
   async status(@Req() req: Request) {
     return this.authService.getUser(req);
@@ -48,7 +51,8 @@ export class AuthController {
   // -------------------> Rota para verificar e e atualizar jwtToken
 
   @Post('refresh')
-  async refresh(
+  @Access('public')
+  refresh(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -59,6 +63,7 @@ export class AuthController {
 
   @Post('logout')
   @UseGuards(JwtAuthGuard)
+  @Access('authorizedOnly')
   logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const user = req.user as IDecodedJWT;
     return this.authService.logoutUser(user, res);

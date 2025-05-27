@@ -13,14 +13,16 @@ import { Prisma, User } from 'generated/prisma';
 import { Request } from 'express';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { JwtAuthGuard } from 'src/common/guards/jwt.guard';
+import { Access } from 'src/common/decorators/access-level-decorator';
 
 @Controller('api/users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   // -------------------> Retorna todos os usuários
 
   @Get()
+  @Access('public')
   findAll() {
     return this.userService.findAll();
   }
@@ -28,6 +30,7 @@ export class UserController {
   // -------------------> Retorna um único usuário
 
   @Get(':id')
+  @Access('authorizedOnly')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }
@@ -41,6 +44,7 @@ export class UserController {
   // -------------------> Atualiza um usuário
 
   @Patch(':id')
+  @Access('authorizedOnly')
   update(
     @Param('id') id: string,
     @Body() updateUserDto: Prisma.UserUpdateInput,
@@ -50,6 +54,7 @@ export class UserController {
   // -------------------> Atualiza senha de um usuário
 
   @Patch(':id/change-password')
+  @Access('authorizedOnly')
   @UseGuards(JwtAuthGuard)
   updatePassword(
     @Param('id') id: string,
@@ -61,6 +66,7 @@ export class UserController {
   // -------------------> Deleta usuário
 
   @Delete(':id')
+  @Access('restrict')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
