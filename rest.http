@@ -107,8 +107,8 @@ DELETE http://localhost:3000/api/posts/author/9
 Cookie: 
 
 ### Gets Inboxes
-GET http://localhost:3000/api/inbox
-Cookie: 
+GET http://localhost:3000/api/inbox/search?q=o
+Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0MzgxNjUsImV4cCI6MTc0ODQzODM0NX0.vFGn8lF_kITXrCXqzGGo6yK6IcDcCQ1xB_jHpY_Uz6E; Max-Age=180; Path=/; Expires=Wed, 28 May 2025 13:19:06 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0MzgxNjUsImV4cCI6MTc0OTA0Mjk2NX0.eRbnx_Nu0sYNIOBVVGy_cCWxJtZl3La3syzj-7D_Ub8; Max-Age=604800; Path=/; Expires=Wed, 04 Jun 2025 13:16:06 GMT; HttpOnly; SameSite=Lax
 
 ### Delete Inboxes
 DELETE http://localhost:3000/api/inbox/1
@@ -119,9 +119,10 @@ POST http://localhost:3000/api/inbox
 Content-Type: application/json
 
 {
-    "name": "",
-    "email": "",
-    "message": ""
+    "name": "Joaozinho",
+    "subject":"Falei contigo ontem...",
+    "email": "joaozinho@email.com",
+    "message": "Falei contigo ontem sobre tal coisa, n sei se tu lembra"
 }
 
 ### Create Curriculum
@@ -199,3 +200,15 @@ Content-Type: application/json
 ### Create Curriculum
 DELETE http://localhost:3000/api/curriculum
 Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0MDA5MzYsImV4cCI6MTc0ODQwMTExNn0.OeR119EO9Gq93RCAj7AAAflYbmb-gy2TbeIb6Ys1ta0; Max-Age=180; Path=/; Expires=Wed, 28 May 2025 02:58:36 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0MDA5MzYsImV4cCI6MTc0OTAwNTczNn0.TFga7XKJ-HadTb9kRn2xaV3Waw9hEXd-NC2MFd2wns4; Max-Age=604800; Path=/; Expires=Wed, 04 Jun 2025 02:55:36 GMT; HttpOnly; SameSite=Lax
+
+###
+GET http://localhost:3000/api/inbox/
+Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0NDgxNjYsImV4cCI6MTc0ODQ0ODM0Nn0.SbTlPQsTgn5QQhFDHYI6SFX9H7pinx8T2ObZxxQasXk; Max-Age=180; Path=/; Expires=Wed, 28 May 2025 16:05:47 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0NDgxNjYsImV4cCI6MTc0OTA1Mjk2Nn0.n-a8WCvVBbtP8D6wvtYzFkA4aGRRBqM0D-mnjhjykAg; Max-Age=604800; Path=/; Expires=Wed, 04 Jun 2025 16:02:47 GMT; HttpOnly; SameSite=Lax
+
+###
+POST http://localhost:3000/api/inbox
+Content-Type: application/json
+
+{
+
+}
