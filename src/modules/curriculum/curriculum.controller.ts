@@ -10,8 +10,8 @@ export class CurriculumController {
 
   @Post()
   @Access('restrict')
-  create(@Body() createCurriculumDto: Prisma.CurriculumCreateInput) {
-    return this.curriculumService.create(createCurriculumDto);
+  create(@Body() body: Prisma.CurriculumCreateInput) {
+    return this.curriculumService.create(body);
   }
 
   @Get()
@@ -22,13 +22,13 @@ export class CurriculumController {
 
   @Patch()
   @Access('restrict')
-  update(@Body() updateCurriculumDto: Prisma.CurriculumUpdateInput) {
-    return this.curriculumService.update(updateCurriculumDto);
+  update(@Body() data: Prisma.CurriculumUpdateInput) {
+    return this.curriculumService.update(data);
   }
 
-  @Delete()
+  @Delete(':confirm')
   @Access('restrict')
-  remove(confirmation: string) {
+  remove(@Param('confirm') confirmation: string) {
     return this.curriculumService.remove(confirmation);
   }
 }

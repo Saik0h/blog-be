@@ -46,6 +46,8 @@ model Curriculum {
   lastName       String
   credential     String
   profileImage   String
+  contactInfo    ContactInfo?  @relation(fields: [contactInfoId], references: [id])
+  contactInfoId  Int?          @unique
   academicInfo   AcademicInfo? @relation(fields: [academicInfoId], references: [id])
   academicInfoId Int?          @unique
   teachingInfo   TeachingInfo? @relation(fields: [teachingInfoId], references: [id])
@@ -54,6 +56,22 @@ model Curriculum {
   singleton      Boolean       @unique @default(true)
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
+}
+
+model ContactInfoItem {
+  id            Int         @id @default(autoincrement())
+  label         String
+  link          String
+  platform      String?
+  contactInfo   ContactInfo @relation(fields: [contactInfoId], references: [id])
+  contactInfoId Int
+}
+
+model ContactInfo {
+  id         Int               @id @default(autoincrement())
+  title      String
+  items      ContactInfoItem[]
+  curriculum Curriculum?
 }
 
 model AcademicInfo {

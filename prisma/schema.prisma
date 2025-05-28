@@ -40,35 +40,52 @@ model Post {
   updatedAt  DateTime     @updatedAt
 }
 
-
 model Curriculum {
-  id            Int            @id @default(autoincrement())
-  firstName     String
-  lastName      String
-  credential    String
-  profileImage  String
-  academicInfo  AcademicInfo?  @relation(fields: [academicInfoId], references: [id])
+  id             Int           @id @default(autoincrement())
+  firstName      String
+  lastName       String
+  credential     String
+  profileImage   String
+  contactInfo    ContactInfo?  @relation(fields: [contactInfoId], references: [id])
+  contactInfoId  Int?          @unique
+  academicInfo   AcademicInfo? @relation(fields: [academicInfoId], references: [id])
   academicInfoId Int?          @unique
-  teachingInfo  TeachingInfo?  @relation(fields: [teachingInfoId], references: [id])
+  teachingInfo   TeachingInfo? @relation(fields: [teachingInfoId], references: [id])
   teachingInfoId Int?          @unique
-  extras        Json
-  singleton     Boolean        @default(true) @unique
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  extras         Json
+  singleton      Boolean       @unique @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model ContactInfoItem {
+  id            Int         @id @default(autoincrement())
+  label         String
+  link          String
+  platform      String?
+  contactInfo   ContactInfo @relation(fields: [contactInfoId], references: [id])
+  contactInfoId Int
+}
+
+model ContactInfo {
+  id         Int               @id @default(autoincrement())
+  title      String
+  items      ContactInfoItem[]
+  curriculum Curriculum?
 }
 
 model AcademicInfo {
-  id          Int      @id @default(autoincrement())
-  title       String
-  items       String[]   // array de strings com cursos/formações
-  curriculum  Curriculum?
+  id         Int         @id @default(autoincrement())
+  title      String
+  items      String[] // array de strings com cursos/formações
+  curriculum Curriculum?
 }
 
 model TeachingInfo {
-  id          Int      @id @default(autoincrement())
-  title       String
-  items       String[]   // array de strings com disciplinas/cursos
-  curriculum  Curriculum?
+  id         Int         @id @default(autoincrement())
+  title      String
+  items      String[] // array de strings com disciplinas/cursos
+  curriculum Curriculum?
 }
 
 model InboxMessage {

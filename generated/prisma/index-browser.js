@@ -149,12 +149,26 @@ exports.Prisma.CurriculumScalarFieldEnum = {
   lastName: 'lastName',
   credential: 'credential',
   profileImage: 'profileImage',
+  contactInfoId: 'contactInfoId',
   academicInfoId: 'academicInfoId',
   teachingInfoId: 'teachingInfoId',
   extras: 'extras',
   singleton: 'singleton',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ContactInfoItemScalarFieldEnum = {
+  id: 'id',
+  label: 'label',
+  link: 'link',
+  platform: 'platform',
+  contactInfoId: 'contactInfoId'
+};
+
+exports.Prisma.ContactInfoScalarFieldEnum = {
+  id: 'id',
+  title: 'title'
 };
 
 exports.Prisma.AcademicInfoScalarFieldEnum = {
@@ -218,6 +232,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Post: 'Post',
   Curriculum: 'Curriculum',
+  ContactInfoItem: 'ContactInfoItem',
+  ContactInfo: 'ContactInfo',
   AcademicInfo: 'AcademicInfo',
   TeachingInfo: 'TeachingInfo',
   InboxMessage: 'InboxMessage'

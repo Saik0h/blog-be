@@ -29,6 +29,16 @@ export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
  */
 export type Curriculum = $Result.DefaultSelection<Prisma.$CurriculumPayload>
 /**
+ * Model ContactInfoItem
+ * 
+ */
+export type ContactInfoItem = $Result.DefaultSelection<Prisma.$ContactInfoItemPayload>
+/**
+ * Model ContactInfo
+ * 
+ */
+export type ContactInfo = $Result.DefaultSelection<Prisma.$ContactInfoPayload>
+/**
  * Model AcademicInfo
  * 
  */
@@ -228,6 +238,26 @@ export class PrismaClient<
     * ```
     */
   get curriculum(): Prisma.CurriculumDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contactInfoItem`: Exposes CRUD operations for the **ContactInfoItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContactInfoItems
+    * const contactInfoItems = await prisma.contactInfoItem.findMany()
+    * ```
+    */
+  get contactInfoItem(): Prisma.ContactInfoItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contactInfo`: Exposes CRUD operations for the **ContactInfo** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContactInfos
+    * const contactInfos = await prisma.contactInfo.findMany()
+    * ```
+    */
+  get contactInfo(): Prisma.ContactInfoDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.academicInfo`: Exposes CRUD operations for the **AcademicInfo** model.
@@ -701,6 +731,8 @@ export namespace Prisma {
     User: 'User',
     Post: 'Post',
     Curriculum: 'Curriculum',
+    ContactInfoItem: 'ContactInfoItem',
+    ContactInfo: 'ContactInfo',
     AcademicInfo: 'AcademicInfo',
     TeachingInfo: 'TeachingInfo',
     InboxMessage: 'InboxMessage'
@@ -722,7 +754,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "post" | "curriculum" | "academicInfo" | "teachingInfo" | "inboxMessage"
+      modelProps: "user" | "post" | "curriculum" | "contactInfoItem" | "contactInfo" | "academicInfo" | "teachingInfo" | "inboxMessage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -945,6 +977,154 @@ export namespace Prisma {
           count: {
             args: Prisma.CurriculumCountArgs<ExtArgs>
             result: $Utils.Optional<CurriculumCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContactInfoItem: {
+        payload: Prisma.$ContactInfoItemPayload<ExtArgs>
+        fields: Prisma.ContactInfoItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContactInfoItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContactInfoItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload>
+          }
+          findFirst: {
+            args: Prisma.ContactInfoItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContactInfoItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload>
+          }
+          findMany: {
+            args: Prisma.ContactInfoItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload>[]
+          }
+          create: {
+            args: Prisma.ContactInfoItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload>
+          }
+          createMany: {
+            args: Prisma.ContactInfoItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContactInfoItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload>[]
+          }
+          delete: {
+            args: Prisma.ContactInfoItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload>
+          }
+          update: {
+            args: Prisma.ContactInfoItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContactInfoItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContactInfoItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContactInfoItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContactInfoItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoItemPayload>
+          }
+          aggregate: {
+            args: Prisma.ContactInfoItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContactInfoItem>
+          }
+          groupBy: {
+            args: Prisma.ContactInfoItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContactInfoItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContactInfoItemCountArgs<ExtArgs>
+            result: $Utils.Optional<ContactInfoItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContactInfo: {
+        payload: Prisma.$ContactInfoPayload<ExtArgs>
+        fields: Prisma.ContactInfoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContactInfoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContactInfoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload>
+          }
+          findFirst: {
+            args: Prisma.ContactInfoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContactInfoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload>
+          }
+          findMany: {
+            args: Prisma.ContactInfoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload>[]
+          }
+          create: {
+            args: Prisma.ContactInfoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload>
+          }
+          createMany: {
+            args: Prisma.ContactInfoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContactInfoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload>[]
+          }
+          delete: {
+            args: Prisma.ContactInfoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload>
+          }
+          update: {
+            args: Prisma.ContactInfoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContactInfoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContactInfoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContactInfoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContactInfoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContactInfoPayload>
+          }
+          aggregate: {
+            args: Prisma.ContactInfoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContactInfo>
+          }
+          groupBy: {
+            args: Prisma.ContactInfoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContactInfoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContactInfoCountArgs<ExtArgs>
+            result: $Utils.Optional<ContactInfoCountAggregateOutputType> | number
           }
         }
       }
@@ -1257,6 +1437,8 @@ export namespace Prisma {
     user?: UserOmit
     post?: PostOmit
     curriculum?: CurriculumOmit
+    contactInfoItem?: ContactInfoItemOmit
+    contactInfo?: ContactInfoOmit
     academicInfo?: AcademicInfoOmit
     teachingInfo?: TeachingInfoOmit
     inboxMessage?: InboxMessageOmit
@@ -1377,6 +1559,37 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostWhereInput
+  }
+
+
+  /**
+   * Count Type ContactInfoCountOutputType
+   */
+
+  export type ContactInfoCountOutputType = {
+    items: number
+  }
+
+  export type ContactInfoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | ContactInfoCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ContactInfoCountOutputType without action
+   */
+  export type ContactInfoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoCountOutputType
+     */
+    select?: ContactInfoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ContactInfoCountOutputType without action
+   */
+  export type ContactInfoCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactInfoItemWhereInput
   }
 
 
@@ -3685,12 +3898,14 @@ export namespace Prisma {
 
   export type CurriculumAvgAggregateOutputType = {
     id: number | null
+    contactInfoId: number | null
     academicInfoId: number | null
     teachingInfoId: number | null
   }
 
   export type CurriculumSumAggregateOutputType = {
     id: number | null
+    contactInfoId: number | null
     academicInfoId: number | null
     teachingInfoId: number | null
   }
@@ -3701,6 +3916,7 @@ export namespace Prisma {
     lastName: string | null
     credential: string | null
     profileImage: string | null
+    contactInfoId: number | null
     academicInfoId: number | null
     teachingInfoId: number | null
     singleton: boolean | null
@@ -3714,6 +3930,7 @@ export namespace Prisma {
     lastName: string | null
     credential: string | null
     profileImage: string | null
+    contactInfoId: number | null
     academicInfoId: number | null
     teachingInfoId: number | null
     singleton: boolean | null
@@ -3727,6 +3944,7 @@ export namespace Prisma {
     lastName: number
     credential: number
     profileImage: number
+    contactInfoId: number
     academicInfoId: number
     teachingInfoId: number
     extras: number
@@ -3739,12 +3957,14 @@ export namespace Prisma {
 
   export type CurriculumAvgAggregateInputType = {
     id?: true
+    contactInfoId?: true
     academicInfoId?: true
     teachingInfoId?: true
   }
 
   export type CurriculumSumAggregateInputType = {
     id?: true
+    contactInfoId?: true
     academicInfoId?: true
     teachingInfoId?: true
   }
@@ -3755,6 +3975,7 @@ export namespace Prisma {
     lastName?: true
     credential?: true
     profileImage?: true
+    contactInfoId?: true
     academicInfoId?: true
     teachingInfoId?: true
     singleton?: true
@@ -3768,6 +3989,7 @@ export namespace Prisma {
     lastName?: true
     credential?: true
     profileImage?: true
+    contactInfoId?: true
     academicInfoId?: true
     teachingInfoId?: true
     singleton?: true
@@ -3781,6 +4003,7 @@ export namespace Prisma {
     lastName?: true
     credential?: true
     profileImage?: true
+    contactInfoId?: true
     academicInfoId?: true
     teachingInfoId?: true
     extras?: true
@@ -3882,6 +4105,7 @@ export namespace Prisma {
     lastName: string
     credential: string
     profileImage: string
+    contactInfoId: number | null
     academicInfoId: number | null
     teachingInfoId: number | null
     extras: JsonValue
@@ -3915,12 +4139,14 @@ export namespace Prisma {
     lastName?: boolean
     credential?: boolean
     profileImage?: boolean
+    contactInfoId?: boolean
     academicInfoId?: boolean
     teachingInfoId?: boolean
     extras?: boolean
     singleton?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    contactInfo?: boolean | Curriculum$contactInfoArgs<ExtArgs>
     academicInfo?: boolean | Curriculum$academicInfoArgs<ExtArgs>
     teachingInfo?: boolean | Curriculum$teachingInfoArgs<ExtArgs>
   }, ExtArgs["result"]["curriculum"]>
@@ -3931,12 +4157,14 @@ export namespace Prisma {
     lastName?: boolean
     credential?: boolean
     profileImage?: boolean
+    contactInfoId?: boolean
     academicInfoId?: boolean
     teachingInfoId?: boolean
     extras?: boolean
     singleton?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    contactInfo?: boolean | Curriculum$contactInfoArgs<ExtArgs>
     academicInfo?: boolean | Curriculum$academicInfoArgs<ExtArgs>
     teachingInfo?: boolean | Curriculum$teachingInfoArgs<ExtArgs>
   }, ExtArgs["result"]["curriculum"]>
@@ -3947,12 +4175,14 @@ export namespace Prisma {
     lastName?: boolean
     credential?: boolean
     profileImage?: boolean
+    contactInfoId?: boolean
     academicInfoId?: boolean
     teachingInfoId?: boolean
     extras?: boolean
     singleton?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    contactInfo?: boolean | Curriculum$contactInfoArgs<ExtArgs>
     academicInfo?: boolean | Curriculum$academicInfoArgs<ExtArgs>
     teachingInfo?: boolean | Curriculum$teachingInfoArgs<ExtArgs>
   }, ExtArgs["result"]["curriculum"]>
@@ -3963,6 +4193,7 @@ export namespace Prisma {
     lastName?: boolean
     credential?: boolean
     profileImage?: boolean
+    contactInfoId?: boolean
     academicInfoId?: boolean
     teachingInfoId?: boolean
     extras?: boolean
@@ -3971,16 +4202,19 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type CurriculumOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "credential" | "profileImage" | "academicInfoId" | "teachingInfoId" | "extras" | "singleton" | "createdAt" | "updatedAt", ExtArgs["result"]["curriculum"]>
+  export type CurriculumOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "credential" | "profileImage" | "contactInfoId" | "academicInfoId" | "teachingInfoId" | "extras" | "singleton" | "createdAt" | "updatedAt", ExtArgs["result"]["curriculum"]>
   export type CurriculumInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contactInfo?: boolean | Curriculum$contactInfoArgs<ExtArgs>
     academicInfo?: boolean | Curriculum$academicInfoArgs<ExtArgs>
     teachingInfo?: boolean | Curriculum$teachingInfoArgs<ExtArgs>
   }
   export type CurriculumIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contactInfo?: boolean | Curriculum$contactInfoArgs<ExtArgs>
     academicInfo?: boolean | Curriculum$academicInfoArgs<ExtArgs>
     teachingInfo?: boolean | Curriculum$teachingInfoArgs<ExtArgs>
   }
   export type CurriculumIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contactInfo?: boolean | Curriculum$contactInfoArgs<ExtArgs>
     academicInfo?: boolean | Curriculum$academicInfoArgs<ExtArgs>
     teachingInfo?: boolean | Curriculum$teachingInfoArgs<ExtArgs>
   }
@@ -3988,6 +4222,7 @@ export namespace Prisma {
   export type $CurriculumPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Curriculum"
     objects: {
+      contactInfo: Prisma.$ContactInfoPayload<ExtArgs> | null
       academicInfo: Prisma.$AcademicInfoPayload<ExtArgs> | null
       teachingInfo: Prisma.$TeachingInfoPayload<ExtArgs> | null
     }
@@ -3997,6 +4232,7 @@ export namespace Prisma {
       lastName: string
       credential: string
       profileImage: string
+      contactInfoId: number | null
       academicInfoId: number | null
       teachingInfoId: number | null
       extras: Prisma.JsonValue
@@ -4397,6 +4633,7 @@ export namespace Prisma {
    */
   export interface Prisma__CurriculumClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    contactInfo<T extends Curriculum$contactInfoArgs<ExtArgs> = {}>(args?: Subset<T, Curriculum$contactInfoArgs<ExtArgs>>): Prisma__ContactInfoClient<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     academicInfo<T extends Curriculum$academicInfoArgs<ExtArgs> = {}>(args?: Subset<T, Curriculum$academicInfoArgs<ExtArgs>>): Prisma__AcademicInfoClient<$Result.GetResult<Prisma.$AcademicInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     teachingInfo<T extends Curriculum$teachingInfoArgs<ExtArgs> = {}>(args?: Subset<T, Curriculum$teachingInfoArgs<ExtArgs>>): Prisma__TeachingInfoClient<$Result.GetResult<Prisma.$TeachingInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
@@ -4433,6 +4670,7 @@ export namespace Prisma {
     readonly lastName: FieldRef<"Curriculum", 'String'>
     readonly credential: FieldRef<"Curriculum", 'String'>
     readonly profileImage: FieldRef<"Curriculum", 'String'>
+    readonly contactInfoId: FieldRef<"Curriculum", 'Int'>
     readonly academicInfoId: FieldRef<"Curriculum", 'Int'>
     readonly teachingInfoId: FieldRef<"Curriculum", 'Int'>
     readonly extras: FieldRef<"Curriculum", 'Json'>
@@ -4835,6 +5073,25 @@ export namespace Prisma {
   }
 
   /**
+   * Curriculum.contactInfo
+   */
+  export type Curriculum$contactInfoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
+    where?: ContactInfoWhereInput
+  }
+
+  /**
    * Curriculum.academicInfo
    */
   export type Curriculum$academicInfoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4888,6 +5145,2190 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: CurriculumInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ContactInfoItem
+   */
+
+  export type AggregateContactInfoItem = {
+    _count: ContactInfoItemCountAggregateOutputType | null
+    _avg: ContactInfoItemAvgAggregateOutputType | null
+    _sum: ContactInfoItemSumAggregateOutputType | null
+    _min: ContactInfoItemMinAggregateOutputType | null
+    _max: ContactInfoItemMaxAggregateOutputType | null
+  }
+
+  export type ContactInfoItemAvgAggregateOutputType = {
+    id: number | null
+    contactInfoId: number | null
+  }
+
+  export type ContactInfoItemSumAggregateOutputType = {
+    id: number | null
+    contactInfoId: number | null
+  }
+
+  export type ContactInfoItemMinAggregateOutputType = {
+    id: number | null
+    label: string | null
+    link: string | null
+    platform: string | null
+    contactInfoId: number | null
+  }
+
+  export type ContactInfoItemMaxAggregateOutputType = {
+    id: number | null
+    label: string | null
+    link: string | null
+    platform: string | null
+    contactInfoId: number | null
+  }
+
+  export type ContactInfoItemCountAggregateOutputType = {
+    id: number
+    label: number
+    link: number
+    platform: number
+    contactInfoId: number
+    _all: number
+  }
+
+
+  export type ContactInfoItemAvgAggregateInputType = {
+    id?: true
+    contactInfoId?: true
+  }
+
+  export type ContactInfoItemSumAggregateInputType = {
+    id?: true
+    contactInfoId?: true
+  }
+
+  export type ContactInfoItemMinAggregateInputType = {
+    id?: true
+    label?: true
+    link?: true
+    platform?: true
+    contactInfoId?: true
+  }
+
+  export type ContactInfoItemMaxAggregateInputType = {
+    id?: true
+    label?: true
+    link?: true
+    platform?: true
+    contactInfoId?: true
+  }
+
+  export type ContactInfoItemCountAggregateInputType = {
+    id?: true
+    label?: true
+    link?: true
+    platform?: true
+    contactInfoId?: true
+    _all?: true
+  }
+
+  export type ContactInfoItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContactInfoItem to aggregate.
+     */
+    where?: ContactInfoItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactInfoItems to fetch.
+     */
+    orderBy?: ContactInfoItemOrderByWithRelationInput | ContactInfoItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContactInfoItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactInfoItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactInfoItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContactInfoItems
+    **/
+    _count?: true | ContactInfoItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContactInfoItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContactInfoItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContactInfoItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContactInfoItemMaxAggregateInputType
+  }
+
+  export type GetContactInfoItemAggregateType<T extends ContactInfoItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateContactInfoItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContactInfoItem[P]>
+      : GetScalarType<T[P], AggregateContactInfoItem[P]>
+  }
+
+
+
+
+  export type ContactInfoItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactInfoItemWhereInput
+    orderBy?: ContactInfoItemOrderByWithAggregationInput | ContactInfoItemOrderByWithAggregationInput[]
+    by: ContactInfoItemScalarFieldEnum[] | ContactInfoItemScalarFieldEnum
+    having?: ContactInfoItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContactInfoItemCountAggregateInputType | true
+    _avg?: ContactInfoItemAvgAggregateInputType
+    _sum?: ContactInfoItemSumAggregateInputType
+    _min?: ContactInfoItemMinAggregateInputType
+    _max?: ContactInfoItemMaxAggregateInputType
+  }
+
+  export type ContactInfoItemGroupByOutputType = {
+    id: number
+    label: string
+    link: string
+    platform: string | null
+    contactInfoId: number
+    _count: ContactInfoItemCountAggregateOutputType | null
+    _avg: ContactInfoItemAvgAggregateOutputType | null
+    _sum: ContactInfoItemSumAggregateOutputType | null
+    _min: ContactInfoItemMinAggregateOutputType | null
+    _max: ContactInfoItemMaxAggregateOutputType | null
+  }
+
+  type GetContactInfoItemGroupByPayload<T extends ContactInfoItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContactInfoItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContactInfoItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContactInfoItemGroupByOutputType[P]>
+            : GetScalarType<T[P], ContactInfoItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContactInfoItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    label?: boolean
+    link?: boolean
+    platform?: boolean
+    contactInfoId?: boolean
+    contactInfo?: boolean | ContactInfoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contactInfoItem"]>
+
+  export type ContactInfoItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    label?: boolean
+    link?: boolean
+    platform?: boolean
+    contactInfoId?: boolean
+    contactInfo?: boolean | ContactInfoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contactInfoItem"]>
+
+  export type ContactInfoItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    label?: boolean
+    link?: boolean
+    platform?: boolean
+    contactInfoId?: boolean
+    contactInfo?: boolean | ContactInfoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contactInfoItem"]>
+
+  export type ContactInfoItemSelectScalar = {
+    id?: boolean
+    label?: boolean
+    link?: boolean
+    platform?: boolean
+    contactInfoId?: boolean
+  }
+
+  export type ContactInfoItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "link" | "platform" | "contactInfoId", ExtArgs["result"]["contactInfoItem"]>
+  export type ContactInfoItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contactInfo?: boolean | ContactInfoDefaultArgs<ExtArgs>
+  }
+  export type ContactInfoItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contactInfo?: boolean | ContactInfoDefaultArgs<ExtArgs>
+  }
+  export type ContactInfoItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contactInfo?: boolean | ContactInfoDefaultArgs<ExtArgs>
+  }
+
+  export type $ContactInfoItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContactInfoItem"
+    objects: {
+      contactInfo: Prisma.$ContactInfoPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      label: string
+      link: string
+      platform: string | null
+      contactInfoId: number
+    }, ExtArgs["result"]["contactInfoItem"]>
+    composites: {}
+  }
+
+  type ContactInfoItemGetPayload<S extends boolean | null | undefined | ContactInfoItemDefaultArgs> = $Result.GetResult<Prisma.$ContactInfoItemPayload, S>
+
+  type ContactInfoItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContactInfoItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContactInfoItemCountAggregateInputType | true
+    }
+
+  export interface ContactInfoItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContactInfoItem'], meta: { name: 'ContactInfoItem' } }
+    /**
+     * Find zero or one ContactInfoItem that matches the filter.
+     * @param {ContactInfoItemFindUniqueArgs} args - Arguments to find a ContactInfoItem
+     * @example
+     * // Get one ContactInfoItem
+     * const contactInfoItem = await prisma.contactInfoItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContactInfoItemFindUniqueArgs>(args: SelectSubset<T, ContactInfoItemFindUniqueArgs<ExtArgs>>): Prisma__ContactInfoItemClient<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContactInfoItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContactInfoItemFindUniqueOrThrowArgs} args - Arguments to find a ContactInfoItem
+     * @example
+     * // Get one ContactInfoItem
+     * const contactInfoItem = await prisma.contactInfoItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContactInfoItemFindUniqueOrThrowArgs>(args: SelectSubset<T, ContactInfoItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContactInfoItemClient<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContactInfoItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoItemFindFirstArgs} args - Arguments to find a ContactInfoItem
+     * @example
+     * // Get one ContactInfoItem
+     * const contactInfoItem = await prisma.contactInfoItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContactInfoItemFindFirstArgs>(args?: SelectSubset<T, ContactInfoItemFindFirstArgs<ExtArgs>>): Prisma__ContactInfoItemClient<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContactInfoItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoItemFindFirstOrThrowArgs} args - Arguments to find a ContactInfoItem
+     * @example
+     * // Get one ContactInfoItem
+     * const contactInfoItem = await prisma.contactInfoItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContactInfoItemFindFirstOrThrowArgs>(args?: SelectSubset<T, ContactInfoItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContactInfoItemClient<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContactInfoItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContactInfoItems
+     * const contactInfoItems = await prisma.contactInfoItem.findMany()
+     * 
+     * // Get first 10 ContactInfoItems
+     * const contactInfoItems = await prisma.contactInfoItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contactInfoItemWithIdOnly = await prisma.contactInfoItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContactInfoItemFindManyArgs>(args?: SelectSubset<T, ContactInfoItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContactInfoItem.
+     * @param {ContactInfoItemCreateArgs} args - Arguments to create a ContactInfoItem.
+     * @example
+     * // Create one ContactInfoItem
+     * const ContactInfoItem = await prisma.contactInfoItem.create({
+     *   data: {
+     *     // ... data to create a ContactInfoItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContactInfoItemCreateArgs>(args: SelectSubset<T, ContactInfoItemCreateArgs<ExtArgs>>): Prisma__ContactInfoItemClient<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContactInfoItems.
+     * @param {ContactInfoItemCreateManyArgs} args - Arguments to create many ContactInfoItems.
+     * @example
+     * // Create many ContactInfoItems
+     * const contactInfoItem = await prisma.contactInfoItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContactInfoItemCreateManyArgs>(args?: SelectSubset<T, ContactInfoItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContactInfoItems and returns the data saved in the database.
+     * @param {ContactInfoItemCreateManyAndReturnArgs} args - Arguments to create many ContactInfoItems.
+     * @example
+     * // Create many ContactInfoItems
+     * const contactInfoItem = await prisma.contactInfoItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContactInfoItems and only return the `id`
+     * const contactInfoItemWithIdOnly = await prisma.contactInfoItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContactInfoItemCreateManyAndReturnArgs>(args?: SelectSubset<T, ContactInfoItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContactInfoItem.
+     * @param {ContactInfoItemDeleteArgs} args - Arguments to delete one ContactInfoItem.
+     * @example
+     * // Delete one ContactInfoItem
+     * const ContactInfoItem = await prisma.contactInfoItem.delete({
+     *   where: {
+     *     // ... filter to delete one ContactInfoItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContactInfoItemDeleteArgs>(args: SelectSubset<T, ContactInfoItemDeleteArgs<ExtArgs>>): Prisma__ContactInfoItemClient<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContactInfoItem.
+     * @param {ContactInfoItemUpdateArgs} args - Arguments to update one ContactInfoItem.
+     * @example
+     * // Update one ContactInfoItem
+     * const contactInfoItem = await prisma.contactInfoItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContactInfoItemUpdateArgs>(args: SelectSubset<T, ContactInfoItemUpdateArgs<ExtArgs>>): Prisma__ContactInfoItemClient<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContactInfoItems.
+     * @param {ContactInfoItemDeleteManyArgs} args - Arguments to filter ContactInfoItems to delete.
+     * @example
+     * // Delete a few ContactInfoItems
+     * const { count } = await prisma.contactInfoItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContactInfoItemDeleteManyArgs>(args?: SelectSubset<T, ContactInfoItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContactInfoItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContactInfoItems
+     * const contactInfoItem = await prisma.contactInfoItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContactInfoItemUpdateManyArgs>(args: SelectSubset<T, ContactInfoItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContactInfoItems and returns the data updated in the database.
+     * @param {ContactInfoItemUpdateManyAndReturnArgs} args - Arguments to update many ContactInfoItems.
+     * @example
+     * // Update many ContactInfoItems
+     * const contactInfoItem = await prisma.contactInfoItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContactInfoItems and only return the `id`
+     * const contactInfoItemWithIdOnly = await prisma.contactInfoItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContactInfoItemUpdateManyAndReturnArgs>(args: SelectSubset<T, ContactInfoItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContactInfoItem.
+     * @param {ContactInfoItemUpsertArgs} args - Arguments to update or create a ContactInfoItem.
+     * @example
+     * // Update or create a ContactInfoItem
+     * const contactInfoItem = await prisma.contactInfoItem.upsert({
+     *   create: {
+     *     // ... data to create a ContactInfoItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContactInfoItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContactInfoItemUpsertArgs>(args: SelectSubset<T, ContactInfoItemUpsertArgs<ExtArgs>>): Prisma__ContactInfoItemClient<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContactInfoItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoItemCountArgs} args - Arguments to filter ContactInfoItems to count.
+     * @example
+     * // Count the number of ContactInfoItems
+     * const count = await prisma.contactInfoItem.count({
+     *   where: {
+     *     // ... the filter for the ContactInfoItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContactInfoItemCountArgs>(
+      args?: Subset<T, ContactInfoItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContactInfoItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContactInfoItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContactInfoItemAggregateArgs>(args: Subset<T, ContactInfoItemAggregateArgs>): Prisma.PrismaPromise<GetContactInfoItemAggregateType<T>>
+
+    /**
+     * Group by ContactInfoItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContactInfoItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContactInfoItemGroupByArgs['orderBy'] }
+        : { orderBy?: ContactInfoItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContactInfoItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContactInfoItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContactInfoItem model
+   */
+  readonly fields: ContactInfoItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContactInfoItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContactInfoItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    contactInfo<T extends ContactInfoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContactInfoDefaultArgs<ExtArgs>>): Prisma__ContactInfoClient<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContactInfoItem model
+   */
+  interface ContactInfoItemFieldRefs {
+    readonly id: FieldRef<"ContactInfoItem", 'Int'>
+    readonly label: FieldRef<"ContactInfoItem", 'String'>
+    readonly link: FieldRef<"ContactInfoItem", 'String'>
+    readonly platform: FieldRef<"ContactInfoItem", 'String'>
+    readonly contactInfoId: FieldRef<"ContactInfoItem", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContactInfoItem findUnique
+   */
+  export type ContactInfoItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactInfoItem to fetch.
+     */
+    where: ContactInfoItemWhereUniqueInput
+  }
+
+  /**
+   * ContactInfoItem findUniqueOrThrow
+   */
+  export type ContactInfoItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactInfoItem to fetch.
+     */
+    where: ContactInfoItemWhereUniqueInput
+  }
+
+  /**
+   * ContactInfoItem findFirst
+   */
+  export type ContactInfoItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactInfoItem to fetch.
+     */
+    where?: ContactInfoItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactInfoItems to fetch.
+     */
+    orderBy?: ContactInfoItemOrderByWithRelationInput | ContactInfoItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContactInfoItems.
+     */
+    cursor?: ContactInfoItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactInfoItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactInfoItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactInfoItems.
+     */
+    distinct?: ContactInfoItemScalarFieldEnum | ContactInfoItemScalarFieldEnum[]
+  }
+
+  /**
+   * ContactInfoItem findFirstOrThrow
+   */
+  export type ContactInfoItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactInfoItem to fetch.
+     */
+    where?: ContactInfoItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactInfoItems to fetch.
+     */
+    orderBy?: ContactInfoItemOrderByWithRelationInput | ContactInfoItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContactInfoItems.
+     */
+    cursor?: ContactInfoItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactInfoItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactInfoItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactInfoItems.
+     */
+    distinct?: ContactInfoItemScalarFieldEnum | ContactInfoItemScalarFieldEnum[]
+  }
+
+  /**
+   * ContactInfoItem findMany
+   */
+  export type ContactInfoItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactInfoItems to fetch.
+     */
+    where?: ContactInfoItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactInfoItems to fetch.
+     */
+    orderBy?: ContactInfoItemOrderByWithRelationInput | ContactInfoItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContactInfoItems.
+     */
+    cursor?: ContactInfoItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactInfoItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactInfoItems.
+     */
+    skip?: number
+    distinct?: ContactInfoItemScalarFieldEnum | ContactInfoItemScalarFieldEnum[]
+  }
+
+  /**
+   * ContactInfoItem create
+   */
+  export type ContactInfoItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContactInfoItem.
+     */
+    data: XOR<ContactInfoItemCreateInput, ContactInfoItemUncheckedCreateInput>
+  }
+
+  /**
+   * ContactInfoItem createMany
+   */
+  export type ContactInfoItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContactInfoItems.
+     */
+    data: ContactInfoItemCreateManyInput | ContactInfoItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContactInfoItem createManyAndReturn
+   */
+  export type ContactInfoItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContactInfoItems.
+     */
+    data: ContactInfoItemCreateManyInput | ContactInfoItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContactInfoItem update
+   */
+  export type ContactInfoItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContactInfoItem.
+     */
+    data: XOR<ContactInfoItemUpdateInput, ContactInfoItemUncheckedUpdateInput>
+    /**
+     * Choose, which ContactInfoItem to update.
+     */
+    where: ContactInfoItemWhereUniqueInput
+  }
+
+  /**
+   * ContactInfoItem updateMany
+   */
+  export type ContactInfoItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContactInfoItems.
+     */
+    data: XOR<ContactInfoItemUpdateManyMutationInput, ContactInfoItemUncheckedUpdateManyInput>
+    /**
+     * Filter which ContactInfoItems to update
+     */
+    where?: ContactInfoItemWhereInput
+    /**
+     * Limit how many ContactInfoItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContactInfoItem updateManyAndReturn
+   */
+  export type ContactInfoItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * The data used to update ContactInfoItems.
+     */
+    data: XOR<ContactInfoItemUpdateManyMutationInput, ContactInfoItemUncheckedUpdateManyInput>
+    /**
+     * Filter which ContactInfoItems to update
+     */
+    where?: ContactInfoItemWhereInput
+    /**
+     * Limit how many ContactInfoItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContactInfoItem upsert
+   */
+  export type ContactInfoItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContactInfoItem to update in case it exists.
+     */
+    where: ContactInfoItemWhereUniqueInput
+    /**
+     * In case the ContactInfoItem found by the `where` argument doesn't exist, create a new ContactInfoItem with this data.
+     */
+    create: XOR<ContactInfoItemCreateInput, ContactInfoItemUncheckedCreateInput>
+    /**
+     * In case the ContactInfoItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContactInfoItemUpdateInput, ContactInfoItemUncheckedUpdateInput>
+  }
+
+  /**
+   * ContactInfoItem delete
+   */
+  export type ContactInfoItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+    /**
+     * Filter which ContactInfoItem to delete.
+     */
+    where: ContactInfoItemWhereUniqueInput
+  }
+
+  /**
+   * ContactInfoItem deleteMany
+   */
+  export type ContactInfoItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContactInfoItems to delete
+     */
+    where?: ContactInfoItemWhereInput
+    /**
+     * Limit how many ContactInfoItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContactInfoItem without action
+   */
+  export type ContactInfoItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ContactInfo
+   */
+
+  export type AggregateContactInfo = {
+    _count: ContactInfoCountAggregateOutputType | null
+    _avg: ContactInfoAvgAggregateOutputType | null
+    _sum: ContactInfoSumAggregateOutputType | null
+    _min: ContactInfoMinAggregateOutputType | null
+    _max: ContactInfoMaxAggregateOutputType | null
+  }
+
+  export type ContactInfoAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ContactInfoSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ContactInfoMinAggregateOutputType = {
+    id: number | null
+    title: string | null
+  }
+
+  export type ContactInfoMaxAggregateOutputType = {
+    id: number | null
+    title: string | null
+  }
+
+  export type ContactInfoCountAggregateOutputType = {
+    id: number
+    title: number
+    _all: number
+  }
+
+
+  export type ContactInfoAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ContactInfoSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ContactInfoMinAggregateInputType = {
+    id?: true
+    title?: true
+  }
+
+  export type ContactInfoMaxAggregateInputType = {
+    id?: true
+    title?: true
+  }
+
+  export type ContactInfoCountAggregateInputType = {
+    id?: true
+    title?: true
+    _all?: true
+  }
+
+  export type ContactInfoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContactInfo to aggregate.
+     */
+    where?: ContactInfoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactInfos to fetch.
+     */
+    orderBy?: ContactInfoOrderByWithRelationInput | ContactInfoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContactInfoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactInfos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactInfos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContactInfos
+    **/
+    _count?: true | ContactInfoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContactInfoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContactInfoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContactInfoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContactInfoMaxAggregateInputType
+  }
+
+  export type GetContactInfoAggregateType<T extends ContactInfoAggregateArgs> = {
+        [P in keyof T & keyof AggregateContactInfo]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContactInfo[P]>
+      : GetScalarType<T[P], AggregateContactInfo[P]>
+  }
+
+
+
+
+  export type ContactInfoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactInfoWhereInput
+    orderBy?: ContactInfoOrderByWithAggregationInput | ContactInfoOrderByWithAggregationInput[]
+    by: ContactInfoScalarFieldEnum[] | ContactInfoScalarFieldEnum
+    having?: ContactInfoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContactInfoCountAggregateInputType | true
+    _avg?: ContactInfoAvgAggregateInputType
+    _sum?: ContactInfoSumAggregateInputType
+    _min?: ContactInfoMinAggregateInputType
+    _max?: ContactInfoMaxAggregateInputType
+  }
+
+  export type ContactInfoGroupByOutputType = {
+    id: number
+    title: string
+    _count: ContactInfoCountAggregateOutputType | null
+    _avg: ContactInfoAvgAggregateOutputType | null
+    _sum: ContactInfoSumAggregateOutputType | null
+    _min: ContactInfoMinAggregateOutputType | null
+    _max: ContactInfoMaxAggregateOutputType | null
+  }
+
+  type GetContactInfoGroupByPayload<T extends ContactInfoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContactInfoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContactInfoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContactInfoGroupByOutputType[P]>
+            : GetScalarType<T[P], ContactInfoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContactInfoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    items?: boolean | ContactInfo$itemsArgs<ExtArgs>
+    curriculum?: boolean | ContactInfo$curriculumArgs<ExtArgs>
+    _count?: boolean | ContactInfoCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contactInfo"]>
+
+  export type ContactInfoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+  }, ExtArgs["result"]["contactInfo"]>
+
+  export type ContactInfoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+  }, ExtArgs["result"]["contactInfo"]>
+
+  export type ContactInfoSelectScalar = {
+    id?: boolean
+    title?: boolean
+  }
+
+  export type ContactInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title", ExtArgs["result"]["contactInfo"]>
+  export type ContactInfoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | ContactInfo$itemsArgs<ExtArgs>
+    curriculum?: boolean | ContactInfo$curriculumArgs<ExtArgs>
+    _count?: boolean | ContactInfoCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ContactInfoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ContactInfoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ContactInfoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContactInfo"
+    objects: {
+      items: Prisma.$ContactInfoItemPayload<ExtArgs>[]
+      curriculum: Prisma.$CurriculumPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      title: string
+    }, ExtArgs["result"]["contactInfo"]>
+    composites: {}
+  }
+
+  type ContactInfoGetPayload<S extends boolean | null | undefined | ContactInfoDefaultArgs> = $Result.GetResult<Prisma.$ContactInfoPayload, S>
+
+  type ContactInfoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContactInfoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContactInfoCountAggregateInputType | true
+    }
+
+  export interface ContactInfoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContactInfo'], meta: { name: 'ContactInfo' } }
+    /**
+     * Find zero or one ContactInfo that matches the filter.
+     * @param {ContactInfoFindUniqueArgs} args - Arguments to find a ContactInfo
+     * @example
+     * // Get one ContactInfo
+     * const contactInfo = await prisma.contactInfo.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContactInfoFindUniqueArgs>(args: SelectSubset<T, ContactInfoFindUniqueArgs<ExtArgs>>): Prisma__ContactInfoClient<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContactInfo that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContactInfoFindUniqueOrThrowArgs} args - Arguments to find a ContactInfo
+     * @example
+     * // Get one ContactInfo
+     * const contactInfo = await prisma.contactInfo.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContactInfoFindUniqueOrThrowArgs>(args: SelectSubset<T, ContactInfoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContactInfoClient<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContactInfo that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoFindFirstArgs} args - Arguments to find a ContactInfo
+     * @example
+     * // Get one ContactInfo
+     * const contactInfo = await prisma.contactInfo.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContactInfoFindFirstArgs>(args?: SelectSubset<T, ContactInfoFindFirstArgs<ExtArgs>>): Prisma__ContactInfoClient<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContactInfo that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoFindFirstOrThrowArgs} args - Arguments to find a ContactInfo
+     * @example
+     * // Get one ContactInfo
+     * const contactInfo = await prisma.contactInfo.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContactInfoFindFirstOrThrowArgs>(args?: SelectSubset<T, ContactInfoFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContactInfoClient<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContactInfos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContactInfos
+     * const contactInfos = await prisma.contactInfo.findMany()
+     * 
+     * // Get first 10 ContactInfos
+     * const contactInfos = await prisma.contactInfo.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contactInfoWithIdOnly = await prisma.contactInfo.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContactInfoFindManyArgs>(args?: SelectSubset<T, ContactInfoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContactInfo.
+     * @param {ContactInfoCreateArgs} args - Arguments to create a ContactInfo.
+     * @example
+     * // Create one ContactInfo
+     * const ContactInfo = await prisma.contactInfo.create({
+     *   data: {
+     *     // ... data to create a ContactInfo
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContactInfoCreateArgs>(args: SelectSubset<T, ContactInfoCreateArgs<ExtArgs>>): Prisma__ContactInfoClient<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContactInfos.
+     * @param {ContactInfoCreateManyArgs} args - Arguments to create many ContactInfos.
+     * @example
+     * // Create many ContactInfos
+     * const contactInfo = await prisma.contactInfo.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContactInfoCreateManyArgs>(args?: SelectSubset<T, ContactInfoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContactInfos and returns the data saved in the database.
+     * @param {ContactInfoCreateManyAndReturnArgs} args - Arguments to create many ContactInfos.
+     * @example
+     * // Create many ContactInfos
+     * const contactInfo = await prisma.contactInfo.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContactInfos and only return the `id`
+     * const contactInfoWithIdOnly = await prisma.contactInfo.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContactInfoCreateManyAndReturnArgs>(args?: SelectSubset<T, ContactInfoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContactInfo.
+     * @param {ContactInfoDeleteArgs} args - Arguments to delete one ContactInfo.
+     * @example
+     * // Delete one ContactInfo
+     * const ContactInfo = await prisma.contactInfo.delete({
+     *   where: {
+     *     // ... filter to delete one ContactInfo
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContactInfoDeleteArgs>(args: SelectSubset<T, ContactInfoDeleteArgs<ExtArgs>>): Prisma__ContactInfoClient<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContactInfo.
+     * @param {ContactInfoUpdateArgs} args - Arguments to update one ContactInfo.
+     * @example
+     * // Update one ContactInfo
+     * const contactInfo = await prisma.contactInfo.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContactInfoUpdateArgs>(args: SelectSubset<T, ContactInfoUpdateArgs<ExtArgs>>): Prisma__ContactInfoClient<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContactInfos.
+     * @param {ContactInfoDeleteManyArgs} args - Arguments to filter ContactInfos to delete.
+     * @example
+     * // Delete a few ContactInfos
+     * const { count } = await prisma.contactInfo.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContactInfoDeleteManyArgs>(args?: SelectSubset<T, ContactInfoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContactInfos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContactInfos
+     * const contactInfo = await prisma.contactInfo.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContactInfoUpdateManyArgs>(args: SelectSubset<T, ContactInfoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContactInfos and returns the data updated in the database.
+     * @param {ContactInfoUpdateManyAndReturnArgs} args - Arguments to update many ContactInfos.
+     * @example
+     * // Update many ContactInfos
+     * const contactInfo = await prisma.contactInfo.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContactInfos and only return the `id`
+     * const contactInfoWithIdOnly = await prisma.contactInfo.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContactInfoUpdateManyAndReturnArgs>(args: SelectSubset<T, ContactInfoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContactInfo.
+     * @param {ContactInfoUpsertArgs} args - Arguments to update or create a ContactInfo.
+     * @example
+     * // Update or create a ContactInfo
+     * const contactInfo = await prisma.contactInfo.upsert({
+     *   create: {
+     *     // ... data to create a ContactInfo
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContactInfo we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContactInfoUpsertArgs>(args: SelectSubset<T, ContactInfoUpsertArgs<ExtArgs>>): Prisma__ContactInfoClient<$Result.GetResult<Prisma.$ContactInfoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContactInfos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoCountArgs} args - Arguments to filter ContactInfos to count.
+     * @example
+     * // Count the number of ContactInfos
+     * const count = await prisma.contactInfo.count({
+     *   where: {
+     *     // ... the filter for the ContactInfos we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContactInfoCountArgs>(
+      args?: Subset<T, ContactInfoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContactInfoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContactInfo.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContactInfoAggregateArgs>(args: Subset<T, ContactInfoAggregateArgs>): Prisma.PrismaPromise<GetContactInfoAggregateType<T>>
+
+    /**
+     * Group by ContactInfo.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContactInfoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContactInfoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContactInfoGroupByArgs['orderBy'] }
+        : { orderBy?: ContactInfoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContactInfoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContactInfoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContactInfo model
+   */
+  readonly fields: ContactInfoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContactInfo.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContactInfoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    items<T extends ContactInfo$itemsArgs<ExtArgs> = {}>(args?: Subset<T, ContactInfo$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactInfoItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    curriculum<T extends ContactInfo$curriculumArgs<ExtArgs> = {}>(args?: Subset<T, ContactInfo$curriculumArgs<ExtArgs>>): Prisma__CurriculumClient<$Result.GetResult<Prisma.$CurriculumPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContactInfo model
+   */
+  interface ContactInfoFieldRefs {
+    readonly id: FieldRef<"ContactInfo", 'Int'>
+    readonly title: FieldRef<"ContactInfo", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContactInfo findUnique
+   */
+  export type ContactInfoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactInfo to fetch.
+     */
+    where: ContactInfoWhereUniqueInput
+  }
+
+  /**
+   * ContactInfo findUniqueOrThrow
+   */
+  export type ContactInfoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactInfo to fetch.
+     */
+    where: ContactInfoWhereUniqueInput
+  }
+
+  /**
+   * ContactInfo findFirst
+   */
+  export type ContactInfoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactInfo to fetch.
+     */
+    where?: ContactInfoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactInfos to fetch.
+     */
+    orderBy?: ContactInfoOrderByWithRelationInput | ContactInfoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContactInfos.
+     */
+    cursor?: ContactInfoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactInfos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactInfos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactInfos.
+     */
+    distinct?: ContactInfoScalarFieldEnum | ContactInfoScalarFieldEnum[]
+  }
+
+  /**
+   * ContactInfo findFirstOrThrow
+   */
+  export type ContactInfoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactInfo to fetch.
+     */
+    where?: ContactInfoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactInfos to fetch.
+     */
+    orderBy?: ContactInfoOrderByWithRelationInput | ContactInfoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContactInfos.
+     */
+    cursor?: ContactInfoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactInfos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactInfos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContactInfos.
+     */
+    distinct?: ContactInfoScalarFieldEnum | ContactInfoScalarFieldEnum[]
+  }
+
+  /**
+   * ContactInfo findMany
+   */
+  export type ContactInfoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
+    /**
+     * Filter, which ContactInfos to fetch.
+     */
+    where?: ContactInfoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContactInfos to fetch.
+     */
+    orderBy?: ContactInfoOrderByWithRelationInput | ContactInfoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContactInfos.
+     */
+    cursor?: ContactInfoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContactInfos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContactInfos.
+     */
+    skip?: number
+    distinct?: ContactInfoScalarFieldEnum | ContactInfoScalarFieldEnum[]
+  }
+
+  /**
+   * ContactInfo create
+   */
+  export type ContactInfoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContactInfo.
+     */
+    data: XOR<ContactInfoCreateInput, ContactInfoUncheckedCreateInput>
+  }
+
+  /**
+   * ContactInfo createMany
+   */
+  export type ContactInfoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContactInfos.
+     */
+    data: ContactInfoCreateManyInput | ContactInfoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContactInfo createManyAndReturn
+   */
+  export type ContactInfoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContactInfos.
+     */
+    data: ContactInfoCreateManyInput | ContactInfoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContactInfo update
+   */
+  export type ContactInfoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContactInfo.
+     */
+    data: XOR<ContactInfoUpdateInput, ContactInfoUncheckedUpdateInput>
+    /**
+     * Choose, which ContactInfo to update.
+     */
+    where: ContactInfoWhereUniqueInput
+  }
+
+  /**
+   * ContactInfo updateMany
+   */
+  export type ContactInfoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContactInfos.
+     */
+    data: XOR<ContactInfoUpdateManyMutationInput, ContactInfoUncheckedUpdateManyInput>
+    /**
+     * Filter which ContactInfos to update
+     */
+    where?: ContactInfoWhereInput
+    /**
+     * Limit how many ContactInfos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContactInfo updateManyAndReturn
+   */
+  export type ContactInfoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * The data used to update ContactInfos.
+     */
+    data: XOR<ContactInfoUpdateManyMutationInput, ContactInfoUncheckedUpdateManyInput>
+    /**
+     * Filter which ContactInfos to update
+     */
+    where?: ContactInfoWhereInput
+    /**
+     * Limit how many ContactInfos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContactInfo upsert
+   */
+  export type ContactInfoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContactInfo to update in case it exists.
+     */
+    where: ContactInfoWhereUniqueInput
+    /**
+     * In case the ContactInfo found by the `where` argument doesn't exist, create a new ContactInfo with this data.
+     */
+    create: XOR<ContactInfoCreateInput, ContactInfoUncheckedCreateInput>
+    /**
+     * In case the ContactInfo was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContactInfoUpdateInput, ContactInfoUncheckedUpdateInput>
+  }
+
+  /**
+   * ContactInfo delete
+   */
+  export type ContactInfoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
+    /**
+     * Filter which ContactInfo to delete.
+     */
+    where: ContactInfoWhereUniqueInput
+  }
+
+  /**
+   * ContactInfo deleteMany
+   */
+  export type ContactInfoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContactInfos to delete
+     */
+    where?: ContactInfoWhereInput
+    /**
+     * Limit how many ContactInfos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContactInfo.items
+   */
+  export type ContactInfo$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfoItem
+     */
+    select?: ContactInfoItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfoItem
+     */
+    omit?: ContactInfoItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoItemInclude<ExtArgs> | null
+    where?: ContactInfoItemWhereInput
+    orderBy?: ContactInfoItemOrderByWithRelationInput | ContactInfoItemOrderByWithRelationInput[]
+    cursor?: ContactInfoItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContactInfoItemScalarFieldEnum | ContactInfoItemScalarFieldEnum[]
+  }
+
+  /**
+   * ContactInfo.curriculum
+   */
+  export type ContactInfo$curriculumArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Curriculum
+     */
+    select?: CurriculumSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Curriculum
+     */
+    omit?: CurriculumOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CurriculumInclude<ExtArgs> | null
+    where?: CurriculumWhereInput
+  }
+
+  /**
+   * ContactInfo without action
+   */
+  export type ContactInfoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactInfo
+     */
+    select?: ContactInfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContactInfo
+     */
+    omit?: ContactInfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInfoInclude<ExtArgs> | null
   }
 
 
@@ -8129,6 +10570,7 @@ export namespace Prisma {
     lastName: 'lastName',
     credential: 'credential',
     profileImage: 'profileImage',
+    contactInfoId: 'contactInfoId',
     academicInfoId: 'academicInfoId',
     teachingInfoId: 'teachingInfoId',
     extras: 'extras',
@@ -8138,6 +10580,25 @@ export namespace Prisma {
   };
 
   export type CurriculumScalarFieldEnum = (typeof CurriculumScalarFieldEnum)[keyof typeof CurriculumScalarFieldEnum]
+
+
+  export const ContactInfoItemScalarFieldEnum: {
+    id: 'id',
+    label: 'label',
+    link: 'link',
+    platform: 'platform',
+    contactInfoId: 'contactInfoId'
+  };
+
+  export type ContactInfoItemScalarFieldEnum = (typeof ContactInfoItemScalarFieldEnum)[keyof typeof ContactInfoItemScalarFieldEnum]
+
+
+  export const ContactInfoScalarFieldEnum: {
+    id: 'id',
+    title: 'title'
+  };
+
+  export type ContactInfoScalarFieldEnum = (typeof ContactInfoScalarFieldEnum)[keyof typeof ContactInfoScalarFieldEnum]
 
 
   export const AcademicInfoScalarFieldEnum: {
@@ -8482,12 +10943,14 @@ export namespace Prisma {
     lastName?: StringFilter<"Curriculum"> | string
     credential?: StringFilter<"Curriculum"> | string
     profileImage?: StringFilter<"Curriculum"> | string
+    contactInfoId?: IntNullableFilter<"Curriculum"> | number | null
     academicInfoId?: IntNullableFilter<"Curriculum"> | number | null
     teachingInfoId?: IntNullableFilter<"Curriculum"> | number | null
     extras?: JsonFilter<"Curriculum">
     singleton?: BoolFilter<"Curriculum"> | boolean
     createdAt?: DateTimeFilter<"Curriculum"> | Date | string
     updatedAt?: DateTimeFilter<"Curriculum"> | Date | string
+    contactInfo?: XOR<ContactInfoNullableScalarRelationFilter, ContactInfoWhereInput> | null
     academicInfo?: XOR<AcademicInfoNullableScalarRelationFilter, AcademicInfoWhereInput> | null
     teachingInfo?: XOR<TeachingInfoNullableScalarRelationFilter, TeachingInfoWhereInput> | null
   }
@@ -8498,18 +10961,21 @@ export namespace Prisma {
     lastName?: SortOrder
     credential?: SortOrder
     profileImage?: SortOrder
+    contactInfoId?: SortOrderInput | SortOrder
     academicInfoId?: SortOrderInput | SortOrder
     teachingInfoId?: SortOrderInput | SortOrder
     extras?: SortOrder
     singleton?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    contactInfo?: ContactInfoOrderByWithRelationInput
     academicInfo?: AcademicInfoOrderByWithRelationInput
     teachingInfo?: TeachingInfoOrderByWithRelationInput
   }
 
   export type CurriculumWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    contactInfoId?: number
     academicInfoId?: number
     teachingInfoId?: number
     singleton?: boolean
@@ -8523,9 +10989,10 @@ export namespace Prisma {
     extras?: JsonFilter<"Curriculum">
     createdAt?: DateTimeFilter<"Curriculum"> | Date | string
     updatedAt?: DateTimeFilter<"Curriculum"> | Date | string
+    contactInfo?: XOR<ContactInfoNullableScalarRelationFilter, ContactInfoWhereInput> | null
     academicInfo?: XOR<AcademicInfoNullableScalarRelationFilter, AcademicInfoWhereInput> | null
     teachingInfo?: XOR<TeachingInfoNullableScalarRelationFilter, TeachingInfoWhereInput> | null
-  }, "id" | "academicInfoId" | "teachingInfoId" | "singleton">
+  }, "id" | "contactInfoId" | "academicInfoId" | "teachingInfoId" | "singleton">
 
   export type CurriculumOrderByWithAggregationInput = {
     id?: SortOrder
@@ -8533,6 +11000,7 @@ export namespace Prisma {
     lastName?: SortOrder
     credential?: SortOrder
     profileImage?: SortOrder
+    contactInfoId?: SortOrderInput | SortOrder
     academicInfoId?: SortOrderInput | SortOrder
     teachingInfoId?: SortOrderInput | SortOrder
     extras?: SortOrder
@@ -8555,12 +11023,115 @@ export namespace Prisma {
     lastName?: StringWithAggregatesFilter<"Curriculum"> | string
     credential?: StringWithAggregatesFilter<"Curriculum"> | string
     profileImage?: StringWithAggregatesFilter<"Curriculum"> | string
+    contactInfoId?: IntNullableWithAggregatesFilter<"Curriculum"> | number | null
     academicInfoId?: IntNullableWithAggregatesFilter<"Curriculum"> | number | null
     teachingInfoId?: IntNullableWithAggregatesFilter<"Curriculum"> | number | null
     extras?: JsonWithAggregatesFilter<"Curriculum">
     singleton?: BoolWithAggregatesFilter<"Curriculum"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Curriculum"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Curriculum"> | Date | string
+  }
+
+  export type ContactInfoItemWhereInput = {
+    AND?: ContactInfoItemWhereInput | ContactInfoItemWhereInput[]
+    OR?: ContactInfoItemWhereInput[]
+    NOT?: ContactInfoItemWhereInput | ContactInfoItemWhereInput[]
+    id?: IntFilter<"ContactInfoItem"> | number
+    label?: StringFilter<"ContactInfoItem"> | string
+    link?: StringFilter<"ContactInfoItem"> | string
+    platform?: StringNullableFilter<"ContactInfoItem"> | string | null
+    contactInfoId?: IntFilter<"ContactInfoItem"> | number
+    contactInfo?: XOR<ContactInfoScalarRelationFilter, ContactInfoWhereInput>
+  }
+
+  export type ContactInfoItemOrderByWithRelationInput = {
+    id?: SortOrder
+    label?: SortOrder
+    link?: SortOrder
+    platform?: SortOrderInput | SortOrder
+    contactInfoId?: SortOrder
+    contactInfo?: ContactInfoOrderByWithRelationInput
+  }
+
+  export type ContactInfoItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ContactInfoItemWhereInput | ContactInfoItemWhereInput[]
+    OR?: ContactInfoItemWhereInput[]
+    NOT?: ContactInfoItemWhereInput | ContactInfoItemWhereInput[]
+    label?: StringFilter<"ContactInfoItem"> | string
+    link?: StringFilter<"ContactInfoItem"> | string
+    platform?: StringNullableFilter<"ContactInfoItem"> | string | null
+    contactInfoId?: IntFilter<"ContactInfoItem"> | number
+    contactInfo?: XOR<ContactInfoScalarRelationFilter, ContactInfoWhereInput>
+  }, "id">
+
+  export type ContactInfoItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    label?: SortOrder
+    link?: SortOrder
+    platform?: SortOrderInput | SortOrder
+    contactInfoId?: SortOrder
+    _count?: ContactInfoItemCountOrderByAggregateInput
+    _avg?: ContactInfoItemAvgOrderByAggregateInput
+    _max?: ContactInfoItemMaxOrderByAggregateInput
+    _min?: ContactInfoItemMinOrderByAggregateInput
+    _sum?: ContactInfoItemSumOrderByAggregateInput
+  }
+
+  export type ContactInfoItemScalarWhereWithAggregatesInput = {
+    AND?: ContactInfoItemScalarWhereWithAggregatesInput | ContactInfoItemScalarWhereWithAggregatesInput[]
+    OR?: ContactInfoItemScalarWhereWithAggregatesInput[]
+    NOT?: ContactInfoItemScalarWhereWithAggregatesInput | ContactInfoItemScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ContactInfoItem"> | number
+    label?: StringWithAggregatesFilter<"ContactInfoItem"> | string
+    link?: StringWithAggregatesFilter<"ContactInfoItem"> | string
+    platform?: StringNullableWithAggregatesFilter<"ContactInfoItem"> | string | null
+    contactInfoId?: IntWithAggregatesFilter<"ContactInfoItem"> | number
+  }
+
+  export type ContactInfoWhereInput = {
+    AND?: ContactInfoWhereInput | ContactInfoWhereInput[]
+    OR?: ContactInfoWhereInput[]
+    NOT?: ContactInfoWhereInput | ContactInfoWhereInput[]
+    id?: IntFilter<"ContactInfo"> | number
+    title?: StringFilter<"ContactInfo"> | string
+    items?: ContactInfoItemListRelationFilter
+    curriculum?: XOR<CurriculumNullableScalarRelationFilter, CurriculumWhereInput> | null
+  }
+
+  export type ContactInfoOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    items?: ContactInfoItemOrderByRelationAggregateInput
+    curriculum?: CurriculumOrderByWithRelationInput
+  }
+
+  export type ContactInfoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ContactInfoWhereInput | ContactInfoWhereInput[]
+    OR?: ContactInfoWhereInput[]
+    NOT?: ContactInfoWhereInput | ContactInfoWhereInput[]
+    title?: StringFilter<"ContactInfo"> | string
+    items?: ContactInfoItemListRelationFilter
+    curriculum?: XOR<CurriculumNullableScalarRelationFilter, CurriculumWhereInput> | null
+  }, "id">
+
+  export type ContactInfoOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    _count?: ContactInfoCountOrderByAggregateInput
+    _avg?: ContactInfoAvgOrderByAggregateInput
+    _max?: ContactInfoMaxOrderByAggregateInput
+    _min?: ContactInfoMinOrderByAggregateInput
+    _sum?: ContactInfoSumOrderByAggregateInput
+  }
+
+  export type ContactInfoScalarWhereWithAggregatesInput = {
+    AND?: ContactInfoScalarWhereWithAggregatesInput | ContactInfoScalarWhereWithAggregatesInput[]
+    OR?: ContactInfoScalarWhereWithAggregatesInput[]
+    NOT?: ContactInfoScalarWhereWithAggregatesInput | ContactInfoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ContactInfo"> | number
+    title?: StringWithAggregatesFilter<"ContactInfo"> | string
   }
 
   export type AcademicInfoWhereInput = {
@@ -8888,6 +11459,7 @@ export namespace Prisma {
     singleton?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    contactInfo?: ContactInfoCreateNestedOneWithoutCurriculumInput
     academicInfo?: AcademicInfoCreateNestedOneWithoutCurriculumInput
     teachingInfo?: TeachingInfoCreateNestedOneWithoutCurriculumInput
   }
@@ -8898,6 +11470,7 @@ export namespace Prisma {
     lastName: string
     credential: string
     profileImage: string
+    contactInfoId?: number | null
     academicInfoId?: number | null
     teachingInfoId?: number | null
     extras: JsonNullValueInput | InputJsonValue
@@ -8915,6 +11488,7 @@ export namespace Prisma {
     singleton?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInfo?: ContactInfoUpdateOneWithoutCurriculumNestedInput
     academicInfo?: AcademicInfoUpdateOneWithoutCurriculumNestedInput
     teachingInfo?: TeachingInfoUpdateOneWithoutCurriculumNestedInput
   }
@@ -8925,6 +11499,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     credential?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
+    contactInfoId?: NullableIntFieldUpdateOperationsInput | number | null
     academicInfoId?: NullableIntFieldUpdateOperationsInput | number | null
     teachingInfoId?: NullableIntFieldUpdateOperationsInput | number | null
     extras?: JsonNullValueInput | InputJsonValue
@@ -8939,6 +11514,7 @@ export namespace Prisma {
     lastName: string
     credential: string
     profileImage: string
+    contactInfoId?: number | null
     academicInfoId?: number | null
     teachingInfoId?: number | null
     extras: JsonNullValueInput | InputJsonValue
@@ -8964,12 +11540,105 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     credential?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
+    contactInfoId?: NullableIntFieldUpdateOperationsInput | number | null
     academicInfoId?: NullableIntFieldUpdateOperationsInput | number | null
     teachingInfoId?: NullableIntFieldUpdateOperationsInput | number | null
     extras?: JsonNullValueInput | InputJsonValue
     singleton?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactInfoItemCreateInput = {
+    label: string
+    link: string
+    platform?: string | null
+    contactInfo: ContactInfoCreateNestedOneWithoutItemsInput
+  }
+
+  export type ContactInfoItemUncheckedCreateInput = {
+    id?: number
+    label: string
+    link: string
+    platform?: string | null
+    contactInfoId: number
+  }
+
+  export type ContactInfoItemUpdateInput = {
+    label?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    platform?: NullableStringFieldUpdateOperationsInput | string | null
+    contactInfo?: ContactInfoUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type ContactInfoItemUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    platform?: NullableStringFieldUpdateOperationsInput | string | null
+    contactInfoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ContactInfoItemCreateManyInput = {
+    id?: number
+    label: string
+    link: string
+    platform?: string | null
+    contactInfoId: number
+  }
+
+  export type ContactInfoItemUpdateManyMutationInput = {
+    label?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    platform?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContactInfoItemUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    platform?: NullableStringFieldUpdateOperationsInput | string | null
+    contactInfoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ContactInfoCreateInput = {
+    title: string
+    items?: ContactInfoItemCreateNestedManyWithoutContactInfoInput
+    curriculum?: CurriculumCreateNestedOneWithoutContactInfoInput
+  }
+
+  export type ContactInfoUncheckedCreateInput = {
+    id?: number
+    title: string
+    items?: ContactInfoItemUncheckedCreateNestedManyWithoutContactInfoInput
+    curriculum?: CurriculumUncheckedCreateNestedOneWithoutContactInfoInput
+  }
+
+  export type ContactInfoUpdateInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    items?: ContactInfoItemUpdateManyWithoutContactInfoNestedInput
+    curriculum?: CurriculumUpdateOneWithoutContactInfoNestedInput
+  }
+
+  export type ContactInfoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    items?: ContactInfoItemUncheckedUpdateManyWithoutContactInfoNestedInput
+    curriculum?: CurriculumUncheckedUpdateOneWithoutContactInfoNestedInput
+  }
+
+  export type ContactInfoCreateManyInput = {
+    id?: number
+    title: string
+  }
+
+  export type ContactInfoUpdateManyMutationInput = {
+    title?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ContactInfoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type AcademicInfoCreateInput = {
@@ -9429,6 +12098,11 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type ContactInfoNullableScalarRelationFilter = {
+    is?: ContactInfoWhereInput | null
+    isNot?: ContactInfoWhereInput | null
+  }
+
   export type AcademicInfoNullableScalarRelationFilter = {
     is?: AcademicInfoWhereInput | null
     isNot?: AcademicInfoWhereInput | null
@@ -9445,6 +12119,7 @@ export namespace Prisma {
     lastName?: SortOrder
     credential?: SortOrder
     profileImage?: SortOrder
+    contactInfoId?: SortOrder
     academicInfoId?: SortOrder
     teachingInfoId?: SortOrder
     extras?: SortOrder
@@ -9455,6 +12130,7 @@ export namespace Prisma {
 
   export type CurriculumAvgOrderByAggregateInput = {
     id?: SortOrder
+    contactInfoId?: SortOrder
     academicInfoId?: SortOrder
     teachingInfoId?: SortOrder
   }
@@ -9465,6 +12141,7 @@ export namespace Prisma {
     lastName?: SortOrder
     credential?: SortOrder
     profileImage?: SortOrder
+    contactInfoId?: SortOrder
     academicInfoId?: SortOrder
     teachingInfoId?: SortOrder
     singleton?: SortOrder
@@ -9478,6 +12155,7 @@ export namespace Prisma {
     lastName?: SortOrder
     credential?: SortOrder
     profileImage?: SortOrder
+    contactInfoId?: SortOrder
     academicInfoId?: SortOrder
     teachingInfoId?: SortOrder
     singleton?: SortOrder
@@ -9487,6 +12165,7 @@ export namespace Prisma {
 
   export type CurriculumSumOrderByAggregateInput = {
     id?: SortOrder
+    contactInfoId?: SortOrder
     academicInfoId?: SortOrder
     teachingInfoId?: SortOrder
   }
@@ -9541,9 +12220,81 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type ContactInfoScalarRelationFilter = {
+    is?: ContactInfoWhereInput
+    isNot?: ContactInfoWhereInput
+  }
+
+  export type ContactInfoItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    label?: SortOrder
+    link?: SortOrder
+    platform?: SortOrder
+    contactInfoId?: SortOrder
+  }
+
+  export type ContactInfoItemAvgOrderByAggregateInput = {
+    id?: SortOrder
+    contactInfoId?: SortOrder
+  }
+
+  export type ContactInfoItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    label?: SortOrder
+    link?: SortOrder
+    platform?: SortOrder
+    contactInfoId?: SortOrder
+  }
+
+  export type ContactInfoItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    label?: SortOrder
+    link?: SortOrder
+    platform?: SortOrder
+    contactInfoId?: SortOrder
+  }
+
+  export type ContactInfoItemSumOrderByAggregateInput = {
+    id?: SortOrder
+    contactInfoId?: SortOrder
+  }
+
+  export type ContactInfoItemListRelationFilter = {
+    every?: ContactInfoItemWhereInput
+    some?: ContactInfoItemWhereInput
+    none?: ContactInfoItemWhereInput
+  }
+
   export type CurriculumNullableScalarRelationFilter = {
     is?: CurriculumWhereInput | null
     isNot?: CurriculumWhereInput | null
+  }
+
+  export type ContactInfoItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContactInfoCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+  }
+
+  export type ContactInfoAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ContactInfoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+  }
+
+  export type ContactInfoMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+  }
+
+  export type ContactInfoSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type AcademicInfoCountOrderByAggregateInput = {
@@ -9725,6 +12476,12 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
   }
 
+  export type ContactInfoCreateNestedOneWithoutCurriculumInput = {
+    create?: XOR<ContactInfoCreateWithoutCurriculumInput, ContactInfoUncheckedCreateWithoutCurriculumInput>
+    connectOrCreate?: ContactInfoCreateOrConnectWithoutCurriculumInput
+    connect?: ContactInfoWhereUniqueInput
+  }
+
   export type AcademicInfoCreateNestedOneWithoutCurriculumInput = {
     create?: XOR<AcademicInfoCreateWithoutCurriculumInput, AcademicInfoUncheckedCreateWithoutCurriculumInput>
     connectOrCreate?: AcademicInfoCreateOrConnectWithoutCurriculumInput
@@ -9739,6 +12496,16 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type ContactInfoUpdateOneWithoutCurriculumNestedInput = {
+    create?: XOR<ContactInfoCreateWithoutCurriculumInput, ContactInfoUncheckedCreateWithoutCurriculumInput>
+    connectOrCreate?: ContactInfoCreateOrConnectWithoutCurriculumInput
+    upsert?: ContactInfoUpsertWithoutCurriculumInput
+    disconnect?: ContactInfoWhereInput | boolean
+    delete?: ContactInfoWhereInput | boolean
+    connect?: ContactInfoWhereUniqueInput
+    update?: XOR<XOR<ContactInfoUpdateToOneWithWhereWithoutCurriculumInput, ContactInfoUpdateWithoutCurriculumInput>, ContactInfoUncheckedUpdateWithoutCurriculumInput>
   }
 
   export type AcademicInfoUpdateOneWithoutCurriculumNestedInput = {
@@ -9767,6 +12534,94 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type ContactInfoCreateNestedOneWithoutItemsInput = {
+    create?: XOR<ContactInfoCreateWithoutItemsInput, ContactInfoUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: ContactInfoCreateOrConnectWithoutItemsInput
+    connect?: ContactInfoWhereUniqueInput
+  }
+
+  export type ContactInfoUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<ContactInfoCreateWithoutItemsInput, ContactInfoUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: ContactInfoCreateOrConnectWithoutItemsInput
+    upsert?: ContactInfoUpsertWithoutItemsInput
+    connect?: ContactInfoWhereUniqueInput
+    update?: XOR<XOR<ContactInfoUpdateToOneWithWhereWithoutItemsInput, ContactInfoUpdateWithoutItemsInput>, ContactInfoUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ContactInfoItemCreateNestedManyWithoutContactInfoInput = {
+    create?: XOR<ContactInfoItemCreateWithoutContactInfoInput, ContactInfoItemUncheckedCreateWithoutContactInfoInput> | ContactInfoItemCreateWithoutContactInfoInput[] | ContactInfoItemUncheckedCreateWithoutContactInfoInput[]
+    connectOrCreate?: ContactInfoItemCreateOrConnectWithoutContactInfoInput | ContactInfoItemCreateOrConnectWithoutContactInfoInput[]
+    createMany?: ContactInfoItemCreateManyContactInfoInputEnvelope
+    connect?: ContactInfoItemWhereUniqueInput | ContactInfoItemWhereUniqueInput[]
+  }
+
+  export type CurriculumCreateNestedOneWithoutContactInfoInput = {
+    create?: XOR<CurriculumCreateWithoutContactInfoInput, CurriculumUncheckedCreateWithoutContactInfoInput>
+    connectOrCreate?: CurriculumCreateOrConnectWithoutContactInfoInput
+    connect?: CurriculumWhereUniqueInput
+  }
+
+  export type ContactInfoItemUncheckedCreateNestedManyWithoutContactInfoInput = {
+    create?: XOR<ContactInfoItemCreateWithoutContactInfoInput, ContactInfoItemUncheckedCreateWithoutContactInfoInput> | ContactInfoItemCreateWithoutContactInfoInput[] | ContactInfoItemUncheckedCreateWithoutContactInfoInput[]
+    connectOrCreate?: ContactInfoItemCreateOrConnectWithoutContactInfoInput | ContactInfoItemCreateOrConnectWithoutContactInfoInput[]
+    createMany?: ContactInfoItemCreateManyContactInfoInputEnvelope
+    connect?: ContactInfoItemWhereUniqueInput | ContactInfoItemWhereUniqueInput[]
+  }
+
+  export type CurriculumUncheckedCreateNestedOneWithoutContactInfoInput = {
+    create?: XOR<CurriculumCreateWithoutContactInfoInput, CurriculumUncheckedCreateWithoutContactInfoInput>
+    connectOrCreate?: CurriculumCreateOrConnectWithoutContactInfoInput
+    connect?: CurriculumWhereUniqueInput
+  }
+
+  export type ContactInfoItemUpdateManyWithoutContactInfoNestedInput = {
+    create?: XOR<ContactInfoItemCreateWithoutContactInfoInput, ContactInfoItemUncheckedCreateWithoutContactInfoInput> | ContactInfoItemCreateWithoutContactInfoInput[] | ContactInfoItemUncheckedCreateWithoutContactInfoInput[]
+    connectOrCreate?: ContactInfoItemCreateOrConnectWithoutContactInfoInput | ContactInfoItemCreateOrConnectWithoutContactInfoInput[]
+    upsert?: ContactInfoItemUpsertWithWhereUniqueWithoutContactInfoInput | ContactInfoItemUpsertWithWhereUniqueWithoutContactInfoInput[]
+    createMany?: ContactInfoItemCreateManyContactInfoInputEnvelope
+    set?: ContactInfoItemWhereUniqueInput | ContactInfoItemWhereUniqueInput[]
+    disconnect?: ContactInfoItemWhereUniqueInput | ContactInfoItemWhereUniqueInput[]
+    delete?: ContactInfoItemWhereUniqueInput | ContactInfoItemWhereUniqueInput[]
+    connect?: ContactInfoItemWhereUniqueInput | ContactInfoItemWhereUniqueInput[]
+    update?: ContactInfoItemUpdateWithWhereUniqueWithoutContactInfoInput | ContactInfoItemUpdateWithWhereUniqueWithoutContactInfoInput[]
+    updateMany?: ContactInfoItemUpdateManyWithWhereWithoutContactInfoInput | ContactInfoItemUpdateManyWithWhereWithoutContactInfoInput[]
+    deleteMany?: ContactInfoItemScalarWhereInput | ContactInfoItemScalarWhereInput[]
+  }
+
+  export type CurriculumUpdateOneWithoutContactInfoNestedInput = {
+    create?: XOR<CurriculumCreateWithoutContactInfoInput, CurriculumUncheckedCreateWithoutContactInfoInput>
+    connectOrCreate?: CurriculumCreateOrConnectWithoutContactInfoInput
+    upsert?: CurriculumUpsertWithoutContactInfoInput
+    disconnect?: CurriculumWhereInput | boolean
+    delete?: CurriculumWhereInput | boolean
+    connect?: CurriculumWhereUniqueInput
+    update?: XOR<XOR<CurriculumUpdateToOneWithWhereWithoutContactInfoInput, CurriculumUpdateWithoutContactInfoInput>, CurriculumUncheckedUpdateWithoutContactInfoInput>
+  }
+
+  export type ContactInfoItemUncheckedUpdateManyWithoutContactInfoNestedInput = {
+    create?: XOR<ContactInfoItemCreateWithoutContactInfoInput, ContactInfoItemUncheckedCreateWithoutContactInfoInput> | ContactInfoItemCreateWithoutContactInfoInput[] | ContactInfoItemUncheckedCreateWithoutContactInfoInput[]
+    connectOrCreate?: ContactInfoItemCreateOrConnectWithoutContactInfoInput | ContactInfoItemCreateOrConnectWithoutContactInfoInput[]
+    upsert?: ContactInfoItemUpsertWithWhereUniqueWithoutContactInfoInput | ContactInfoItemUpsertWithWhereUniqueWithoutContactInfoInput[]
+    createMany?: ContactInfoItemCreateManyContactInfoInputEnvelope
+    set?: ContactInfoItemWhereUniqueInput | ContactInfoItemWhereUniqueInput[]
+    disconnect?: ContactInfoItemWhereUniqueInput | ContactInfoItemWhereUniqueInput[]
+    delete?: ContactInfoItemWhereUniqueInput | ContactInfoItemWhereUniqueInput[]
+    connect?: ContactInfoItemWhereUniqueInput | ContactInfoItemWhereUniqueInput[]
+    update?: ContactInfoItemUpdateWithWhereUniqueWithoutContactInfoInput | ContactInfoItemUpdateWithWhereUniqueWithoutContactInfoInput[]
+    updateMany?: ContactInfoItemUpdateManyWithWhereWithoutContactInfoInput | ContactInfoItemUpdateManyWithWhereWithoutContactInfoInput[]
+    deleteMany?: ContactInfoItemScalarWhereInput | ContactInfoItemScalarWhereInput[]
+  }
+
+  export type CurriculumUncheckedUpdateOneWithoutContactInfoNestedInput = {
+    create?: XOR<CurriculumCreateWithoutContactInfoInput, CurriculumUncheckedCreateWithoutContactInfoInput>
+    connectOrCreate?: CurriculumCreateOrConnectWithoutContactInfoInput
+    upsert?: CurriculumUpsertWithoutContactInfoInput
+    disconnect?: CurriculumWhereInput | boolean
+    delete?: CurriculumWhereInput | boolean
+    connect?: CurriculumWhereUniqueInput
+    update?: XOR<XOR<CurriculumUpdateToOneWithWhereWithoutContactInfoInput, CurriculumUpdateWithoutContactInfoInput>, CurriculumUncheckedUpdateWithoutContactInfoInput>
   }
 
   export type AcademicInfoCreateitemsInput = {
@@ -10204,6 +13059,22 @@ export namespace Prisma {
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type ContactInfoCreateWithoutCurriculumInput = {
+    title: string
+    items?: ContactInfoItemCreateNestedManyWithoutContactInfoInput
+  }
+
+  export type ContactInfoUncheckedCreateWithoutCurriculumInput = {
+    id?: number
+    title: string
+    items?: ContactInfoItemUncheckedCreateNestedManyWithoutContactInfoInput
+  }
+
+  export type ContactInfoCreateOrConnectWithoutCurriculumInput = {
+    where: ContactInfoWhereUniqueInput
+    create: XOR<ContactInfoCreateWithoutCurriculumInput, ContactInfoUncheckedCreateWithoutCurriculumInput>
+  }
+
   export type AcademicInfoCreateWithoutCurriculumInput = {
     title: string
     items?: AcademicInfoCreateitemsInput | string[]
@@ -10234,6 +13105,28 @@ export namespace Prisma {
   export type TeachingInfoCreateOrConnectWithoutCurriculumInput = {
     where: TeachingInfoWhereUniqueInput
     create: XOR<TeachingInfoCreateWithoutCurriculumInput, TeachingInfoUncheckedCreateWithoutCurriculumInput>
+  }
+
+  export type ContactInfoUpsertWithoutCurriculumInput = {
+    update: XOR<ContactInfoUpdateWithoutCurriculumInput, ContactInfoUncheckedUpdateWithoutCurriculumInput>
+    create: XOR<ContactInfoCreateWithoutCurriculumInput, ContactInfoUncheckedCreateWithoutCurriculumInput>
+    where?: ContactInfoWhereInput
+  }
+
+  export type ContactInfoUpdateToOneWithWhereWithoutCurriculumInput = {
+    where?: ContactInfoWhereInput
+    data: XOR<ContactInfoUpdateWithoutCurriculumInput, ContactInfoUncheckedUpdateWithoutCurriculumInput>
+  }
+
+  export type ContactInfoUpdateWithoutCurriculumInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    items?: ContactInfoItemUpdateManyWithoutContactInfoNestedInput
+  }
+
+  export type ContactInfoUncheckedUpdateWithoutCurriculumInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    items?: ContactInfoItemUncheckedUpdateManyWithoutContactInfoNestedInput
   }
 
   export type AcademicInfoUpsertWithoutCurriculumInput = {
@@ -10280,6 +13173,164 @@ export namespace Prisma {
     items?: TeachingInfoUpdateitemsInput | string[]
   }
 
+  export type ContactInfoCreateWithoutItemsInput = {
+    title: string
+    curriculum?: CurriculumCreateNestedOneWithoutContactInfoInput
+  }
+
+  export type ContactInfoUncheckedCreateWithoutItemsInput = {
+    id?: number
+    title: string
+    curriculum?: CurriculumUncheckedCreateNestedOneWithoutContactInfoInput
+  }
+
+  export type ContactInfoCreateOrConnectWithoutItemsInput = {
+    where: ContactInfoWhereUniqueInput
+    create: XOR<ContactInfoCreateWithoutItemsInput, ContactInfoUncheckedCreateWithoutItemsInput>
+  }
+
+  export type ContactInfoUpsertWithoutItemsInput = {
+    update: XOR<ContactInfoUpdateWithoutItemsInput, ContactInfoUncheckedUpdateWithoutItemsInput>
+    create: XOR<ContactInfoCreateWithoutItemsInput, ContactInfoUncheckedCreateWithoutItemsInput>
+    where?: ContactInfoWhereInput
+  }
+
+  export type ContactInfoUpdateToOneWithWhereWithoutItemsInput = {
+    where?: ContactInfoWhereInput
+    data: XOR<ContactInfoUpdateWithoutItemsInput, ContactInfoUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ContactInfoUpdateWithoutItemsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    curriculum?: CurriculumUpdateOneWithoutContactInfoNestedInput
+  }
+
+  export type ContactInfoUncheckedUpdateWithoutItemsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    curriculum?: CurriculumUncheckedUpdateOneWithoutContactInfoNestedInput
+  }
+
+  export type ContactInfoItemCreateWithoutContactInfoInput = {
+    label: string
+    link: string
+    platform?: string | null
+  }
+
+  export type ContactInfoItemUncheckedCreateWithoutContactInfoInput = {
+    id?: number
+    label: string
+    link: string
+    platform?: string | null
+  }
+
+  export type ContactInfoItemCreateOrConnectWithoutContactInfoInput = {
+    where: ContactInfoItemWhereUniqueInput
+    create: XOR<ContactInfoItemCreateWithoutContactInfoInput, ContactInfoItemUncheckedCreateWithoutContactInfoInput>
+  }
+
+  export type ContactInfoItemCreateManyContactInfoInputEnvelope = {
+    data: ContactInfoItemCreateManyContactInfoInput | ContactInfoItemCreateManyContactInfoInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CurriculumCreateWithoutContactInfoInput = {
+    firstName: string
+    lastName: string
+    credential: string
+    profileImage: string
+    extras: JsonNullValueInput | InputJsonValue
+    singleton?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    academicInfo?: AcademicInfoCreateNestedOneWithoutCurriculumInput
+    teachingInfo?: TeachingInfoCreateNestedOneWithoutCurriculumInput
+  }
+
+  export type CurriculumUncheckedCreateWithoutContactInfoInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    credential: string
+    profileImage: string
+    academicInfoId?: number | null
+    teachingInfoId?: number | null
+    extras: JsonNullValueInput | InputJsonValue
+    singleton?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CurriculumCreateOrConnectWithoutContactInfoInput = {
+    where: CurriculumWhereUniqueInput
+    create: XOR<CurriculumCreateWithoutContactInfoInput, CurriculumUncheckedCreateWithoutContactInfoInput>
+  }
+
+  export type ContactInfoItemUpsertWithWhereUniqueWithoutContactInfoInput = {
+    where: ContactInfoItemWhereUniqueInput
+    update: XOR<ContactInfoItemUpdateWithoutContactInfoInput, ContactInfoItemUncheckedUpdateWithoutContactInfoInput>
+    create: XOR<ContactInfoItemCreateWithoutContactInfoInput, ContactInfoItemUncheckedCreateWithoutContactInfoInput>
+  }
+
+  export type ContactInfoItemUpdateWithWhereUniqueWithoutContactInfoInput = {
+    where: ContactInfoItemWhereUniqueInput
+    data: XOR<ContactInfoItemUpdateWithoutContactInfoInput, ContactInfoItemUncheckedUpdateWithoutContactInfoInput>
+  }
+
+  export type ContactInfoItemUpdateManyWithWhereWithoutContactInfoInput = {
+    where: ContactInfoItemScalarWhereInput
+    data: XOR<ContactInfoItemUpdateManyMutationInput, ContactInfoItemUncheckedUpdateManyWithoutContactInfoInput>
+  }
+
+  export type ContactInfoItemScalarWhereInput = {
+    AND?: ContactInfoItemScalarWhereInput | ContactInfoItemScalarWhereInput[]
+    OR?: ContactInfoItemScalarWhereInput[]
+    NOT?: ContactInfoItemScalarWhereInput | ContactInfoItemScalarWhereInput[]
+    id?: IntFilter<"ContactInfoItem"> | number
+    label?: StringFilter<"ContactInfoItem"> | string
+    link?: StringFilter<"ContactInfoItem"> | string
+    platform?: StringNullableFilter<"ContactInfoItem"> | string | null
+    contactInfoId?: IntFilter<"ContactInfoItem"> | number
+  }
+
+  export type CurriculumUpsertWithoutContactInfoInput = {
+    update: XOR<CurriculumUpdateWithoutContactInfoInput, CurriculumUncheckedUpdateWithoutContactInfoInput>
+    create: XOR<CurriculumCreateWithoutContactInfoInput, CurriculumUncheckedCreateWithoutContactInfoInput>
+    where?: CurriculumWhereInput
+  }
+
+  export type CurriculumUpdateToOneWithWhereWithoutContactInfoInput = {
+    where?: CurriculumWhereInput
+    data: XOR<CurriculumUpdateWithoutContactInfoInput, CurriculumUncheckedUpdateWithoutContactInfoInput>
+  }
+
+  export type CurriculumUpdateWithoutContactInfoInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    credential?: StringFieldUpdateOperationsInput | string
+    profileImage?: StringFieldUpdateOperationsInput | string
+    extras?: JsonNullValueInput | InputJsonValue
+    singleton?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    academicInfo?: AcademicInfoUpdateOneWithoutCurriculumNestedInput
+    teachingInfo?: TeachingInfoUpdateOneWithoutCurriculumNestedInput
+  }
+
+  export type CurriculumUncheckedUpdateWithoutContactInfoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    credential?: StringFieldUpdateOperationsInput | string
+    profileImage?: StringFieldUpdateOperationsInput | string
+    academicInfoId?: NullableIntFieldUpdateOperationsInput | number | null
+    teachingInfoId?: NullableIntFieldUpdateOperationsInput | number | null
+    extras?: JsonNullValueInput | InputJsonValue
+    singleton?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CurriculumCreateWithoutAcademicInfoInput = {
     firstName: string
     lastName: string
@@ -10289,6 +13340,7 @@ export namespace Prisma {
     singleton?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    contactInfo?: ContactInfoCreateNestedOneWithoutCurriculumInput
     teachingInfo?: TeachingInfoCreateNestedOneWithoutCurriculumInput
   }
 
@@ -10298,6 +13350,7 @@ export namespace Prisma {
     lastName: string
     credential: string
     profileImage: string
+    contactInfoId?: number | null
     teachingInfoId?: number | null
     extras: JsonNullValueInput | InputJsonValue
     singleton?: boolean
@@ -10330,6 +13383,7 @@ export namespace Prisma {
     singleton?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInfo?: ContactInfoUpdateOneWithoutCurriculumNestedInput
     teachingInfo?: TeachingInfoUpdateOneWithoutCurriculumNestedInput
   }
 
@@ -10339,6 +13393,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     credential?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
+    contactInfoId?: NullableIntFieldUpdateOperationsInput | number | null
     teachingInfoId?: NullableIntFieldUpdateOperationsInput | number | null
     extras?: JsonNullValueInput | InputJsonValue
     singleton?: BoolFieldUpdateOperationsInput | boolean
@@ -10355,6 +13410,7 @@ export namespace Prisma {
     singleton?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    contactInfo?: ContactInfoCreateNestedOneWithoutCurriculumInput
     academicInfo?: AcademicInfoCreateNestedOneWithoutCurriculumInput
   }
 
@@ -10364,6 +13420,7 @@ export namespace Prisma {
     lastName: string
     credential: string
     profileImage: string
+    contactInfoId?: number | null
     academicInfoId?: number | null
     extras: JsonNullValueInput | InputJsonValue
     singleton?: boolean
@@ -10396,6 +13453,7 @@ export namespace Prisma {
     singleton?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contactInfo?: ContactInfoUpdateOneWithoutCurriculumNestedInput
     academicInfo?: AcademicInfoUpdateOneWithoutCurriculumNestedInput
   }
 
@@ -10405,6 +13463,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     credential?: StringFieldUpdateOperationsInput | string
     profileImage?: StringFieldUpdateOperationsInput | string
+    contactInfoId?: NullableIntFieldUpdateOperationsInput | number | null
     academicInfoId?: NullableIntFieldUpdateOperationsInput | number | null
     extras?: JsonNullValueInput | InputJsonValue
     singleton?: BoolFieldUpdateOperationsInput | boolean
@@ -10453,6 +13512,33 @@ export namespace Prisma {
     references?: PostUpdatereferencesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactInfoItemCreateManyContactInfoInput = {
+    id?: number
+    label: string
+    link: string
+    platform?: string | null
+  }
+
+  export type ContactInfoItemUpdateWithoutContactInfoInput = {
+    label?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    platform?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContactInfoItemUncheckedUpdateWithoutContactInfoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    platform?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContactInfoItemUncheckedUpdateManyWithoutContactInfoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    platform?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
