@@ -16,13 +16,13 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "ocmagarao",
-    "password": "senha123"
+    "username": "",
+    "password": ""
 }
 
 ### Refresh Tokens
 POST http://localhost:3000/api/auth/refresh
-Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0MDA2NTksImV4cCI6MTc0ODQwMDgzOX0.sKYeB_YbkQtcED0HJGvzjzktgW_mm65wyy6SFXz9GYE; Max-Age=180; Path=/; Expires=Wed, 28 May 2025 02:53:59 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0MDA2NTksImV4cCI6MTc0OTAwNTQ1OX0.efKItMaT91gjCwt3b8vpytwpRXp03g0O8-eaH86DC6k; Max-Age=604800; Path=/; Expires=Wed, 04 Jun 2025 02:50:59 GMT; HttpOnly; SameSite=Lax
+Cookie: 
 
 ### Get user from token
 GET http://localhost:3000/api/auth/status
@@ -108,7 +108,7 @@ Cookie:
 
 ### Gets Inboxes
 GET http://localhost:3000/api/inbox/search?q=o
-Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0MzgxNjUsImV4cCI6MTc0ODQzODM0NX0.vFGn8lF_kITXrCXqzGGo6yK6IcDcCQ1xB_jHpY_Uz6E; Max-Age=180; Path=/; Expires=Wed, 28 May 2025 13:19:06 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0MzgxNjUsImV4cCI6MTc0OTA0Mjk2NX0.eRbnx_Nu0sYNIOBVVGy_cCWxJtZl3La3syzj-7D_Ub8; Max-Age=604800; Path=/; Expires=Wed, 04 Jun 2025 13:16:06 GMT; HttpOnly; SameSite=Lax
+Cookie: 
 
 ### Delete Inboxes
 DELETE http://localhost:3000/api/inbox/1
@@ -119,91 +119,29 @@ POST http://localhost:3000/api/inbox
 Content-Type: application/json
 
 {
-    "name": "Joaozinho",
-    "subject":"Falei contigo ontem...",
-    "email": "joaozinho@email.com",
-    "message": "Falei contigo ontem sobre tal coisa, n sei se tu lembra"
+    "name": "",
+    "subject":"",
+    "email": "",
+    "message": ""
 }
 
 ### Create Curriculum
 POST http://localhost:3000/api/curriculum
-Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDgzOTkyNDUsImV4cCI6MTc0ODM5OTQyNX0.TmAJnGPo-xpShyTk5pILSpZStFzr3Hr0HATsOWeiSV0; Max-Age=180; Path=/; Expires=Wed, 28 May 2025 02:30:25 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDgzOTkyNDUsImV4cCI6MTc0OTAwNDA0NX0.peJakL-VxDfPaNGSbEGSExTILq8A4sf-NK3oWihOoW0; Max-Age=604800; Path=/; Expires=Wed, 04 Jun 2025 02:27:25 GMT; HttpOnly; SameSite=Lax
+Cookie: 
 Content-Type: application/json
 
 {
-  "firstName": "Lais",
-  "lastName": "Donida",
-  "credential": "1234",
-  "profileImage": "https://placehold.co/600x400",
-  "contactInfo": {
-    "create": {
-      "title": "Informações de Contato",
-      "items": {
-        "create": [
-          {
-            "label": "lais.donida@gmail.com",
-            "link": "mailTo:lais.donida@gmail.com",
-            "platform": "E-mail"
-          },
-          {
-            "label": "Lais Donida",
-            "link": "https://www.linkedin.com/in/lais-donida-85b57355/",
-            "platform": "LinkedIn"
-          },
-          {
-            "label": "@dra.laisdonida",
-            "link": "https://www.instagram.com/dra.laisdonida/",
-            "platform": "Instagram"
-          },
-          {
-            "label": "Lais Oliva Donida",
-            "link": "https://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K4831472D8",
-            "platform": "Lattes"
-          }
-        ]
-      }
-    }
-  },
-  "academicInfo": {
-    "create": {
-      "title": "formação",
-      "items": [
-        "Fonoaudióloga graduada Pela UFSC",
-        "Terapeuta DIR Floortime"
-      ]
-    }
-  },
-  "teachingInfo": {
-    "create": {
-      "title": "docência",
-      "items": [
-        "Professora do curso de fonoaudiologia da UFSC",
-        "Professora do programa de pós-graduação em TEA da ACE/FGG (Joinville)"
-      ]
-    }
-  },
-  "extras": {
-      "title": "experiência",
-      "items": [
-        "Autismo",
-        "Comunicação Alternativa",
-        "Transtornos motores de fala",
-        "Atraso motor de fala",
-        "TDAH",
-        "Transtorno do desenvolvimento intelectual",
-        "Leitura e escrita",
-        "Afasia"
-      ]
-  }
+  "":""
 }
+  
 
 ### Create Curriculum
 DELETE http://localhost:3000/api/curriculum
-Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0MDA5MzYsImV4cCI6MTc0ODQwMTExNn0.OeR119EO9Gq93RCAj7AAAflYbmb-gy2TbeIb6Ys1ta0; Max-Age=180; Path=/; Expires=Wed, 28 May 2025 02:58:36 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0MDA5MzYsImV4cCI6MTc0OTAwNTczNn0.TFga7XKJ-HadTb9kRn2xaV3Waw9hEXd-NC2MFd2wns4; Max-Age=604800; Path=/; Expires=Wed, 04 Jun 2025 02:55:36 GMT; HttpOnly; SameSite=Lax
+Cookie: 
 
 ###
 GET http://localhost:3000/api/inbox/
-Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0NDgxNjYsImV4cCI6MTc0ODQ0ODM0Nn0.SbTlPQsTgn5QQhFDHYI6SFX9H7pinx8T2ObZxxQasXk; Max-Age=180; Path=/; Expires=Wed, 28 May 2025 16:05:47 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg0NDgxNjYsImV4cCI6MTc0OTA1Mjk2Nn0.n-a8WCvVBbtP8D6wvtYzFkA4aGRRBqM0D-mnjhjykAg; Max-Age=604800; Path=/; Expires=Wed, 04 Jun 2025 16:02:47 GMT; HttpOnly; SameSite=Lax
+Cookie: 
 
 ###
 POST http://localhost:3000/api/inbox

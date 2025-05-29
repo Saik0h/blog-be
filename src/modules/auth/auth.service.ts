@@ -4,12 +4,11 @@ import {
   ForbiddenException,
   HttpException,
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Prisma, User } from 'generated/prisma';
+import { Prisma } from 'generated/prisma';
 import { DatabaseService } from 'src/database/database.service';
 import { comparePassword, encodePassword } from 'src/common/utils/bcrypt';
 import { Request, Response } from 'express';
@@ -27,10 +26,10 @@ export class AuthService {
   constructor(
     private readonly prisma: DatabaseService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   // -------------------------------------------------------- //
-  
+
   private isTokenExpired(decoded: IDecodedJWT): boolean {
     if (!decoded.exp) return true;
 
@@ -134,7 +133,7 @@ export class AuthService {
     }
 
     if (this.isTokenExpired(decoded)) {
-      throw new ForbiddenException('Access token expired');
+      throw new ForbiddenException('token expired');
     }
     return { message: 'Token is valid' };
   }

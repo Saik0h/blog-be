@@ -24,14 +24,10 @@ export class AccessGuard implements CanActivate {
 
     let user: IDecodedJWT | null = null;
     if (token) {
-      try {
-        user = this.jwtService.verify(token) as IDecodedJWT;
-        request.user = user;
-      } catch (err) {
-        throw err
-      }
-    }
+      user = this.jwtService.verify(token) as IDecodedJWT;
+      request.user = user;
 
+    }
     switch (accessLevel) {
 
       case 'authorizedOnly':

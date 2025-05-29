@@ -15,20 +15,18 @@ import { Request } from 'express';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: DatabaseService) {}
+  constructor(private readonly prisma: DatabaseService) { }
 
-  // Retorna todos os usuários
   async findAll() {
     try {
       const users = await this.prisma.user.findMany({});
       if (!users) throw new NotFoundException('There are no users yet');
       return this.removeSensitiveDataFromUsers(users);
     } catch (error) {
-      throw new BadRequestException('Cannot retrieve users');
+      throw error;
     }
   }
 
-  // Retorna um único usuário
   async findOne(id: number) {
     try {
       const user = await this.prisma.user.findUnique({ where: { id } });
@@ -37,11 +35,10 @@ export class UserService {
       }
       return this.removeSensitiveDataFromUser(user);
     } catch (err) {
-      throw new NotFoundException('Cannot find user');
+      throw err;
     }
   }
 
-  // Retorna todos os posts de um autor específico
   async findAllByAuthor(id: number) {
     try {
       const posts = await this.prisma.post.findMany({
@@ -54,11 +51,10 @@ export class UserService {
       }
       return posts;
     } catch (err) {
-      throw new BadRequestException('Erro ao buscar posts');
+      throw err;
     }
   }
 
-  // Atualiza o usuário
   async update(id: number, updateUserDto: UpdateUserDto) {
     try {
       if (!id) throw new BadRequestException('User must be provided');
@@ -73,7 +69,6 @@ export class UserService {
     }
   }
 
-  // Remove um usuário
   async remove(id: number) {
     try {
       const user = await this.prisma.user.findUnique({ where: { id } });
@@ -82,7 +77,7 @@ export class UserService {
       }
       return this.prisma.user.delete({ where: { id } });
     } catch (err) {
-      throw new BadRequestException('Erro ao excluir usuário');
+      throw err;
     }
   }
 
@@ -108,18 +103,15 @@ export class UserService {
 
       return { message: 'Password Updated Succsessfully' };
     } catch (err) {
-      console.error(err);
       throw err;
     }
   }
 
-  // Método para remover dados sensíveis de um único usuário
   private removeSensitiveDataFromUser(user: User) {
     const { password, refreshToken, profileImage, username, ...userWOP } = user;
     return userWOP;
   }
 
-  // Método para remover dados sensíveis de vários usuários
   private removeSensitiveDataFromUsers(users: User[]) {
     return users.map(
       ({ password, refreshToken, profileImage, username, ...usersWOP }) =>

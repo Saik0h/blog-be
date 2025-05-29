@@ -43,7 +43,6 @@ export class AuthController {
 
   @Get('status')
   @Access('authorizedOnly')
-  @UseGuards(JwtAuthGuard)
   async status(@Req() req: Request) {
     return this.authService.getUser(req);
   }
@@ -62,7 +61,6 @@ export class AuthController {
   // -------------------> Rota de logout
 
   @Post('logout')
-  @UseGuards(JwtAuthGuard)
   @Access('authorizedOnly')
   logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const user = req.user as IDecodedJWT;

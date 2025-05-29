@@ -8,7 +8,7 @@ import { Prisma } from 'generated/prisma';
 
 @Injectable()
 export class InboxService {
-  constructor(private readonly prisma: DatabaseService) {}
+  constructor(private readonly prisma: DatabaseService) { }
 
   async create(data: Prisma.InboxMessageCreateInput) {
     try {
@@ -52,7 +52,7 @@ export class InboxService {
       where: { id },
       data: { read: true },
     });
-    return {message: `Mail with the ID: ${id} was read`};
+    return { message: `Mail with the ID: ${id} was read` };
   }
 
   async search(query: string) {

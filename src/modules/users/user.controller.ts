@@ -9,10 +9,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Prisma, User } from 'generated/prisma';
+import { Prisma } from 'generated/prisma';
 import { Request } from 'express';
 import { ChangePasswordDto } from './dto/change-password.dto';
-import { JwtAuthGuard } from 'src/common/guards/jwt.guard';
 import { Access } from 'src/common/decorators/access-level-decorator';
 
 @Controller('api/users')
@@ -37,6 +36,7 @@ export class UserController {
   // -------------------> Retorna todos os posts de um usuário específico
 
   @Get(':id/posts')
+  @Access('public')
   findByAuthor(@Param('id') id: string) {
     return this.userService.findAllByAuthor(+id);
   }
@@ -55,7 +55,6 @@ export class UserController {
 
   @Patch(':id/change-password')
   @Access('authorizedOnly')
-  @UseGuards(JwtAuthGuard)
   updatePassword(
     @Param('id') id: string,
     @Body() passwordPayload: ChangePasswordDto,
