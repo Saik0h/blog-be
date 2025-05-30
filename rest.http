@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ### Refresh Tokens
 POST http://localhost:3000/api/auth/refresh
-Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg2NDA1MDAsImV4cCI6MTc0ODY0MDUzMH0.MxLG0chBxdYAp52f0IsoqQtnBcL4awiZxvpcge4I3no; Max-Age=30; Path=/; Expires=Fri, 30 May 2025 21:28:50 GMT; HttpOnly; SameSite=Lax,refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDg2NDA1MDAsImV4cCI6MTc0OTI0NTMwMH0.iOyo9azdJCsK49RSjbdIvrnpjo5s2UF4UviJkBS6J8U; Max-Age=604800; Path=/; Expires=Fri, 06 Jun 2025 21:28:20 GMT; HttpOnly; SameSite=Lax
+Cookie: 
 
 ### Get user from token
 GET http://localhost:3000/api/auth/status
