@@ -20,7 +20,7 @@ export const setTokensInCookies = (res: Response, tokens: ITokens) => {
     httpOnly: true,
     secure: false,
     sameSite: 'lax',
-    maxAge: 60000 * 3, // 3 minutos
+    maxAge: process.env.COOKIE_EXP as any as number
   });
   res.cookie('refreshToken', tokens.refreshToken, {
     httpOnly: true,

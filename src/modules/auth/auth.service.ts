@@ -21,6 +21,15 @@ import {
 } from './utils/cookie-service';
 // IMPORTS ACIMA-----------------------^
 
+// const decoded_token = verify(token, process.env.SECRET_JWT, (error, decoded)=>{
+//             if(error?.name === "TokenExpiredError"){
+//                 throw new UnauthorizedException("Token expired.");
+//             };
+//             return { 
+//                 user:decoded as User_Request,
+//             };
+//         });
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -28,19 +37,16 @@ export class AuthService {
     private jwtService: JwtService,
   ) { }
 
+private tokenExpires = process.env.TOKEN_EXP
   // -------------------------------------------------------- //
-
-  private isTokenExpired(decoded: IDecodedJWT): boolean {
-    if (!decoded.exp) return true;
-
-    const expirationTime = decoded.exp * 1000;
-    const currentTime = Date.now();
-
-    return currentTime >= expirationTime;
+  private extractPayload(token: string): IDecodedJWT {
+    const t = this.jwtService.verify(token, { secret: 'abcde' }) as IDecodedJWT;
+    return t
   }
 
-  private extractPayload(token: string): IDecodedJWT {
-    return this.jwtService.verify(token) as IDecodedJWT;
+  private async signToken(payload: { sub: number; role: string }, expIn = this.tokenExpires) {
+    console.log(this.tokenExpires)
+    return await this.jwtService.signAsync(payload, { secret: 'abcde', expiresIn: expIn })
   }
 
   // -------------------------------------------------------- //
@@ -132,9 +138,6 @@ export class AuthService {
       throw new ForbiddenException('Invalid access token');
     }
 
-    if (this.isTokenExpired(decoded)) {
-      throw new ForbiddenException('token expired');
-    }
     return { message: 'Token is valid' };
   }
 
@@ -146,9 +149,6 @@ export class AuthService {
       if (refreshToken === null)
         throw new ForbiddenException('User must be logged in');
       const decoded: IDecodedJWT = this.extractPayload(refreshToken);
-
-      if (this.isTokenExpired(decoded))
-        throw new ForbiddenException('Token Expired');
 
       const user = await this.prisma.user.findUnique({
         where: { id: decoded.sub },
@@ -168,6 +168,7 @@ export class AuthService {
 
       return { message: 'Access token refreshed successfully' };
     } catch (err) {
+      console.log(err)
       throw err instanceof HttpException
         ? err
         : new ForbiddenException('Unable to refresh token');
@@ -210,13 +211,9 @@ export class AuthService {
       role,
     };
 
-    const accessToken = this.jwtService.sign(payload, {
-      expiresIn: '3m',
-    });
+    const accessToken = await this.signToken(payload);
+    const refreshToken = await this.signToken(payload, '7d');
 
-    const refreshToken = this.jwtService.sign(payload, {
-      expiresIn: '7d',
-    });
     await this.updateRefreshTokenInDb(userId, refreshToken);
     return { accessToken, refreshToken };
   }

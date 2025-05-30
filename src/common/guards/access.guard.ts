@@ -18,16 +18,17 @@ export class AccessGuard implements CanActivate {
     ]);
 
     if (accessLevel === 'public') return true
-
+    console.log(accessLevel)
     const request = context.switchToHttp().getRequest();
-    const token = request.cookies?.['accessToken'];
+    const token = request.cookies?.['refreshToken'];
 
     let user: IDecodedJWT | null = null;
-    if (token) {
-      user = this.jwtService.verify(token) as IDecodedJWT;
-      request.user = user;
 
+    if (token) {
+      user = this.jwtService.verify(token, {secret: 'abcde'}) as IDecodedJWT;
+      request.user = user;
     }
+
     switch (accessLevel) {
 
       case 'authorizedOnly':

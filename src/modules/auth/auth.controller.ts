@@ -7,10 +7,9 @@ import {
   Get,
   Res,
 } from '@nestjs/common';
-import { Prisma, User } from 'generated/prisma';
+import { Prisma } from 'generated/prisma';
 import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
-import { JwtAuthGuard } from '../../common/guards/jwt.guard';
 import { IDecodedJWT } from 'src/common/utils/decoded';
 import { Access } from 'src/common/decorators/access-level-decorator';
 
