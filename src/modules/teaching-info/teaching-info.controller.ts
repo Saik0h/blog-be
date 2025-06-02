@@ -9,10 +9,13 @@ import {
 } from '@nestjs/common';
 import { Prisma } from 'generated/prisma';
 import { TeachingInfoService } from './teaching-info.service';
+import { Access } from 'src/common/decorators/access-level-decorator';
 
+@Access('public')
 @Controller('api/curriculum/teaching')
 export class TeachingInfoController {
   constructor(private readonly teachingInfoService: TeachingInfoService) {}
+  
   @Post()
   create(@Body() createTeachingInfoDto: Prisma.TeachingInfoCreateInput) {
     return this.teachingInfoService.createTeachingField(createTeachingInfoDto);

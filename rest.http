@@ -156,10 +156,10 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/api/curriculum/experience/item
+POST http://localhost:3000/api/curriculum/academics
 Content-Type: application/json
 
 {
-"description":"fiz uns trampo aqui e ali"
+"title" : "Formações"
 }
 
