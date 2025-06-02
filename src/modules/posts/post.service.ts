@@ -46,24 +46,50 @@ export class PostService {
   }
 
   // -------------------------------------------------------------------- //
- 
 
   async findAll() {
-    return await this.prisma.post.findMany({include:  {author: {select: {firstname: true, lastname: true, profileImage: true}}}});
+    return await this.prisma.post.findMany({
+      include: {
+        author: {
+          select: { firstname: true, lastname: true, profileImage: true },
+        },
+      },
+    });
   }
 
   // -------------------------------------------------------------------- //
   async findAllBlogs() {
-    return this.prisma.post.findMany({ where: { category: 'BLOG' }, include:  {author: {select: {firstname: true, lastname: true, profileImage: true}}}});
+    return this.prisma.post.findMany({
+      where: { category: 'BLOG' },
+      include: {
+        author: {
+          select: { firstname: true, lastname: true, profileImage: true },
+        },
+      },
+    });
   }
 
   // -------------------------------------------------------------------- //
   async findAllArtigos() {
-    return this.prisma.post.findMany({ where: { category: 'ARTIGO' }, include:  {author: {select: {firstname: true, lastname: true, profileImage: true}}}});
+    return this.prisma.post.findMany({
+      where: { category: 'ARTIGO' },
+      include: {
+        author: {
+          select: { firstname: true, lastname: true, profileImage: true },
+        },
+      },
+    });
   }
   // -------------------------------------------------------------------- //
   async findOne(id: number): Promise<Post> {
-    const post = await this.prisma.post.findUnique({ where: { id }, include: {author: {select:{firstname: true, lastname: true, profileImage: true }}} });
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+      include: {
+        author: {
+          select: { firstname: true, lastname: true, profileImage: true },
+        },
+      },
+    });
 
     if (!post) {
       throw new NotFoundException(`Post com ID ${id} não encontrado.`);
@@ -123,6 +149,39 @@ export class PostService {
       throw err;
     }
   }
+  // -------------------------------------------------------------------- //
+  async findOneBlog(id: number) {
+    try {
+      const blog = await this.prisma.post.findUnique({
+        where: { id, category: 'BLOG' },
+        include: {
+          author: {
+            select: { firstname: true, lastname: true, profileImage: true },
+          },
+        },
+      });
+      if (!blog) throw new NotFoundException('Artigo não encontrado');
+      return blog;
+    } catch (err) {
+      throw err;
+    }
+  }
 
   // -------------------------------------------------------------------- //
+  async findOneArtigo(id: number) {
+    try {
+      const artigo = await this.prisma.post.findUnique({
+        where: { id, category: 'ARTIGO' },
+        include: {
+          author: {
+            select: { firstname: true, lastname: true, profileImage: true },
+          },
+        },
+      });
+      if (!artigo) throw new NotFoundException('Artigo não encontrado');
+      return artigo;
+    } catch (err) {
+      throw err;
+    }
+  }
 }

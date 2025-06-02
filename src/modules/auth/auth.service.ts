@@ -35,7 +35,7 @@ export class AuthService {
   constructor(
     private readonly prisma: DatabaseService,
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
 private tokenExpires = process.env.TOKEN_EXP
   // -------------------------------------------------------- //
@@ -45,7 +45,6 @@ private tokenExpires = process.env.TOKEN_EXP
   }
 
   private async signToken(payload: { sub: number; role: string }, expIn = this.tokenExpires) {
-    console.log(this.tokenExpires)
     return await this.jwtService.signAsync(payload, { secret: 'abcde', expiresIn: expIn })
   }
 
@@ -168,7 +167,6 @@ private tokenExpires = process.env.TOKEN_EXP
 
       return { message: 'Access token refreshed successfully' };
     } catch (err) {
-      console.log(err)
       throw err instanceof HttpException
         ? err
         : new ForbiddenException('Unable to refresh token');

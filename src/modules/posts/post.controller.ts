@@ -53,6 +53,22 @@ export class PostController {
     return this.postService.findAllArtigos();
   }
 
+  // -------------------> Retorna um artigo específico
+
+  @Get('artigos/:id')
+  @Access('public')
+  findOneArtigo(@Param('id') id: string) {
+    return this.postService.findOneArtigo(+id);
+  }
+
+  // -------------------> Retorna um blog específico
+
+  @Get('blogs/:id')
+  @Access('public')
+  findOneBlog(@Param('id') id: string) {
+    return this.postService.findOneBlog(+id);
+  }
+
   // -------------------> Retorna um post específico
 
   @Get(':id')

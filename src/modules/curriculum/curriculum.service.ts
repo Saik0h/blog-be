@@ -1,36 +1,54 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from 'generated/prisma';
 import { DatabaseService } from 'src/database/database.service';
+import { ContactInfoService } from '../contact-info/contact-info.service';
+import { ExperienceInfoService } from '../experience-info/experience-info.service';
+import { TeachingInfoService } from '../teaching-info/teaching-info.service';
+import { AcademicInfoService } from '../academic-info/academic-info.service';
 
 @Injectable()
 export class CurriculumService {
-  constructor(private readonly prisma: DatabaseService) {}
+  constructor(
+    private readonly prisma: DatabaseService,
+    private readonly contactSubservice: ContactInfoService,
+    private readonly experienceSubservice: ExperienceInfoService,
+    private readonly teachingSubservice: TeachingInfoService,
+    private readonly academicSubservice: AcademicInfoService,
+  ) {}
 
-  async create(data: Prisma.CurriculumCreateInput) {
+  async createCurriculum(data: Prisma.CurriculumCreateInput) {
     try {
-      return this.prisma.curriculum.create({ data });
+      return await this.prisma.curriculum.create({ data });
     } catch (err) {
       throw err;
     }
   }
 
-  async find() {
+  async findCurriculum() {
     try {
-      const curriculum = {
-        personal_data: await this.prisma.curriculum.findUnique({ where: { singleton: true } }),
-        contact_field: await this.getContactField(),
-        teaching_field: await this.getTeachingField(),
-        academic_field: await this.getAcademicField(),
+      const raw = await this.prisma.curriculum.findUnique({
+        where: { singleton: true },
+      });
+
+      return {
+        firstname: raw!.firstname,
+        lastname: raw!.lastname,
+        profileImage: raw!.profileImage,
+        jobTitle: raw!.jobTitle,
+        credential: raw!.credential,
+        contact_field: await this.contactSubservice.findField(),
+        teaching_field: await this.teachingSubservice.findField(),
+        academic_field: await this.academicSubservice.findField(),
+        experiences_field: await this.experienceSubservice.findField(),
       };
-      return curriculum
     } catch (err) {
       throw err;
     }
   }
 
-  update(data: Prisma.CurriculumUpdateInput) {
+  async updatePersonalData(data: Prisma.CurriculumUpdateInput) {
     try {
-      return this.prisma.curriculum.update({
+      return await this.prisma.curriculum.update({
         where: { singleton: true },
         data,
       });
@@ -39,26 +57,13 @@ export class CurriculumService {
     }
   }
 
-  remove(confirmation: string) {
+  async removeCurriculum() {
     try {
-      if (confirmation === 'confirma') {
-        return this.prisma.curriculum.delete({ where: { singleton: true } });
-      }
+      return await this.prisma.curriculum.delete({
+        where: { singleton: true },
+      });
     } catch (err) {
-      console.error(err);
       throw err;
     }
-  }
-
-  private getContactField() {
-    return this.prisma.contactInfo.findUnique({ where: { id: 1 } });
-  }
-
-  private getAcademicField() {
-    return this.prisma.academicInfo.findUnique({ where: { id: 1 } });
-  }
-
-  private getTeachingField() {
-    return this.prisma.teachingInfo.findUnique({ where: { id: 1 } });
   }
 }

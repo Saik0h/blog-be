@@ -41,21 +41,31 @@ model Post {
 }
 
 model Curriculum {
-  id             Int           @id @default(autoincrement())
-  firstName      String
-  lastName       String
-  credential     String
-  profileImage   String
-  contactInfo    ContactInfo?  @relation(fields: [contactInfoId], references: [id])
-  contactInfoId  Int?          @unique
-  academicInfo   AcademicInfo? @relation(fields: [academicInfoId], references: [id])
-  academicInfoId Int?          @unique
-  teachingInfo   TeachingInfo? @relation(fields: [teachingInfoId], references: [id])
-  teachingInfoId Int?          @unique
-  extras         Json
-  singleton      Boolean       @unique @default(true)
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  id               Int             @id @default(autoincrement())
+  firstname        String
+  lastname         String
+  jobTitle         String
+  credential       String
+  profileImage     String
+  contactInfo      ContactInfo?    @relation(fields: [contactInfoId], references: [id])
+  contactInfoId    Int?            @unique
+  academicInfo     AcademicInfo?   @relation(fields: [academicInfoId], references: [id])
+  academicInfoId   Int?            @unique
+  teachingInfo     TeachingInfo?   @relation(fields: [teachingInfoId], references: [id])
+  teachingInfoId   Int?            @unique
+  experienceInfo   ExperienceInfo? @relation(fields: [experienceInfoId], references: [id])
+  experienceInfoId Int?            @unique
+  singleton        Boolean         @unique @default(true)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+}
+
+model ContactInfo {
+  id         Int               @id @default(autoincrement())
+  title      String
+  items      ContactInfoItem[]
+  singleton  Boolean           @unique @default(true)
+  curriculum Curriculum?
 }
 
 model ContactInfoItem {
@@ -67,25 +77,49 @@ model ContactInfoItem {
   contactInfoId Int
 }
 
-model ContactInfo {
-  id         Int               @id @default(autoincrement())
+model AcademicInfo {
+  id         Int                @id @default(autoincrement())
   title      String
-  items      ContactInfoItem[]
+  items      AcademicInfoItem[]
+  singleton  Boolean            @unique @default(true)
   curriculum Curriculum?
 }
 
-model AcademicInfo {
-  id         Int         @id @default(autoincrement())
-  title      String
-  items      String[] // array de strings com cursos/formações
-  curriculum Curriculum?
+model AcademicInfoItem {
+  id             Int          @id @default(autoincrement())
+  description    String
+  academicInfo   AcademicInfo @relation(fields: [academicInfoId], references: [id])
+  academicInfoId Int
 }
 
 model TeachingInfo {
-  id         Int         @id @default(autoincrement())
+  id         Int                @id @default(autoincrement())
   title      String
-  items      String[] // array de strings com disciplinas/cursos
+  items      TeachingInfoItem[]
+  singleton  Boolean            @unique @default(true)
   curriculum Curriculum?
+}
+
+model TeachingInfoItem {
+  id             Int          @id @default(autoincrement())
+  description    String
+  teachingInfo   TeachingInfo @relation(fields: [teachingInfoId], references: [id])
+  teachingInfoId Int
+}
+
+model ExperienceInfo {
+  id         Int                  @id @default(autoincrement())
+  title      String
+  items      ExperienceInfoItem[]
+  singleton  Boolean              @unique @default(true)
+  curriculum Curriculum?
+}
+
+model ExperienceInfoItem {
+  id               Int            @id @default(autoincrement())
+  description      String
+  experienceInfo   ExperienceInfo @relation(fields: [experienceInfoId], references: [id])
+  experienceInfoId Int
 }
 
 model InboxMessage {

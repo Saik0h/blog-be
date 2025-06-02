@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CurriculumService } from './curriculum.service';
 
 import { Prisma } from 'generated/prisma';
@@ -6,29 +14,29 @@ import { Access } from 'src/common/decorators/access-level-decorator';
 
 @Controller('api/curriculum')
 export class CurriculumController {
-  constructor(private readonly curriculumService: CurriculumService) { }
+  constructor(private readonly curriculumService: CurriculumService) {}
 
   @Post()
   @Access('restrict')
   create(@Body() body: Prisma.CurriculumCreateInput) {
-    return this.curriculumService.create(body);
+    return this.curriculumService.createCurriculum(body);
   }
 
   @Get()
   @Access('public')
   findAll() {
-    return this.curriculumService.find();
+    return this.curriculumService.findCurriculum();
   }
 
   @Patch()
   @Access('restrict')
   update(@Body() data: Prisma.CurriculumUpdateInput) {
-    return this.curriculumService.update(data);
+    return this.curriculumService.updatePersonalData(data);
   }
 
-  @Delete(':confirm')
+  @Delete('delete')
   @Access('restrict')
-  remove(@Param('confirm') confirmation: string) {
-    return this.curriculumService.remove(confirmation);
+  remove() {
+    return this.curriculumService.removeCurriculum();
   }
 }

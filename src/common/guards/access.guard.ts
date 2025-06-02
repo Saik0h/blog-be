@@ -18,7 +18,6 @@ export class AccessGuard implements CanActivate {
     ]);
 
     if (accessLevel === 'public') return true
-    console.log(accessLevel)
     const request = context.switchToHttp().getRequest();
     const token = request.cookies?.['refreshToken'];
 

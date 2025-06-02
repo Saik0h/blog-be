@@ -131,12 +131,16 @@ Cookie:
 Content-Type: application/json
 
 {
-  "":""
+  "firstname":"Lais",
+  "lastname":"Donida",
+  "profileImage":"",
+  "credential":"1234",
+  "jobTitle":"Fonoaudióloga"
 }
   
 
 ### Create Curriculum
-DELETE http://localhost:3000/api/curriculum
+DELETE http://localhost:3000/api/curriculum/delete
 Cookie: 
 
 ###
@@ -150,3 +154,12 @@ Content-Type: application/json
 {
 
 }
+
+###
+POST http://localhost:3000/api/curriculum/experience/item
+Content-Type: application/json
+
+{
+"description":"fiz uns trampo aqui e ali"
+}
+

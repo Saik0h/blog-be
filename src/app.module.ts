@@ -10,9 +10,11 @@ import { CurriculumModule } from './modules/curriculum/curriculum.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AccessGuard } from './common/guards/access.guard';
 import { JwtModule, JwtService } from '@nestjs/jwt';
+import { TeachingInfoItemModule } from './modules/teaching-info/teaching-info.module';
+import { ExperienceInfoModule } from './modules/experience-info/experience-info.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule, PostModule, AuthModule, CurriculumModule, InboxModule, JwtModule.register({ global:true, secret: 'abcde', signOptions: { expiresIn: '1h' } })],
+  imports: [DatabaseModule, UserModule, PostModule, AuthModule, CurriculumModule, InboxModule, JwtModule.register({ global:true, secret: 'abcde', signOptions: { expiresIn: '1h' } }), TeachingInfoItemModule, ExperienceInfoModule],
   controllers: [AppController],
   providers: [AppService, JwtService, { provide: APP_GUARD, useClass: AccessGuard }],
 })

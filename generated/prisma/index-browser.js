@@ -145,17 +145,24 @@ exports.Prisma.PostScalarFieldEnum = {
 
 exports.Prisma.CurriculumScalarFieldEnum = {
   id: 'id',
-  firstName: 'firstName',
-  lastName: 'lastName',
+  firstname: 'firstname',
+  lastname: 'lastname',
+  jobTitle: 'jobTitle',
   credential: 'credential',
   profileImage: 'profileImage',
   contactInfoId: 'contactInfoId',
   academicInfoId: 'academicInfoId',
   teachingInfoId: 'teachingInfoId',
-  extras: 'extras',
+  experienceInfoId: 'experienceInfoId',
   singleton: 'singleton',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ContactInfoScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  singleton: 'singleton'
 };
 
 exports.Prisma.ContactInfoItemScalarFieldEnum = {
@@ -166,21 +173,40 @@ exports.Prisma.ContactInfoItemScalarFieldEnum = {
   contactInfoId: 'contactInfoId'
 };
 
-exports.Prisma.ContactInfoScalarFieldEnum = {
-  id: 'id',
-  title: 'title'
-};
-
 exports.Prisma.AcademicInfoScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  items: 'items'
+  singleton: 'singleton'
+};
+
+exports.Prisma.AcademicInfoItemScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  academicInfoId: 'academicInfoId'
 };
 
 exports.Prisma.TeachingInfoScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  items: 'items'
+  singleton: 'singleton'
+};
+
+exports.Prisma.TeachingInfoItemScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  teachingInfoId: 'teachingInfoId'
+};
+
+exports.Prisma.ExperienceInfoScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  singleton: 'singleton'
+};
+
+exports.Prisma.ExperienceInfoItemScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  experienceInfoId: 'experienceInfoId'
 };
 
 exports.Prisma.InboxMessageScalarFieldEnum = {
@@ -198,10 +224,6 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.JsonNullValueInput = {
-  JsonNull: Prisma.JsonNull
-};
-
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -210,12 +232,6 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
 };
 exports.Role = exports.$Enums.Role = {
   MEMBRO: 'MEMBRO',
@@ -232,10 +248,14 @@ exports.Prisma.ModelName = {
   User: 'User',
   Post: 'Post',
   Curriculum: 'Curriculum',
-  ContactInfoItem: 'ContactInfoItem',
   ContactInfo: 'ContactInfo',
+  ContactInfoItem: 'ContactInfoItem',
   AcademicInfo: 'AcademicInfo',
+  AcademicInfoItem: 'AcademicInfoItem',
   TeachingInfo: 'TeachingInfo',
+  TeachingInfoItem: 'TeachingInfoItem',
+  ExperienceInfo: 'ExperienceInfo',
+  ExperienceInfoItem: 'ExperienceInfoItem',
   InboxMessage: 'InboxMessage'
 };
 
