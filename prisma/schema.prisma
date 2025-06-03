@@ -40,6 +40,12 @@ model Post {
   updatedAt  DateTime     @updatedAt
 }
 
+model FAQ {
+  id       Int    @id @default(autoincrement())
+  question String
+  answer   String
+}
+
 model Curriculum {
   id               Int             @id @default(autoincrement())
   firstname        String
@@ -118,7 +124,7 @@ model ExperienceInfo {
 model ExperienceInfoItem {
   id               Int            @id @default(autoincrement())
   description      String
-  experienceInfo     ExperienceInfo @relation(fields: [experienceInfoId], references: [id])
+  experienceInfo   ExperienceInfo @relation(fields: [experienceInfoId], references: [id])
   experienceInfoId Int
 }
 

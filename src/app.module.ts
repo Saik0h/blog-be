@@ -14,9 +14,10 @@ import { TeachingInfoItemModule } from './modules/teaching-info/teaching-info.mo
 import { ExperienceInfoModule } from './modules/experience-info/experience-info.module';
 import { ContactInfoModule } from './modules/contact-info/contact-info.module';
 import { AcademicInfoModule } from './modules/academic-info/academic-info.module';
+import { FaqModule } from './modules/faq/faq.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule, PostModule, AuthModule, CurriculumModule, InboxModule, JwtModule.register({ global:true, secret: 'abcde', signOptions: { expiresIn: '1h' } }), TeachingInfoItemModule, ExperienceInfoModule, ContactInfoModule, AcademicInfoModule],
+  imports: [DatabaseModule, UserModule, PostModule, AuthModule, CurriculumModule, InboxModule, JwtModule.register({ global:true, secret: 'abcde', signOptions: { expiresIn: '1h' } }), TeachingInfoItemModule, ExperienceInfoModule, ContactInfoModule, AcademicInfoModule, FaqModule],
   controllers: [AppController],
   providers: [AppService, JwtService, { provide: APP_GUARD, useClass: AccessGuard }],
 })

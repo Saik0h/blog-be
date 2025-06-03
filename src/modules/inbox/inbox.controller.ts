@@ -12,7 +12,7 @@ import { InboxService } from './inbox.service';
 import { Prisma } from 'generated/prisma';
 import { Access } from 'src/common/decorators/access-level-decorator';
 
-@Controller('api/inbox')
+@Controller('inbox')
 export class InboxController {
   constructor(private readonly inboxService: InboxService) {}
 

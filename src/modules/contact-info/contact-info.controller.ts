@@ -4,7 +4,7 @@ import { Prisma } from 'generated/prisma';
 import { Access } from 'src/common/decorators/access-level-decorator';
 
 @Access('public')
-@Controller('api/curriculum/contact')
+@Controller('curriculum/contact')
 export class ContactInfoController {
   constructor(private readonly contactInfoService: ContactInfoService) {}
 

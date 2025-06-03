@@ -13,7 +13,7 @@ import { Request, Response } from 'express';
 import { IDecodedJWT } from 'src/common/utils/decoded';
 import { Access } from 'src/common/decorators/access-level-decorator';
 
-@Controller('api/auth')
+@Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
@@ -31,7 +31,7 @@ export class AuthController {
 
   @Post('login')
   @Access('public')
-  async login(
+  login(
     @Body() loginDto: { username: string; password: string },
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -40,10 +40,18 @@ export class AuthController {
 
   // -------------------> Rota responsável por buscar usuário
 
-  @Get('status')
+  @Get('user')
   @Access('authorizedOnly')
-  async status(@Req() req: Request) {
+  user(@Req() req: Request) {
     return this.authService.getUser(req);
+  }
+
+    // -------------------> Rota responsável por buscar usuário
+
+  @Get('status')
+  @Access('public')
+  status(@Req() req: Request) {
+    return this.authService.isThereAUserLoggedIn(req);
   }
 
   // -------------------> Rota para verificar e e atualizar jwtToken

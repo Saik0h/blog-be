@@ -143,6 +143,12 @@ exports.Prisma.PostScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.FAQScalarFieldEnum = {
+  id: 'id',
+  question: 'question',
+  answer: 'answer'
+};
+
 exports.Prisma.CurriculumScalarFieldEnum = {
   id: 'id',
   firstname: 'firstname',
@@ -247,6 +253,7 @@ exports.PostCategory = exports.$Enums.PostCategory = {
 exports.Prisma.ModelName = {
   User: 'User',
   Post: 'Post',
+  FAQ: 'FAQ',
   Curriculum: 'Curriculum',
   ContactInfo: 'ContactInfo',
   ContactInfoItem: 'ContactInfoItem',

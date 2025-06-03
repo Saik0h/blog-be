@@ -35,9 +35,9 @@ export class AuthService {
   constructor(
     private readonly prisma: DatabaseService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
-private tokenExpires = process.env.TOKEN_EXP
+  private tokenExpires = process.env.TOKEN_EXP
   // -------------------------------------------------------- //
   private extractPayload(token: string): IDecodedJWT {
     const t = this.jwtService.verify(token, { secret: 'abcde' }) as IDecodedJWT;
@@ -201,6 +201,16 @@ private tokenExpires = process.env.TOKEN_EXP
     }
   }
 
+
+  async isThereAUserLoggedIn(req: Request) {
+    const user = req.user as IDecodedJWT;
+    try {
+      if (!user) return false
+      return true;
+    } catch (err) {
+      throw err;
+    }
+  }
   // -------------------------------------------------- //
 
   private async generateTokens(userId: number, role: string): Promise<ITokens> {

@@ -17,7 +17,7 @@ import { Request } from 'express';
 import { JwtAuthGuard } from 'src/common/guards/jwt.guard';
 import { Access } from 'src/common/decorators/access-level-decorator';
 
-@Controller('api/posts')
+@Controller('posts')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 

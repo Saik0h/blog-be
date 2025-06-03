@@ -14,7 +14,7 @@ import { Request } from 'express';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { Access } from 'src/common/decorators/access-level-decorator';
 
-@Controller('api/users')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) { }
 

@@ -12,7 +12,7 @@ import { TeachingInfoService } from './teaching-info.service';
 import { Access } from 'src/common/decorators/access-level-decorator';
 
 @Access('public')
-@Controller('api/curriculum/teaching')
+@Controller('curriculum/teaching')
 export class TeachingInfoController {
   constructor(private readonly teachingInfoService: TeachingInfoService) {}
   

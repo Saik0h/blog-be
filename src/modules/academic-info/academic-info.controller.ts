@@ -12,7 +12,7 @@ import { Prisma } from 'generated/prisma';
 import { Access } from 'src/common/decorators/access-level-decorator';
 
 @Access('public')
-@Controller('api/curriculum/academic')
+@Controller('curriculum/academic')
 export class AcademicInfoController {
   constructor(private readonly academicInfoService: AcademicInfoService) {}
 
