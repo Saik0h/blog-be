@@ -12,7 +12,7 @@ import { Prisma } from 'generated/prisma';
 import { DatabaseService } from 'src/database/database.service';
 import { comparePassword, encodePassword } from 'src/common/utils/bcrypt';
 import { Request, Response } from 'express';
-import { ITokens } from 'src/common/utils/tokens';
+import { Tokens } from 'src/common/utils/tokens';
 import { IDecodedJWT } from 'src/common/utils/decoded';
 import {
   clearTokensFromCookies,
@@ -21,15 +21,6 @@ import {
 } from './utils/cookie-service';
 // IMPORTS ACIMA-----------------------^
 
-// const decoded_token = verify(token, process.env.SECRET_JWT, (error, decoded)=>{
-//             if(error?.name === "TokenExpiredError"){
-//                 throw new UnauthorizedException("Token expired.");
-//             };
-//             return { 
-//                 user:decoded as User_Request,
-//             };
-//         });
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -37,15 +28,17 @@ export class AuthService {
     private jwtService: JwtService,
   ) { }
 
-  private tokenExpires = process.env.TOKEN_EXP
+  private tokenExpiresIn = process.env.TOKEN_EXP
+  private refreshTokenExpiresIn = process.env.REFRESH_TOKEN_EXP
+  
   // -------------------------------------------------------- //
-  private extractPayload(token: string): IDecodedJWT {
-    const t = this.jwtService.verify(token, { secret: 'abcde' }) as IDecodedJWT;
+  public async extractPayload(token: string): Promise<IDecodedJWT> {
+    const t = await this.jwtService.verifyAsync(token, { secret: process.env.JWT_SECRET }) as IDecodedJWT;
     return t
   }
 
-  private async signToken(payload: { sub: number; role: string }, expIn = this.tokenExpires) {
-    return await this.jwtService.signAsync(payload, { secret: 'abcde', expiresIn: expIn })
+  private async signToken(payload: { sub: number; role: string }, expIn = this.tokenExpiresIn) {
+    return await this.jwtService.signAsync(payload, { secret: process.env.JWT_SECRET, expiresIn: expIn })
   }
 
   // -------------------------------------------------------- //
@@ -91,7 +84,7 @@ export class AuthService {
       const isPasswordValid = comparePassword(pass, findUser.password);
       if (!isPasswordValid) throw new ForbiddenException('Incorrect Password');
 
-      const tokens: ITokens = await this.generateTokens(
+      const tokens: Tokens = await this.generateTokens(
         findUser.id,
         findUser.role,
       );
@@ -122,19 +115,19 @@ export class AuthService {
 
   // -------------------------------------------------- //
 
-  private async verifyAccessToken(req: Request, res: Response) {
-    const accessToken = getTokensFromCookies(req).accessToken;
+  public async verifyAccessToken(req: Request) {
+    const access_token = getTokensFromCookies(req).access_token;
 
-    if (!accessToken) {
-      throw new ForbiddenException('Access token not found');
+    if (!access_token) {
+      throw new UnauthorizedException('Authentication required');
     }
 
     let decoded: IDecodedJWT;
 
     try {
-      decoded = this.extractPayload(accessToken) as IDecodedJWT;
+      decoded = await this.extractPayload(access_token) as IDecodedJWT;
     } catch (err) {
-      throw new ForbiddenException('Invalid access token');
+      throw new UnauthorizedException('Invalid Token');
     }
 
     return { message: 'Token is valid' };
@@ -144,10 +137,10 @@ export class AuthService {
 
   private async refreshExpiredAccessToken(req: Request, res: Response) {
     try {
-      const refreshToken = getTokensFromCookies(req).refreshToken;
-      if (refreshToken === null)
-        throw new ForbiddenException('User must be logged in');
-      const decoded: IDecodedJWT = this.extractPayload(refreshToken);
+      const refresh_token = getTokensFromCookies(req).refresh_token;
+      if (refresh_token === null)
+        throw new UnauthorizedException('User must be authenticated to access this resource');
+      const decoded: IDecodedJWT = await this.extractPayload(refresh_token);
 
       const user = await this.prisma.user.findUnique({
         where: { id: decoded.sub },
@@ -157,26 +150,26 @@ export class AuthService {
         throw new NotFoundException('User not found');
       }
 
-      if (user.refreshToken !== refreshToken) {
-        throw new ForbiddenException('Invalid token');
+      if (user.refreshToken !== refresh_token) {
+        throw new UnauthorizedException('Invalid token');
       }
 
-      const tokens: ITokens = await this.generateTokens(user.id, user.role);
+      const tokens: Tokens = await this.generateTokens(user.id, user.role);
 
       setTokensInCookies(res, tokens);
 
-      return { message: 'Access token refreshed successfully' };
+      return { message: 'Tokens Refreshed!' };
     } catch (err) {
       throw err instanceof HttpException
         ? err
-        : new ForbiddenException('Unable to refresh token');
+        : new ForbiddenException('Unable To Refresh Tokens');
     }
   }
   // -------------------------------------------------- //
 
   async refreshTokens(req: Request, res: Response) {
     try {
-      return await this.verifyAccessToken(req, res);
+      return await this.verifyAccessToken(req);
     } catch (error) {
       try {
         return await this.refreshExpiredAccessToken(req, res);
@@ -186,8 +179,9 @@ export class AuthService {
     }
   }
 
-  async getUser(req: Request) {
-    const user = req.user as IDecodedJWT;
+  async getUser(request: Request) {
+    const user = request.user as IDecodedJWT;
+    console.log(user)
     try {
       if (!user) throw new UnauthorizedException('User not found');
       const u = await this.prisma.user.findUnique({
@@ -213,24 +207,24 @@ export class AuthService {
   }
   // -------------------------------------------------- //
 
-  private async generateTokens(userId: number, role: string): Promise<ITokens> {
+  private async generateTokens(userId: number, role: string): Promise<Tokens> {
     const payload: { sub: number; role: string } = {
       sub: userId,
       role,
     };
 
-    const accessToken = await this.signToken(payload);
-    const refreshToken = await this.signToken(payload, '7d');
+    const access_token = await this.signToken(payload);
+    const refresh_token = await this.signToken(payload, this.refreshTokenExpiresIn);
 
-    await this.updateRefreshTokenInDb(userId, refreshToken);
-    return { accessToken, refreshToken };
+    await this.updateRefreshTokenInDb(userId, refresh_token);
+    return { access_token, refresh_token };
   }
   // -------------------------------------------------- //
 
-  private async updateRefreshTokenInDb(userId: number, refreshToken: string) {
+  private async updateRefreshTokenInDb(userId: number, refresh_token: string) {
     await this.prisma.user.update({
       where: { id: userId },
-      data: { refreshToken },
+      data: { refreshToken: refresh_token },
     });
   }
 }

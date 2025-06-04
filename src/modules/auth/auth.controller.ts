@@ -11,15 +11,16 @@ import { Prisma } from 'generated/prisma';
 import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
 import { IDecodedJWT } from 'src/common/utils/decoded';
-import { Access } from 'src/common/decorators/access-level-decorator';
+import { AllowPublicAccess } from 'src/common/decorators/allow-public-access.decorator';
+import { RestrictAccess } from 'src/common/decorators/restrict-access.decorator';
+import { AuthenticatedAccess } from 'src/common/decorators/authenticated-access.decorator';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   // -------------------> Rota de Registro de usuário
   @Post('register')
-  @Access('restrict')
   register(
     @Body() registerPayload: Prisma.UserCreateInput,
     @Res({ passthrough: true }) res: Response,
@@ -28,9 +29,8 @@ export class AuthController {
   }
 
   // -------------------> Rota de login
-
+  @AllowPublicAccess()
   @Post('login')
-  @Access('public')
   login(
     @Body() loginDto: { username: string; password: string },
     @Res({ passthrough: true }) res: Response,
@@ -40,16 +40,15 @@ export class AuthController {
 
   // -------------------> Rota responsável por buscar usuário
 
+  @AuthenticatedAccess()
   @Get('user')
-  @Access('authorizedOnly')
   user(@Req() req: Request) {
     return this.authService.getUser(req);
   }
 
-    // -------------------> Rota responsável por buscar usuário
+  // -------------------> Rota responsável por buscar usuário
 
   @Get('status')
-  @Access('public')
   status(@Req() req: Request) {
     return this.authService.isThereAUserLoggedIn(req);
   }
@@ -57,7 +56,7 @@ export class AuthController {
   // -------------------> Rota para verificar e e atualizar jwtToken
 
   @Post('refresh')
-  @Access('public')
+  @AllowPublicAccess()
   refresh(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
@@ -66,9 +65,7 @@ export class AuthController {
   }
 
   // -------------------> Rota de logout
-
   @Post('logout')
-  @Access('authorizedOnly')
   logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const user = req.user as IDecodedJWT;
     return this.authService.logoutUser(user, res);

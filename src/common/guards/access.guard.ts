@@ -1,43 +1,37 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { JwtService } from '@nestjs/jwt';
-import { ACCESS_KEY } from '../decorators/access-level-decorator';
-import { IDecodedJWT } from '../utils/decoded';
+import { Request } from 'express';
+import { AuthService } from 'src/modules/auth/auth.service';
+import { getTokensFromCookies } from 'src/modules/auth/utils/cookie-service';
 
 @Injectable()
 export class AccessGuard implements CanActivate {
-  constructor(
-    private reflector: Reflector,
-    private jwtService: JwtService,
-  ) { }
+  constructor(private readonly authService: AuthService, private readonly reflector: Reflector) { }
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    let request: Request = context.switchToHttp().getRequest();
+    const access = this.reflector.get<string>('access', context.getHandler())
+    
+    if (access === 'allow-public-access') return true
 
-  canActivate(context: ExecutionContext): boolean {
-    const accessLevel = this.reflector.getAllAndOverride<string>(ACCESS_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
 
-    if (accessLevel === 'public') return true
-    const request = context.switchToHttp().getRequest();
-    const token = request.cookies?.['refreshToken'];
-
-    let user: IDecodedJWT | null = null;
-
-    if (token) {
-      user = this.jwtService.verify(token, {secret: 'abcde'}) as IDecodedJWT;
-      request.user = user;
+    if (access === 'authenticated-access' && getTokensFromCookies(request).access_token) {
+      const isAuthenticated = await this.authService.verifyAccessToken(request)
+      console.log('passou daqui')
+      return !!isAuthenticated
     }
 
-    switch (accessLevel) {
-
-      case 'authorizedOnly':
-        return !!user;
-
-      case 'restrict':
-        return !!user && user.role === 'CHEFE';
-
-      default:
-        return false;
+    if (!access) {
+      const isAuthenticated = await this.authService.verifyAccessToken(request)
+      if (!!isAuthenticated) {
+        const user = await this.authService.extractPayload(getTokensFromCookies(request).access_token)
+        if (user.role === 'CHEFE') return true
+      }
     }
+
+
+    return false
+
   }
+
+
 }

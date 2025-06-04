@@ -9,9 +9,7 @@ import {
 } from '@nestjs/common';
 import { Prisma } from 'generated/prisma';
 import { TeachingInfoService } from './teaching-info.service';
-import { Access } from 'src/common/decorators/access-level-decorator';
 
-@Access('public')
 @Controller('curriculum/teaching')
 export class TeachingInfoController {
   constructor(private readonly teachingInfoService: TeachingInfoService) {}

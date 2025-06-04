@@ -1,28 +1,25 @@
 import { Request, Response } from 'express';
-import { ITokens } from 'src/common/utils/tokens';
+import { Tokens } from 'src/common/utils/tokens';
 
 export const getTokensFromCookies = (
   req: Request,
-): {
-  accessToken: string | null;
-  refreshToken: string | null;
-} => {
-  const refreshToken: string = req.cookies['refreshToken'];
-  const accessToken: string = req.cookies['accessToken'];
+): Tokens => {
+  const refresh_token: string = req.cookies['refresh_token'];
+  const access_token: string = req.cookies['access_token'];
   return {
-    accessToken,
-    refreshToken,
+    access_token,
+    refresh_token,
   };
 };
 
-export const setTokensInCookies = (res: Response, tokens: ITokens) => {
-  res.cookie('accessToken', tokens.accessToken, {
+export const setTokensInCookies = (res: Response, tokens: Tokens) => {
+  res.cookie('access_token', tokens.access_token, {
     httpOnly: true,
     secure: false,
     sameSite: 'lax',
     maxAge: process.env.COOKIE_EXP as any as number
   });
-  res.cookie('refreshToken', tokens.refreshToken, {
+  res.cookie('refresh_token', tokens.refresh_token, {
     httpOnly: true,
     secure: false,
     sameSite: 'lax',
@@ -31,13 +28,13 @@ export const setTokensInCookies = (res: Response, tokens: ITokens) => {
 };
 
 export const clearTokensFromCookies = (res: Response) => {
-  res.clearCookie('accessToken', {
+  res.clearCookie('access_token', {
     httpOnly: true,
     secure: false,
     sameSite: 'strict',
   });
 
-  res.clearCookie('refreshToken', {
+  res.clearCookie('refresh_token', {
     httpOnly: true,
     secure: false,
     sameSite: 'strict',

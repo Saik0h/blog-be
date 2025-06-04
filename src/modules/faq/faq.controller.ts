@@ -1,9 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { FaqService } from './faq.service';
 import { Prisma } from 'generated/prisma';
-import { Access } from 'src/common/decorators/access-level-decorator';
 
-@Access('public')
 @Controller('faq')
 export class FaqController {
   constructor(private readonly faqService: FaqService) {}

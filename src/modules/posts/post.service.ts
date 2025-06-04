@@ -4,13 +4,12 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { Post, Prisma, User } from 'generated/prisma';
+import { Post } from 'generated/prisma';
 import { DatabaseService } from 'src/database/database.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Request } from 'express';
 import { IDecodedJWT } from 'src/common/utils/decoded';
-import { last } from 'rxjs';
 
 @Injectable()
 export class PostService {
