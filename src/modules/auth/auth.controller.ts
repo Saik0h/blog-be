@@ -11,9 +11,9 @@ import { Prisma } from 'generated/prisma';
 import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
 import { IDecodedJWT } from 'src/common/utils/decoded';
-import { AllowPublicAccess } from 'src/common/decorators/allow-public-access.decorator';
-import { RestrictAccess } from 'src/common/decorators/restrict-access.decorator';
+import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { AuthenticatedAccess } from 'src/common/decorators/authenticated-access.decorator';
+import { isPublic } from 'src/common/decorators/is-public.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -29,8 +29,8 @@ export class AuthController {
   }
 
   // -------------------> Rota de login
-  @AllowPublicAccess()
   @Post('login')
+  @isPublic()
   login(
     @Body() loginDto: { username: string; password: string },
     @Res({ passthrough: true }) res: Response,
@@ -40,8 +40,8 @@ export class AuthController {
 
   // -------------------> Rota responsável por buscar usuário
 
-  @AuthenticatedAccess()
   @Get('user')
+  @CurrentUser()
   user(@Req() req: Request) {
     return this.authService.getUser(req);
   }
@@ -49,6 +49,7 @@ export class AuthController {
   // -------------------> Rota responsável por buscar usuário
 
   @Get('status')
+  @CurrentUser()
   status(@Req() req: Request) {
     return this.authService.isThereAUserLoggedIn(req);
   }
@@ -56,7 +57,7 @@ export class AuthController {
   // -------------------> Rota para verificar e e atualizar jwtToken
 
   @Post('refresh')
-  @AllowPublicAccess()
+  @isPublic()
   refresh(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
@@ -66,6 +67,7 @@ export class AuthController {
 
   // -------------------> Rota de logout
   @Post('logout')
+  @AuthenticatedAccess()
   logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const user = req.user as IDecodedJWT;
     return this.authService.logoutUser(user, res);

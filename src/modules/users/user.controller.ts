@@ -11,8 +11,8 @@ import { UserService } from './user.service';
 import { Prisma } from 'generated/prisma';
 import { Request } from 'express';
 import { ChangePasswordDto } from './dto/change-password.dto';
-import { AllowPublicAccess } from 'src/common/decorators/allow-public-access.decorator';
-import { AuthenticatedAccess } from 'src/common/decorators/authenticated-access.decorator';
+import { isPublic } from 'src/common/decorators/is-public.decorator';
+import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 
 @Controller('users')
 export class UserController {
@@ -20,7 +20,7 @@ export class UserController {
 
   // -------------------> Retorna todos os usuários
   @Get()
-  @AllowPublicAccess()
+  @isPublic()
   findAll() {
     return this.userService.findAll();
   }
@@ -28,13 +28,14 @@ export class UserController {
   // -------------------> Retorna um único usuário
 
   @Get(':id')
+  @isPublic()
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }
   // -------------------> Retorna todos os posts de um usuário específico
 
   @Get(':id/posts')
-  @AuthenticatedAccess()
+  @isPublic()
   findByAuthor(@Param('id') id: string) {
     return this.userService.findAllByAuthor(+id);
   }
@@ -42,6 +43,7 @@ export class UserController {
   // -------------------> Atualiza um usuário
 
   @Patch(':id')
+  @CurrentUser()
   update(
     @Param('id') id: string,
     @Body() updateUserDto: Prisma.UserUpdateInput,
@@ -51,6 +53,7 @@ export class UserController {
   // -------------------> Atualiza senha de um usuário
 
   @Patch(':id/change-password')
+  @CurrentUser()
   updatePassword(
     @Body() passwordPayload: ChangePasswordDto,
     @Req() req: Request,

@@ -2,13 +2,13 @@
 ### Register
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
-Cookie: 
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJyb2xlIjoiTUVNQlJPIiwiaWF0IjoxNzQ5MTM0MDkwLCJleHAiOjE3NDkxMzQxNTB9.koYC2paCIZ4m2DeJOeqg8QHjER5TKaIAwTdIFB_a_D0; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:35:51 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJyb2xlIjoiTUVNQlJPIiwiaWF0IjoxNzQ5MTM0MDkwLCJleHAiOjE3NDkyMjA0OTB9.hrx7w7jc_dcYRTj7wGqSy-zlmP8RwSQKALY6Z7EVP0o; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:34:51 GMT; HttpOnly; SameSite=Lax
 
 {
-    "firstname":"",
-    "lastname":"",
-    "username": "",
-    "password": ""
+    "firstname":"joaozao",
+    "lastname":"do balie",
+    "username": "senha123",
+    "password": "senha123"
 }
 
 ### Login
@@ -22,20 +22,21 @@ Content-Type: application/json
 
 ### Get all posts
 GET  http://localhost:3000/api/users
-Cookie: 
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzI0MDksImV4cCI6MTc0OTEzMjQ2OX0.NmMBDp2QSCvdhLljgJpWeURq_mkqRItj4Ob-0lthsmA; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:07:49 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzI0MDksImV4cCI6MTc0OTIxODgwOX0.5I5lvWB_cM6fGX3Wax2Hm8prFouE5Qq1slOQiwHykhw; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:06:49 GMT; HttpOnly; SameSite=Lax
 
 ### Get all posts from a single user
 GET  http://localhost:3000/api/users/12/posts
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkwNTY1MjQsImV4cCI6MTc0OTA1NjU4NH0.-t-x1rVGx_aN1XDaE5SwQ2CaTthCPd6BVsZ_5yiOqvM; Max-Age=60; Path=/; Expires=Wed, 04 Jun 2025 17:03:04 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkwNTY1MjQsImV4cCI6MTc0OTY2MTMyNH0.tgnm2fHuGWmflk0_ydHeVN87y0viWE0ehn1GaObawJg; Max-Age=604800; Path=/; Expires=Wed, 11 Jun 2025 17:02:04 GMT; HttpOnly; SameSite=Lax
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzI0MDksImV4cCI6MTc0OTEzMjQ2OX0.NmMBDp2QSCvdhLljgJpWeURq_mkqRItj4Ob-0lthsmA; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:07:49 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzI0MDksImV4cCI6MTc0OTIxODgwOX0.5I5lvWB_cM6fGX3Wax2Hm8prFouE5Qq1slOQiwHykhw; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:06:49 GMT; HttpOnly; SameSite=Lax
 
 ### Refresh Tokens
-POST http://localhost:3000/api/auth/refresh
-Cookie: 
+GET  http://localhost:3000/api/auth/status
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzQyODgsImV4cCI6MTc0OTEzNDM0OH0.eQXyKyGbiWa9Hd8v4tG1o_0zDmcvuIrWuOTJa4KCi9I; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:39:08 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzQyODgsImV4cCI6MTc0OTIyMDY4OH0.MWD3dnpJLaPGE8rMJLNaKiw_XT4ZxPvIuND4gZ8Ol0Q; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:38:08 GMT; HttpOnly; SameSite=Lax
 
 ### Get user from token
 GET http://localhost:3000/api/auth/user
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkwNzE0ODgsImV4cCI6MTc0OTA3MTU0OH0.KcwStBBRPQy8RbpcCY9DJxEELrhphDlN1ejUJRhfJMg; Max-Age=60; Path=/; Expires=Wed, 04 Jun 2025 21:12:28 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkwNzE0ODgsImV4cCI6MTc0OTE1Nzg4OH0.5DytMyZgkkg9Dm2old9jkcRGj45H9dQ6qBfiYW03v4U; Max-Age=604800; Path=/; Expires=Wed, 11 Jun 2025 21:11:28 GMT; HttpOnly; SameSite=Lax
-### Logout
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzQxOTAsImV4cCI6MTc0OTEzNDI1MH0.B2uwdom84rH5D01ODbSd176pz-GYwAMt7amTxe_4uVY; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:37:30 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzQxOTAsImV4cCI6MTc0OTIyMDU5MH0.UO82fRMmIGLfiQCH7LeUOZ0a_35YUSJ_NdKmNWToV9g; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:36:30 GMT; HttpOnly; SameSite=Lax
+
+
 POST http://localhost:3000/api/auth/logout
 Cookie: 
 
