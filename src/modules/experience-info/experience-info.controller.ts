@@ -9,10 +9,12 @@ import {
 } from '@nestjs/common';
 import { ExperienceInfoService } from './experience-info.service';
 import { Prisma } from 'generated/prisma';
+import { isPublic } from 'src/common/decorators/is-public.decorator';
+
 
 @Controller('curriculum/experience')
 export class ExperienceInfoController {
-  constructor(private readonly experienceInfoService: ExperienceInfoService) {}
+  constructor(private readonly experienceInfoService: ExperienceInfoService) { }
 
   @Post()
   create(@Body() createExperienceInfoDto: Prisma.ExperienceInfoCreateInput) {
@@ -20,8 +22,9 @@ export class ExperienceInfoController {
       createExperienceInfoDto,
     );
   }
-
+  
   @Get()
+  @isPublic()
   findField() {
     return this.experienceInfoService.findField();
   }

@@ -9,7 +9,7 @@ import { DatabaseService } from 'src/database/database.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Request } from 'express';
-import { IDecodedJWT } from 'src/common/utils/decoded';
+import { DecodedJWT } from 'src/common/utils/decoded';
 
 @Injectable()
 export class PostService {
@@ -30,7 +30,7 @@ export class PostService {
   // -------------------------------------------------------------------- //
   async create(payload: CreatePostDto, req: Request): Promise<Post> {
     if (!payload) throw new BadRequestException('No input provided');
-    const user = req.user as IDecodedJWT;
+    const user = req.user as DecodedJWT;
     const id = user.sub;
     try {
       const data: CreatePostDto = {
@@ -103,7 +103,7 @@ export class PostService {
     req: Request,
     data: UpdatePostDto,
   ): Promise<{ message: string }> {
-    const u = req.user as IDecodedJWT;
+    const u = req.user as DecodedJWT;
 
     try {
       await this.prisma.post.update({

@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { Prisma } from 'generated/prisma';
 import { TeachingInfoService } from './teaching-info.service';
+import { isPublic } from 'src/common/decorators/is-public.decorator';
 
 @Controller('curriculum/teaching')
 export class TeachingInfoController {
@@ -18,8 +19,9 @@ export class TeachingInfoController {
   create(@Body() createTeachingInfoDto: Prisma.TeachingInfoCreateInput) {
     return this.teachingInfoService.createTeachingField(createTeachingInfoDto);
   }
-
+  
   @Get()
+  @isPublic()
   findField() {
     return this.teachingInfoService.findField();
   }

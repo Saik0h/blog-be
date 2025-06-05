@@ -1,4 +1,4 @@
-export interface IDecodedJWT {
+export type DecodedJWT = {
   sub: number;
   role: string;
   iat: number;

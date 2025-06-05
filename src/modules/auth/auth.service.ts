@@ -12,7 +12,7 @@ import { DatabaseService } from 'src/database/database.service';
 import { comparePassword, encodePassword } from 'src/common/utils/bcrypt';
 import { Request, Response } from 'express';
 import { Tokens } from 'src/common/utils/tokens';
-import { IDecodedJWT } from 'src/common/utils/decoded';
+import { DecodedJWT } from 'src/common/utils/decoded';
 import {
   clearTokensFromCookies,
   getTokensFromCookies,
@@ -69,7 +69,7 @@ export class AuthService {
       const refresh_token = getTokensFromCookies(req).refresh_token;
       if (refresh_token === null)
         throw new UnauthorizedException('User must be authenticated to access this resource');
-      const decoded: IDecodedJWT = await this.extractPayload(refresh_token);
+      const decoded: DecodedJWT = await this.extractPayload(refresh_token);
 
       const user = await this.prisma.user.findUnique({
         where: { id: decoded.sub },
@@ -99,8 +99,8 @@ export class AuthService {
   // ------------------>
   // Public Methods
   // ------------------>
-  public async extractPayload(token: string): Promise<IDecodedJWT> {
-    const t = await this.jwtService.verifyAsync(token, { secret: process.env.JWT_SECRET }) as IDecodedJWT;
+  public async extractPayload(token: string): Promise<DecodedJWT> {
+    const t = await this.jwtService.verifyAsync(token, { secret: process.env.JWT_SECRET }) as DecodedJWT;
     return t
   }
 
@@ -112,10 +112,10 @@ export class AuthService {
       throw new UnauthorizedException('Authentication required');
     }
 
-    let decoded: IDecodedJWT;
+    let decoded: DecodedJWT;
 
     try {
-      decoded = await this.extractPayload(access_token) as IDecodedJWT;
+      decoded = await this.extractPayload(access_token) as DecodedJWT;
     } catch (err) {
       throw new UnauthorizedException('Invalid Token');
     }
@@ -180,7 +180,7 @@ export class AuthService {
   }
 
   // ------------------>
-  async logoutUser(user: IDecodedJWT, res: Response) {
+  async logoutUser(user: DecodedJWT, res: Response) {
     try {
       if (!user) throw new NotFoundException('User is not logged in');
       const id = user.sub;
@@ -210,7 +210,7 @@ export class AuthService {
 
   // ------------------>
   async getUser(request: Request) {
-    const user = request['user'] as IDecodedJWT;
+    const user = request['user'] as DecodedJWT;
 
     try {
       if (!user) throw new UnauthorizedException('User not found');
@@ -227,7 +227,7 @@ export class AuthService {
 
   // ------------------>
   async isThereAUserLoggedIn(request: Request) {
-    const user = request.user as IDecodedJWT;
+    const user = request.user as DecodedJWT;
     try {
       if (!user) return false
       return true;

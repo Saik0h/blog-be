@@ -3,7 +3,7 @@ import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { AuthService } from 'src/modules/auth/auth.service';
 import { getTokensFromCookies } from 'src/modules/auth/utils/cookie-service';
-import { IDecodedJWT } from '../utils/decoded';
+import { DecodedJWT } from '../utils/decoded';
 
 @Injectable()
 export class AccessGuard implements CanActivate {
@@ -14,7 +14,23 @@ export class AccessGuard implements CanActivate {
     const is_route_public = this.reflector.get<string>('isThisRoutePublic', context.getHandler())
     const is_authenticated = this.reflector.get<string>('isAuthenticated', context.getHandler())
 
-    if (is_route_public === 'true') return true
+    if (is_route_public === 'true') {
+      const identifier = getTokensFromCookies(request).refresh_token
+      const authorization = getTokensFromCookies(request).access_token
+      
+      if (!!authorization) {
+        await this.authService.verifyAccessToken(request)
+        const user = await this.authService.extractPayload(authorization);
+        request['user'] = user as DecodedJWT
+      }
+        if (!authorization && !!identifier) {
+        const user = await this.authService.extractPayload(identifier);
+        request['user'] = user as DecodedJWT
+      }
+
+
+      return true
+    }
 
     if (is_authenticated === 'true' && getTokensFromCookies(request).access_token) {
       const isAuthenticated = await this.authService.verifyAccessToken(request)
@@ -23,7 +39,7 @@ export class AccessGuard implements CanActivate {
 
     const isAuthenticated = await this.authService.verifyAccessToken(request)
     const user = await this.authService.extractPayload(getTokensFromCookies(request).access_token);
-    request['user'] = user as IDecodedJWT
+    request['user'] = user as DecodedJWT
 
     if (current_user === 'true') {
       return !!user
@@ -33,12 +49,6 @@ export class AccessGuard implements CanActivate {
       if (user.role === 'CHEFE') return true
     }
 
-
     return false
   }
-
-
-
-
-
 }

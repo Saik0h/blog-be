@@ -8,20 +8,20 @@ import {
   Delete,
   Query,
   Req,
-  UseGuards,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Request } from 'express';
+import { isPublic } from 'src/common/decorators/is-public.decorator';
 
 @Controller('posts')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
   // -------------------> Mecanismo de pesquisa de posts
-
   @Get('search')
+  @isPublic()
   search(@Query('q') search: string) {
     return this.postService.searchPosts(search);
   }
@@ -29,6 +29,7 @@ export class PostController {
   // -------------------> Retorna todos os posts
 
   @Get()
+  @isPublic()
   findAll() {
     return this.postService.findAll();
   }
@@ -36,6 +37,7 @@ export class PostController {
   // -------------------> Retorna todos os blogs
 
   @Get('blogs')
+  @isPublic()
   findAllBlogs() {
     return this.postService.findAllBlogs();
   }
@@ -43,6 +45,7 @@ export class PostController {
   // -------------------> Retorna todos os artigos
 
   @Get('artigos')
+  @isPublic()
   findAllArtigos() {
     return this.postService.findAllArtigos();
   }
@@ -50,6 +53,7 @@ export class PostController {
   // -------------------> Retorna um artigo específico
 
   @Get('artigos/:id')
+  @isPublic()
   findOneArtigo(@Param('id') id: string) {
     return this.postService.findOneArtigo(+id);
   }
@@ -57,6 +61,7 @@ export class PostController {
   // -------------------> Retorna um blog específico
 
   @Get('blogs/:id')
+  @isPublic()
   findOneBlog(@Param('id') id: string) {
     return this.postService.findOneBlog(+id);
   }
@@ -64,6 +69,7 @@ export class PostController {
   // -------------------> Retorna um post específico
 
   @Get(':id')
+  @isPublic()
   findOne(@Param('id') id: string) {
     return this.postService.findOne(+id);
   }

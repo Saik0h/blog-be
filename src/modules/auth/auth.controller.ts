@@ -10,10 +10,11 @@ import {
 import { Prisma } from 'generated/prisma';
 import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
-import { IDecodedJWT } from 'src/common/utils/decoded';
+import { DecodedJWT } from 'src/common/utils/decoded';
 import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { AuthenticatedAccess } from 'src/common/decorators/authenticated-access.decorator';
 import { isPublic } from 'src/common/decorators/is-public.decorator';
+import { use } from 'passport';
 
 @Controller('auth')
 export class AuthController {
@@ -49,7 +50,7 @@ export class AuthController {
   // -------------------> Rota responsável por buscar usuário
 
   @Get('status')
-  @CurrentUser()
+  @isPublic()
   status(@Req() req: Request) {
     return this.authService.isThereAUserLoggedIn(req);
   }
@@ -67,9 +68,9 @@ export class AuthController {
 
   // -------------------> Rota de logout
   @Post('logout')
-  @AuthenticatedAccess()
-  logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
-    const user = req.user as IDecodedJWT;
+  @CurrentUser()
+  logout(@Req() request: Request, @Res({ passthrough: true }) res: Response) {
+    const user = request.user as DecodedJWT;
     return this.authService.logoutUser(user, res);
   }
 

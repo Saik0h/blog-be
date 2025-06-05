@@ -10,7 +10,7 @@ import { comparePassword, encodePassword } from 'src/common/utils/bcrypt';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from 'generated/prisma';
 import { ChangePasswordDto } from './dto/change-password.dto';
-import { IDecodedJWT } from 'src/common/utils/decoded';
+import { DecodedJWT } from 'src/common/utils/decoded';
 import { Request } from 'express';
 
 @Injectable()
@@ -83,7 +83,7 @@ export class UserService {
 
   async changePassword(req: Request, payload: ChangePasswordDto) {
     try {
-      const u = req.user! as IDecodedJWT;
+      const u = req.user! as DecodedJWT;
       const id = u.sub;
       console.log(id);
       const user = await this.prisma.user.findUnique({ where: { id } });

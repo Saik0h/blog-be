@@ -1,18 +1,20 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ContactInfoService } from './contact-info.service';
 import { Prisma } from 'generated/prisma';
+import { isPublic } from 'src/common/decorators/is-public.decorator';
 
 @Controller('curriculum/contact')
 export class ContactInfoController {
   constructor(private readonly contactInfoService: ContactInfoService) {}
-
-   @Post()
+  
+  @Post()
    create(@Body() createContactInfoDto: Prisma.ContactInfoCreateInput) {
      return this.contactInfoService.createContactField(createContactInfoDto);
-   }
- 
-   @Get()
-   findField() {
+    }
+    
+    @Get()
+    @isPublic()
+    findField() {
      return this.contactInfoService.findField();
    }
  

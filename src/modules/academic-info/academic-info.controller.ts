@@ -9,17 +9,19 @@ import {
 } from '@nestjs/common';
 import { AcademicInfoService } from './academic-info.service';
 import { Prisma } from 'generated/prisma';
+import { isPublic } from 'src/common/decorators/is-public.decorator';
 
 @Controller('curriculum/academic')
 export class AcademicInfoController {
   constructor(private readonly academicInfoService: AcademicInfoService) {}
-
+  
   @Post()
   create(@Body() createAcademicInfoDto: Prisma.AcademicInfoCreateInput) {
     return this.academicInfoService.createAcademicField(createAcademicInfoDto);
   }
-
+  
   @Get()
+  @isPublic()
   findField() {
     return this.academicInfoService.findField();
   }

@@ -10,6 +10,7 @@ import {
 import { CurriculumService } from './curriculum.service';
 
 import { Prisma } from 'generated/prisma';
+import { isPublic } from 'src/common/decorators/is-public.decorator';
 
 @Controller('curriculum')
 export class CurriculumController {
@@ -19,8 +20,9 @@ export class CurriculumController {
   create(@Body() body: Prisma.CurriculumCreateInput) {
     return this.curriculumService.createCurriculum(body);
   }
-
+  
   @Get()
+  @isPublic()
   findAll() {
     return this.curriculumService.findCurriculum();
   }

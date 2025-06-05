@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { InboxService } from './inbox.service';
 import { Prisma } from 'generated/prisma';
+import { isPublic } from 'src/common/decorators/is-public.decorator';
 
 @Controller('inbox')
 export class InboxController {
@@ -20,6 +21,7 @@ export class InboxController {
     return this.inboxService.search(query);
   }
 
+  @isPublic()
   @Post()
   create(@Body() createInboxDto: Prisma.InboxMessageCreateInput) {
     return this.inboxService.create(createInboxDto);
