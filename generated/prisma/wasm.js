@@ -156,19 +156,16 @@ exports.Prisma.CurriculumScalarFieldEnum = {
   jobTitle: 'jobTitle',
   credential: 'credential',
   profileImage: 'profileImage',
-  contactInfoId: 'contactInfoId',
-  academicInfoId: 'academicInfoId',
-  teachingInfoId: 'teachingInfoId',
-  experienceInfoId: 'experienceInfoId',
   singleton: 'singleton',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ContactInfoScalarFieldEnum = {
+exports.Prisma.FieldScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  singleton: 'singleton'
+  items: 'items',
+  curriculumId: 'curriculumId'
 };
 
 exports.Prisma.ContactInfoItemScalarFieldEnum = {
@@ -176,43 +173,7 @@ exports.Prisma.ContactInfoItemScalarFieldEnum = {
   label: 'label',
   link: 'link',
   platform: 'platform',
-  contactInfoId: 'contactInfoId'
-};
-
-exports.Prisma.AcademicInfoScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  singleton: 'singleton'
-};
-
-exports.Prisma.AcademicInfoItemScalarFieldEnum = {
-  id: 'id',
-  description: 'description',
-  academicInfoId: 'academicInfoId'
-};
-
-exports.Prisma.TeachingInfoScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  singleton: 'singleton'
-};
-
-exports.Prisma.TeachingInfoItemScalarFieldEnum = {
-  id: 'id',
-  description: 'description',
-  teachingInfoId: 'teachingInfoId'
-};
-
-exports.Prisma.ExperienceInfoScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  singleton: 'singleton'
-};
-
-exports.Prisma.ExperienceInfoItemScalarFieldEnum = {
-  id: 'id',
-  description: 'description',
-  experienceInfoId: 'experienceInfoId'
+  curriculumId: 'curriculumId'
 };
 
 exports.Prisma.InboxMessageScalarFieldEnum = {
@@ -247,7 +208,9 @@ exports.Role = exports.$Enums.Role = {
 
 exports.PostCategory = exports.$Enums.PostCategory = {
   BLOG: 'BLOG',
-  ARTIGO: 'ARTIGO'
+  ARTIGO: 'ARTIGO',
+  COURSE: 'COURSE',
+  FREE_MATERIAL: 'FREE_MATERIAL'
 };
 
 exports.Prisma.ModelName = {
@@ -255,14 +218,8 @@ exports.Prisma.ModelName = {
   Post: 'Post',
   FAQ: 'FAQ',
   Curriculum: 'Curriculum',
-  ContactInfo: 'ContactInfo',
+  Field: 'Field',
   ContactInfoItem: 'ContactInfoItem',
-  AcademicInfo: 'AcademicInfo',
-  AcademicInfoItem: 'AcademicInfoItem',
-  TeachingInfo: 'TeachingInfo',
-  TeachingInfoItem: 'TeachingInfoItem',
-  ExperienceInfo: 'ExperienceInfo',
-  ExperienceInfoItem: 'ExperienceInfoItem',
   InboxMessage: 'InboxMessage'
 };
 

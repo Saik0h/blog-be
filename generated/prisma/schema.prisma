@@ -47,85 +47,36 @@ model FAQ {
 }
 
 model Curriculum {
-  id               Int             @id @default(autoincrement())
-  firstname        String
-  lastname         String
-  jobTitle         String
-  credential       String
-  profileImage     String
-  contactInfo      ContactInfo?    @relation(fields: [contactInfoId], references: [id])
-  contactInfoId    Int?            @unique
-  academicInfo     AcademicInfo?   @relation(fields: [academicInfoId], references: [id])
-  academicInfoId   Int?            @unique
-  teachingInfo     TeachingInfo?   @relation(fields: [teachingInfoId], references: [id])
-  teachingInfoId   Int?            @unique
-  experienceInfo   ExperienceInfo? @relation(fields: [experienceInfoId], references: [id])
-  experienceInfoId Int?            @unique
-  singleton        Boolean         @unique @default(true)
-  createdAt        DateTime        @default(now())
-  updatedAt        DateTime        @updatedAt
+  id           Int    @id @default(autoincrement())
+  firstname    String
+  lastname     String
+  jobTitle     String
+  credential   String
+  profileImage String
+
+  fields      Field[]
+  contactInfo ContactInfoItem[]
+
+  singleton Boolean  @unique @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model ContactInfo {
-  id         Int               @id @default(autoincrement())
-  title      String
-  items      ContactInfoItem[]
-  singleton  Boolean           @unique @default(true)
-  curriculum Curriculum?
+model Field {
+  id           Int         @id @default(autoincrement())
+  title        String
+  items        String[]
+  curriculum   Curriculum? @relation(fields: [curriculumId], references: [id])
+  curriculumId Int?
 }
 
 model ContactInfoItem {
-  id            Int         @id @default(autoincrement())
-  label         String
-  link          String
-  platform      String?
-  contactInfo   ContactInfo @relation(fields: [contactInfoId], references: [id])
-  contactInfoId Int
-}
-
-model AcademicInfo {
-  id         Int                @id @default(autoincrement())
-  title      String
-  items      AcademicInfoItem[]
-  singleton  Boolean            @unique @default(true)
-  curriculum Curriculum?
-}
-
-model AcademicInfoItem {
-  id             Int          @id @default(autoincrement())
-  description    String
-  academicInfo   AcademicInfo @relation(fields: [academicInfoId], references: [id])
-  academicInfoId Int
-}
-
-model TeachingInfo {
-  id         Int                @id @default(autoincrement())
-  title      String
-  items      TeachingInfoItem[]
-  singleton  Boolean            @unique @default(true)
-  curriculum Curriculum?
-}
-
-model TeachingInfoItem {
-  id             Int          @id @default(autoincrement())
-  description    String
-  teachingInfo   TeachingInfo @relation(fields: [teachingInfoId], references: [id])
-  teachingInfoId Int
-}
-
-model ExperienceInfo {
-  id         Int                  @id @default(autoincrement())
-  title      String
-  items      ExperienceInfoItem[]
-  singleton  Boolean              @unique @default(true)
-  curriculum Curriculum?
-}
-
-model ExperienceInfoItem {
-  id               Int            @id @default(autoincrement())
-  description      String
-  experienceInfo   ExperienceInfo @relation(fields: [experienceInfoId], references: [id])
-  experienceInfoId Int
+  id           Int        @id @default(autoincrement())
+  label        String
+  link         String
+  platform     String
+  contactInfo  Curriculum @relation(fields: [curriculumId], references: [id])
+  curriculumId Int
 }
 
 model InboxMessage {
@@ -141,6 +92,8 @@ model InboxMessage {
 enum PostCategory {
   BLOG
   ARTIGO
+  COURSE
+  FREE_MATERIAL
 }
 
 enum Role {

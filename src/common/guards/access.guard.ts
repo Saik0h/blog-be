@@ -28,7 +28,6 @@ export class AccessGuard implements CanActivate {
         request['user'] = user as DecodedJWT
       }
 
-
       return true
     }
 

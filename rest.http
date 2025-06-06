@@ -1,183 +1,57 @@
-# Auth Endpoints
-### Register
-POST http://localhost:3000/api/auth/register
-Content-Type: application/json
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJyb2xlIjoiTUVNQlJPIiwiaWF0IjoxNzQ5MTM0MDkwLCJleHAiOjE3NDkxMzQxNTB9.koYC2paCIZ4m2DeJOeqg8QHjER5TKaIAwTdIFB_a_D0; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:35:51 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJyb2xlIjoiTUVNQlJPIiwiaWF0IjoxNzQ5MTM0MDkwLCJleHAiOjE3NDkyMjA0OTB9.hrx7w7jc_dcYRTj7wGqSy-zlmP8RwSQKALY6Z7EVP0o; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:34:51 GMT; HttpOnly; SameSite=Lax
-
-{
-    "firstname":"",
-    "lastname":"",
-    "username": "",
-    "password": ""
-}
-
-### Login
-POST http://localhost:3000/api/auth/login
+### Create curriculum
+POST  http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "ocmagarao",
-    "password": "senha123"
+    "username":"ocmagarao",
+    "password":"senha123"
 }
 
-### Get all posts
-GET  http://localhost:3000/api/users
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzI0MDksImV4cCI6MTc0OTEzMjQ2OX0.NmMBDp2QSCvdhLljgJpWeURq_mkqRItj4Ob-0lthsmA; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:07:49 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzI0MDksImV4cCI6MTc0OTIxODgwOX0.5I5lvWB_cM6fGX3Wax2Hm8prFouE5Qq1slOQiwHykhw; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:06:49 GMT; HttpOnly; SameSite=Lax
-
-### Get all posts from a single user
-GET  http://localhost:3000/api/users/12/posts
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzI0MDksImV4cCI6MTc0OTEzMjQ2OX0.NmMBDp2QSCvdhLljgJpWeURq_mkqRItj4Ob-0lthsmA; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:07:49 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzI0MDksImV4cCI6MTc0OTIxODgwOX0.5I5lvWB_cM6fGX3Wax2Hm8prFouE5Qq1slOQiwHykhw; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:06:49 GMT; HttpOnly; SameSite=Lax
-
-### Refresh Tokens
-POST  http://localhost:3000/api/auth/refresh
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzUxMDIsImV4cCI6MTc0OTEzNTE2Mn0.QarpQiHltEpr2typpcvI2HohEWc7Vlub6jU4PIMNIYs; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:52:42 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzUxMDIsImV4cCI6MTc0OTIyMTUwMn0.7ylCqDJrR8CeWFiErYvuHADfJfivVZW3iLnTONKFf-Y; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:51:42 GMT; HttpOnly; SameSite=Lax
-
-
-### Get user from token
-GET http://localhost:3000/api/auth/user
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzQxOTAsImV4cCI6MTc0OTEzNDI1MH0.B2uwdom84rH5D01ODbSd176pz-GYwAMt7amTxe_4uVY; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:37:30 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzQxOTAsImV4cCI6MTc0OTIyMDU5MH0.UO82fRMmIGLfiQCH7LeUOZ0a_35YUSJ_NdKmNWToV9g; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:36:30 GMT; HttpOnly; SameSite=Lax
-
-###
-POST http://localhost:3000/api/auth/logout
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzUxOTgsImV4cCI6MTc0OTEzNTI1OH0.E6AH_yOSGBR3OT_ZLBnl5dAwD0TD8ilcisXJDalbiAI; Max-Age=60; Path=/; Expires=Thu, 05 Jun 2025 14:54:18 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkxMzUxOTgsImV4cCI6MTc0OTIyMTU5OH0.wFkX2i5YzfBxiDP06jydsTlXqK_mmdGfxb7v-Qog1XY; Max-Age=604800; Path=/; Expires=Thu, 12 Jun 2025 14:53:18 GMT; HttpOnly; SameSite=Lax
-
-#Users Endpoints
-### Get All Users
-GET http://localhost:3000/api/users/
-Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkwNjI3MzEsImV4cCI6MTc0OTA2Mjc5MX0.h8ygql1AyM8LDhVLNOKeWu41rTmGzqtFkXVE0p33QL4; Max-Age=60; Path=/; Expires=Wed, 04 Jun 2025 18:46:31 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJyb2xlIjoiQ0hFRkUiLCJpYXQiOjE3NDkwNjI3MzEsImV4cCI6MTc0OTY2NzUzMX0.rawgOH9QuMx6EywC-oRqDtIsY2BPuq-i4TxNBGL1XcI; Max-Age=604800; Path=/; Expires=Wed, 11 Jun 2025 18:45:31 GMT; HttpOnly; SameSite=Lax
-
-### Get a single user
-GET http://localhost:3000/api/users/12
-Cookie: 
-
-### Patches User
-PATCH http://localhost:3000/api/users/11
-Cookie: 
+### Create curriculum
+POST  http://localhost:3000/api/auth/register
 Content-Type: application/json
+Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJDSEVGRSIsImlhdCI6MTc0OTIzMzM5MiwiZXhwIjoxNzQ5MjMzNDUyfQ.LRF4w25QGaj3If33ONwIHNV9P-AXrUMbsGj-aq_Cy_I; Max-Age=60; Path=/; Expires=Fri, 06 Jun 2025 18:10:52 GMT; HttpOnly; SameSite=Lax,refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJDSEVGRSIsImlhdCI6MTc0OTIzMzM5MiwiZXhwIjoxNzQ5MzE5NzkyfQ.HqERe_bD4PNFdyOdt6J0nbMY0q5CUJtZtQKi_jxmLRY; Max-Age=604800; Path=/; Expires=Fri, 13 Jun 2025 18:09:52 GMT; HttpOnly; SameSite=Lax
 
 {
-    "role": ""
+    "firstname":"Lais",
+    "lastname":"Donida",
+    "username":"laisdonida",
+    "password":"senha123"
 }
 
-### Get all posts from a user
-GET http://localhost:3000/api/users/2/posts
-
-### Deletes User
-DELETE  http://localhost:3000/api/users/1
-Cookie: 
-
-### Changes user password
-PATCH  http://localhost:3000/api/users/2/change-password
-Content-Type: application/json
-Cookie: 
-
-{
-    "newPassword":"",
-    "newPasswordConfirmation":"",
-    "currentPassword":""
-}
-
-#Posts Endpoints
-### Creates a post
-POST  http://localhost:3000/api/posts
-Cookie: 
-Content-Type: application/json
-
-{
-    "category": "",
-    "title":"",
-    "text":"",
-    "image":""
-}
-### Get All Posts
-GET http://localhost:3000/api/posts
-
-### Get All Posts from the blog category
-GET http://localhost:3000/api/posts/blogs
-
-### Get All Posts from the article category
-GET http://localhost:3000/api/posts/artigos
-
-### Query posts
-GET http://localhost:3000/api/posts/search?q=gay
-
-### Creates A Post
-PATCH http://localhost:3000/api/posts/1
-Content-Type: application/json
-Cookie: 
-
-{
-    "title" : "",
-    "text" : ""
-}
-
-### Deletes a post
-DELETE http://localhost:3000/api/posts/author/9
-Cookie: 
-
-### Gets Inboxes
-GET http://localhost:3000/api/inbox/search?q=o
-Cookie: 
-
-### Delete Inboxes
-DELETE http://localhost:3000/api/inbox/1
-Cookie: 
-
-### Post Inboxes
-POST http://localhost:3000/api/inbox
-Content-Type: application/json
-
-{
-    "name": "",
-    "subject":"",
-    "email": "",
-    "message": ""
-}
-
-### Create Curriculum
+### Create curriculum
 POST http://localhost:3000/api/curriculum
-Cookie: 
 Content-Type: application/json
 
 {
-  "firstname":"Lais",
-  "lastname":"Donida",
-  "profileImage":"",
-  "credential":"1234",
-  "jobTitle":"Fonoaudióloga"
+    "firstname":"Lais",
+    "lastname":"Donida",
+    "jobTitle":"Fonoaudióloga",
+    "credential":"1234",
+    "profileImage":"ooh ooh ah ah"
 }
-  
 
-### Create Curriculum
-DELETE http://localhost:3000/api/curriculum/delete
-Cookie: 
-
-###
-GET http://localhost:3000/api/inbox/
-Cookie: 
-
-###
-POST http://localhost:3000/api/inbox
+### Create ContactInfo
+POST http://localhost:3000/api/curriculum/contact
 Content-Type: application/json
 
 {
-
+    "label":"Lais",
+    "platform":"instagram",
+    "link":"www.instagram.com"
 }
 
-###
-POST http://localhost:3000/api/curriculum/academic
+### Create Field
+POST http://localhost:3000/api/curriculum/field
 Content-Type: application/json
 
 {
-"title" : "Formações"
+    "title":"Formações",
+    "items":[
+        "sei lá, umas coisa ai", "bla bla bla"
+    ]
 }
 
 ###
-POST http://localhost:3000/api/faq
-Content-Type: application/json
-
-{
-"question" : "Autismo e seique e seiquelá?",
-"answer": "Isso mesmo!"
-}
+GET http://localhost:3000/api/curriculum
 
