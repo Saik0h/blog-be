@@ -11,11 +11,12 @@ import { FaqModule } from './modules/faq/faq.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AccessGuard } from './common/guards/access.guard';
 import { AuthService } from './modules/auth/auth.service';
-import { PassportModule } from '@nestjs/passport';
 import { JwtService } from '@nestjs/jwt';
+import { SupabaseModule } from './database/supabase/supabase.module';
+import { ImageModule } from './modules/images/image.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule, PostModule, AuthModule, CurriculumModule, InboxModule, FaqModule],
+  imports: [DatabaseModule, UserModule, PostModule, AuthModule, CurriculumModule, InboxModule, FaqModule, SupabaseModule, ImageModule],
   controllers: [AppController],
   providers: [AppService, AuthService, JwtService, { provide: APP_GUARD, useClass: AccessGuard }],
 })

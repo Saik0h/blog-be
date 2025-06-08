@@ -18,7 +18,7 @@ import { use } from 'passport';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   // -------------------> Rota de Registro de usuário
   @Post('register')
@@ -55,14 +55,19 @@ export class AuthController {
     return this.authService.isThereAUserLoggedIn(req);
   }
 
+  // -------------------> Rota responsável por dizer se usuário é administrador
+
+  @Get('isAdmin')
+  @isPublic()
+  isAdmin(@Req() req: Request) {
+    return this.authService.isUserAnAdmin(req);
+  }
+
   // -------------------> Rota para verificar e e atualizar jwtToken
 
   @Post('refresh')
   @isPublic()
-  refresh(
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ) {
+  refresh(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     return this.authService.refreshTokens(req, res);
   }
 

@@ -10202,6 +10202,13 @@ export namespace Prisma {
     curriculum?: CurriculumCreateNestedOneWithoutFieldsInput
   }
 
+  export type FieldCreateInputWithPossibleId = {
+    id?: number
+    title: string
+    items?: FieldCreateitemsInput | string[]
+    curriculum?: CurriculumCreateNestedOneWithoutFieldsInput
+  }
+
   export type FieldUncheckedCreateInput = {
     id?: number
     title: string

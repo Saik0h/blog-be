@@ -1,13 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from 'generated/prisma';
 import { DatabaseService } from 'src/database/database.service';
 
-
 @Injectable()
 export class CurriculumService {
-  constructor(
-    private readonly prisma: DatabaseService
-  ) { }
+  constructor(private readonly prisma: DatabaseService) {}
 
   async createCurriculum(data: Prisma.CurriculumCreateInput) {
     try {
@@ -23,8 +20,10 @@ export class CurriculumService {
         where: { singleton: true },
         include: {
           fields: { select: { title: true, items: true, id: true } },
-          contactInfo: { select: { id: true, link: true, label: true, platform: true } }
-        }
+          contactInfo: {
+            select: { id: true, link: true, label: true, platform: true },
+          },
+        },
       });
     } catch (err) {
       throw err;
@@ -57,63 +56,64 @@ export class CurriculumService {
       await this.prisma.contactInfoItem.create({
         data: {
           ...data,
-          contactInfo: { connect: { singleton: true } }
-        }
-      })
-      return { message: 'Nova Informação de contato adicionada' }
+          contactInfo: { connect: { singleton: true } },
+        },
+      });
+      return { message: 'Nova Informação de contato adicionada' };
     } catch (err) {
-      throw err
+      throw err;
     }
   }
 
   async updateContactItem(id: number, data: Prisma.ContactInfoItemUpdateInput) {
     try {
-      await this.prisma.contactInfoItem.update({ where: { id }, data })
-      return { message: 'Informação atualizada.' }
+      await this.prisma.contactInfoItem.update({ where: { id }, data });
+      return { message: 'Informação atualizada.' };
     } catch (err) {
-      throw err
+      throw err;
     }
   }
 
   async deleteContactItem(id: number) {
     try {
-      await this.prisma.contactInfoItem.delete({ where: { id } })
-      return { message: 'Informação removida.' }
+      await this.prisma.contactInfoItem.delete({ where: { id } });
+      return { message: 'Informação removida.' };
     } catch (err) {
-      throw err
+      throw err;
     }
   }
 
-  async createField(data: Prisma.FieldCreateInput) {
+  async createField(dataWithId: Prisma.FieldCreateInputWithPossibleId) {
+    const { id, ...data } = dataWithId;
     try {
+      if (!data) throw new BadRequestException();
       await this.prisma.field.create({
         data: {
           ...data,
-          curriculum: { connect: { singleton: true } }
-        }
-      })
-      return { message: 'Novo campo adicionado' }
+          curriculum: { connect: { singleton: true } },
+        },
+      });
+      return { message: 'Novo campo adicionado' };
     } catch (err) {
-      throw err
+      throw err;
     }
   }
 
   async updateField(id: number, data: Prisma.FieldUpdateInput) {
     try {
-      await this.prisma.field.update({ where: { id }, data })
-      return { message: 'Campo atualizado' }
+      await this.prisma.field.update({ where: { id }, data });
+      return { message: 'Campo atualizado' };
     } catch (err) {
-      throw err
+      throw err;
     }
   }
 
   async deleteField(id: number) {
     try {
-      await this.prisma.field.delete({ where: { id } })
-      return { message: 'Novo campo adicionado' }
+      await this.prisma.field.delete({ where: { id } });
+      return { message: 'Novo campo adicionado' };
     } catch (err) {
-      throw err
+      throw err;
     }
   }
-
 }

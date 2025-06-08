@@ -7,7 +7,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Prisma } from 'generated/prisma';
+import { Prisma, Role } from 'generated/prisma';
 import { DatabaseService } from 'src/database/database.service';
 import { comparePassword, encodePassword } from 'src/common/utils/bcrypt';
 import { Request, Response } from 'express';
@@ -25,13 +25,13 @@ export class AuthService {
   constructor(
     private readonly prisma: DatabaseService,
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
   // ------------------>
   // Private constants
   // ------------------>
-  private tokenExpiresIn = process.env.TOKEN_EXP
-  private refreshTokenExpiresIn = process.env.REFRESH_TOKEN_EXP
+  private tokenExpiresIn = process.env.TOKEN_EXP;
+  private refreshTokenExpiresIn = process.env.REFRESH_TOKEN_EXP;
   // <------------------
 
   // ------------------>
@@ -44,7 +44,10 @@ export class AuthService {
     };
 
     const access_token = await this.signToken(payload);
-    const refresh_token = await this.signToken(payload, this.refreshTokenExpiresIn);
+    const refresh_token = await this.signToken(
+      payload,
+      this.refreshTokenExpiresIn,
+    );
 
     await this.updateRefreshTokenInDb(userId, refresh_token);
     return { access_token, refresh_token };
@@ -59,8 +62,14 @@ export class AuthService {
   }
 
   // ------------------>
-  private async signToken(payload: { sub: number; role: string }, expIn = this.tokenExpiresIn) {
-    return await this.jwtService.signAsync(payload, { secret: process.env.JWT_SECRET, expiresIn: expIn })
+  private async signToken(
+    payload: { sub: number; role: string },
+    expIn = this.tokenExpiresIn,
+  ) {
+    return await this.jwtService.signAsync(payload, {
+      secret: process.env.JWT_SECRET,
+      expiresIn: expIn,
+    });
   }
 
   // ------------------>
@@ -68,7 +77,9 @@ export class AuthService {
     try {
       const refresh_token = getTokensFromCookies(req).refresh_token;
       if (refresh_token === null)
-        throw new UnauthorizedException('User must be authenticated to access this resource');
+        throw new UnauthorizedException(
+          'User must be authenticated to access this resource',
+        );
       const decoded: DecodedJWT = await this.extractPayload(refresh_token);
 
       const user = await this.prisma.user.findUnique({
@@ -100,8 +111,10 @@ export class AuthService {
   // Public Methods
   // ------------------>
   public async extractPayload(token: string): Promise<DecodedJWT> {
-    const t = await this.jwtService.verifyAsync(token, { secret: process.env.JWT_SECRET }) as DecodedJWT;
-    return t
+    const t = (await this.jwtService.verifyAsync(token, {
+      secret: process.env.JWT_SECRET,
+    })) as DecodedJWT;
+    return t;
   }
 
   // ------------------>
@@ -115,7 +128,7 @@ export class AuthService {
     let decoded: DecodedJWT;
 
     try {
-      decoded = await this.extractPayload(access_token) as DecodedJWT;
+      decoded = (await this.extractPayload(access_token)) as DecodedJWT;
     } catch (err) {
       throw new UnauthorizedException('Invalid Token');
     }
@@ -161,7 +174,7 @@ export class AuthService {
       const findUser = await this.prisma.user.findUnique({
         where: { username: user.username },
       });
-      if (!findUser) throw new NotFoundException("User Not Found");
+      if (!findUser) throw new NotFoundException('User Not Found');
 
       const pass = user.password;
       const isPasswordValid = comparePassword(pass, findUser.password);
@@ -229,8 +242,19 @@ export class AuthService {
   async isThereAUserLoggedIn(request: Request) {
     const user = request.user as DecodedJWT;
     try {
-      if (!user) return false
+      if (!user) return false;
       return true;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // ------------------>
+  async isUserAnAdmin(request: Request) {
+    const user = request.user as DecodedJWT;
+    try {
+      if(!user) return false;
+      return user.role === Role.CHEFE;
     } catch (err) {
       throw err;
     }
