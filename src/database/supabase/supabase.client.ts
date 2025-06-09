@@ -14,8 +14,4 @@ export class SupabaseClient {
   getClient() {
     return this.client;
   }
-
-  something(){
-    this.getClient()
-  }
 }

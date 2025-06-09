@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -16,28 +10,89 @@ datasource db {
 }
 
 model User {
-  id           Int     @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   profileImage String?
   firstname    String
   lastname     String
-  username     String  @unique
-  role         Role    @default(MEMBRO)
-  posts        Post[]
+  username     String     @unique
+  role         Role       @default(MEMBRO)
+  articles     Article[]
+  courses      Course[]
+  blogs        Blog[]
+  materials    Material[]
   password     String
   refreshToken String?
 }
 
-model Post {
-  id         Int          @id @default(autoincrement())
-  category   PostCategory @default(BLOG)
-  author     User         @relation(fields: [authorId], references: [id])
+model Article {
+  id         Int         @id @default(autoincrement())
+  author     User        @relation(fields: [authorId], references: [id])
   authorId   Int
   title      String
   text       String
-  image      String
-  references String[]
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
+  image      String?
+  references Reference[]
+  tags       Tag[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Reference {
+  id        Int      @id @default(autoincrement())
+  name      String
+  Article   Article? @relation(fields: [articleId], references: [id])
+  articleId Int?
+}
+
+model Tag {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  Article    Article?  @relation(fields: [articleId], references: [id])
+  articleId  Int?
+  Blog       Blog?     @relation(fields: [blogId], references: [id])
+  blogId     Int?
+  Material   Material? @relation(fields: [materialId], references: [id])
+  materialId Int?
+  Course     Course?   @relation(fields: [courseId], references: [id])
+  courseId   Int?
+}
+
+model Blog {
+  id        Int      @id @default(autoincrement())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  title     String
+  text      String
+  image     String?
+  tags      Tag[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Material {
+  id          Int      @id @default(autoincrement())
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    Int
+  title       String
+  file        String
+  description String
+  image       String?
+  tags        Tag[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Course {
+  id          Int      @id @default(autoincrement())
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    Int
+  title       String
+  description String
+  link        String
+  image       String?
+  tags        Tag[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model FAQ {
@@ -47,19 +102,17 @@ model FAQ {
 }
 
 model Curriculum {
-  id           Int    @id @default(autoincrement())
+  id           Int               @id @default(autoincrement())
   firstname    String
   lastname     String
   jobTitle     String
   credential   String
   profileImage String
-
-  fields      Field[]
-  contactInfo ContactInfoItem[]
-
-  singleton Boolean  @unique @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  fields       Field[]
+  contactInfo  ContactInfoItem[]
+  singleton    Boolean           @unique @default(true)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
 }
 
 model Field {
@@ -87,13 +140,6 @@ model InboxMessage {
   message   String
   read      Boolean  @default(false)
   createdAt DateTime @default(now())
-}
-
-enum PostCategory {
-  BLOG
-  ARTIGO
-  COURSE
-  FREE_MATERIAL
 }
 
 enum Role {

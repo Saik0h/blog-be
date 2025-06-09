@@ -83,8 +83,7 @@ export class CurriculumService {
     }
   }
 
-  async createField(dataWithId: Prisma.FieldCreateInputWithPossibleId) {
-    const { id, ...data } = dataWithId;
+  async createField(data: Prisma.FieldCreateInput) {
     try {
       if (!data) throw new BadRequestException();
       await this.prisma.field.create({

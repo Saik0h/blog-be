@@ -32,13 +32,6 @@ export class UserController {
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }
-  // -------------------> Retorna todos os posts de um usuário específico
-
-  @Get(':id/posts')
-  @isPublic()
-  findByAuthor(@Param('id') id: string) {
-    return this.userService.findAllByAuthor(+id);
-  }
 
   // -------------------> Atualiza um usuário
 

@@ -48,7 +48,7 @@ export class CurriculumController {
 
   @Post('field')
   @isPublic()
-  createField(@Body() body: Prisma.FieldCreateInputWithPossibleId) {
+  createField(@Body() body: Prisma.FieldCreateInput) {
     return this.curriculumService.createField(body);
   }
 

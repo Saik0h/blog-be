@@ -39,21 +39,6 @@ export class UserService {
     }
   }
 
-  async findAllByAuthor(id: number) {
-    try {
-      const posts = await this.prisma.post.findMany({
-        where: { authorId: id },
-      });
-      if (!posts || posts.length === 0) {
-        throw new NotFoundException(
-          'No content created by this author was found',
-        );
-      }
-      return posts;
-    } catch (err) {
-      throw err;
-    }
-  }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     try {

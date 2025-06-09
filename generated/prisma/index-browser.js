@@ -131,14 +131,59 @@ exports.Prisma.UserScalarFieldEnum = {
   refreshToken: 'refreshToken'
 };
 
-exports.Prisma.PostScalarFieldEnum = {
+exports.Prisma.ArticleScalarFieldEnum = {
   id: 'id',
-  category: 'category',
   authorId: 'authorId',
   title: 'title',
   text: 'text',
   image: 'image',
-  references: 'references',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReferenceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  articleId: 'articleId'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  articleId: 'articleId',
+  blogId: 'blogId',
+  materialId: 'materialId',
+  courseId: 'courseId'
+};
+
+exports.Prisma.BlogScalarFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  title: 'title',
+  text: 'text',
+  image: 'image',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MaterialScalarFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  title: 'title',
+  file: 'file',
+  description: 'description',
+  image: 'image',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CourseScalarFieldEnum = {
+  id: 'id',
+  authorId: 'authorId',
+  title: 'title',
+  description: 'description',
+  link: 'link',
+  image: 'image',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -206,16 +251,14 @@ exports.Role = exports.$Enums.Role = {
   CHEFE: 'CHEFE'
 };
 
-exports.PostCategory = exports.$Enums.PostCategory = {
-  BLOG: 'BLOG',
-  ARTIGO: 'ARTIGO',
-  COURSE: 'COURSE',
-  FREE_MATERIAL: 'FREE_MATERIAL'
-};
-
 exports.Prisma.ModelName = {
   User: 'User',
-  Post: 'Post',
+  Article: 'Article',
+  Reference: 'Reference',
+  Tag: 'Tag',
+  Blog: 'Blog',
+  Material: 'Material',
+  Course: 'Course',
   FAQ: 'FAQ',
   Curriculum: 'Curriculum',
   Field: 'Field',
