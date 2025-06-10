@@ -15,15 +15,15 @@ export const getTokensFromCookies = (
 export const setTokensInCookies = (res: Response, tokens: Tokens) => {
   res.cookie('access_token', tokens.access_token, {
     httpOnly: true,
-    secure: false,
-    sameSite: 'lax',
+    secure: true,
+    sameSite: 'none',
     maxAge: process.env.COOKIE_EXP as any as number
   });
   res.cookie('refresh_token', tokens.refresh_token, {
     httpOnly: true,
-    secure: false,
-    sameSite: 'lax',
-    maxAge: 60000 * 60 * 24 * 7, // 7 dias
+    secure: true,
+    sameSite: 'none',
+    maxAge: 60000 * 60 * 24 // 7 dias
   });
 };
 
