@@ -7,7 +7,7 @@ async function bootstrap() {
   app.use(cookieParser());
   app.setGlobalPrefix('api')
   app.enableCors({
-    origin: process.env.CORS_ORIGIN ?? 'http://localhost:4200',
+    origin: process.env.CORS_ORIGIN ?? 'www.laisdonida.com.br',
     credentials: true
   });
   await app.listen(process.env.PORT ?? 3000);
